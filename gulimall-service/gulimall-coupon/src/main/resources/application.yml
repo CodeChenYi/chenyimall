@@ -1,0 +1,29 @@
+server:
+  port: 8001
+  servlet:
+    context-path: /api/coupon
+
+
+spring:
+  datasource:
+    username: root
+    password: 5201314xuan
+    url: jdbc:mysql://111.229.191.225:3306/gulimall_sms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.137.1:8848
+  application:
+    name: gulimall-coupon
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/**/*.xml
+
+swagger:
+  enabled: true
+  title: 优惠卷服务
+  base-package: com.chenyi.gulimall.coupon.controller
+  description: 优惠卷服务接口文档
+  version: 1.0
+  ip-address: ${spring.cloud.client.ipAddress}:${server.port}

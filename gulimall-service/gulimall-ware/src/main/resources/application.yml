@@ -1,0 +1,15 @@
+server:
+  port: 8004
+
+spring:
+  datasource:
+    username: root
+    password: 5201314xuan
+    url: jdbc:mysql://111.229.191.225:3306/gulimall_wms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.137.1:8848
+  application:
+    name: gulimall-product
