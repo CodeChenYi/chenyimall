@@ -4,17 +4,14 @@ import java.util.Arrays;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.chenyi.gulimall.member.entity.MemberStatisticsInfoEntity;
 import com.chenyi.gulimall.member.service.MemberStatisticsInfoService;
 import com.chenyi.gulimall.common.utils.PageUtils;
 import com.chenyi.gulimall.common.utils.R;
 
+import javax.annotation.Resource;
 
 
 /**
@@ -27,13 +24,13 @@ import com.chenyi.gulimall.common.utils.R;
 @RestController
 @RequestMapping("member/memberstatisticsinfo")
 public class MemberStatisticsInfoController {
-    @Autowired
+    @Resource
     private MemberStatisticsInfoService memberStatisticsInfoService;
 
     /**
      * 列表
      */
-    @RequestMapping("/list")
+    @GetMapping("/list")
     // @RequiresPermissions("member:memberstatisticsinfo:list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = memberStatisticsInfoService.queryPage(params);
@@ -45,7 +42,7 @@ public class MemberStatisticsInfoController {
     /**
      * 信息
      */
-    @RequestMapping("/info/{id}")
+    @GetMapping("/info/{id}")
     // @RequiresPermissions("member:memberstatisticsinfo:info")
     public R info(@PathVariable("id") Long id){
 		MemberStatisticsInfoEntity memberStatisticsInfo = memberStatisticsInfoService.getById(id);
@@ -56,7 +53,7 @@ public class MemberStatisticsInfoController {
     /**
      * 保存
      */
-    @RequestMapping("/save")
+    @PostMapping("/save")
     // @RequiresPermissions("member:memberstatisticsinfo:save")
     public R save(@RequestBody MemberStatisticsInfoEntity memberStatisticsInfo){
 		memberStatisticsInfoService.save(memberStatisticsInfo);
@@ -67,7 +64,7 @@ public class MemberStatisticsInfoController {
     /**
      * 修改
      */
-    @RequestMapping("/update")
+    @PutMapping("/update")
     // @RequiresPermissions("member:memberstatisticsinfo:update")
     public R update(@RequestBody MemberStatisticsInfoEntity memberStatisticsInfo){
 		memberStatisticsInfoService.updateById(memberStatisticsInfo);
@@ -78,7 +75,7 @@ public class MemberStatisticsInfoController {
     /**
      * 删除
      */
-    @RequestMapping("/delete")
+    @DeleteMapping("/delete")
     // @RequiresPermissions("member:memberstatisticsinfo:delete")
     public R delete(@RequestBody Long[] ids){
 		memberStatisticsInfoService.removeByIds(Arrays.asList(ids));

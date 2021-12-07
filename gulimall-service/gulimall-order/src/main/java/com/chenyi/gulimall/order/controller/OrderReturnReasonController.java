@@ -4,17 +4,14 @@ import java.util.Arrays;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.chenyi.gulimall.order.entity.OrderReturnReasonEntity;
 import com.chenyi.gulimall.order.service.OrderReturnReasonService;
 import com.chenyi.gulimall.common.utils.PageUtils;
 import com.chenyi.gulimall.common.utils.R;
 
+import javax.annotation.Resource;
 
 
 /**
@@ -27,13 +24,13 @@ import com.chenyi.gulimall.common.utils.R;
 @RestController
 @RequestMapping("order/orderreturnreason")
 public class OrderReturnReasonController {
-    @Autowired
+    @Resource
     private OrderReturnReasonService orderReturnReasonService;
 
     /**
      * 列表
      */
-    @RequestMapping("/list")
+    @GetMapping("/list")
     // @RequiresPermissions("order:orderreturnreason:list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = orderReturnReasonService.queryPage(params);
@@ -45,7 +42,7 @@ public class OrderReturnReasonController {
     /**
      * 信息
      */
-    @RequestMapping("/info/{id}")
+    @GetMapping("/info/{id}")
     // @RequiresPermissions("order:orderreturnreason:info")
     public R info(@PathVariable("id") Long id){
 		OrderReturnReasonEntity orderReturnReason = orderReturnReasonService.getById(id);
@@ -56,7 +53,7 @@ public class OrderReturnReasonController {
     /**
      * 保存
      */
-    @RequestMapping("/save")
+    @PostMapping("/save")
     // @RequiresPermissions("order:orderreturnreason:save")
     public R save(@RequestBody OrderReturnReasonEntity orderReturnReason){
 		orderReturnReasonService.save(orderReturnReason);
@@ -67,7 +64,7 @@ public class OrderReturnReasonController {
     /**
      * 修改
      */
-    @RequestMapping("/update")
+    @PutMapping("/update")
     // @RequiresPermissions("order:orderreturnreason:update")
     public R update(@RequestBody OrderReturnReasonEntity orderReturnReason){
 		orderReturnReasonService.updateById(orderReturnReason);
@@ -78,7 +75,7 @@ public class OrderReturnReasonController {
     /**
      * 删除
      */
-    @RequestMapping("/delete")
+    @DeleteMapping("/delete")
     // @RequiresPermissions("order:orderreturnreason:delete")
     public R delete(@RequestBody Long[] ids){
 		orderReturnReasonService.removeByIds(Arrays.asList(ids));

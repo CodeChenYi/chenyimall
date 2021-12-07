@@ -24,6 +24,7 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 import java.util.Date;
@@ -37,12 +38,12 @@ import java.util.Date;
 @Aspect
 @Component
 public class SysLogAspect {
-	@Autowired
+	@Resource
 	private SysLogService sysLogService;
-	
+
 	@Pointcut("@annotation(io.renren.common.annotation.SysLog)")
-	public void logPointCut() { 
-		
+	public void logPointCut() {
+
 	}
 
 	@Around("logPointCut()")

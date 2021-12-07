@@ -28,6 +28,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Map;
@@ -40,13 +41,13 @@ import java.util.Map;
 @RestController
 @RequestMapping("sys/oss")
 public class SysOssController {
-	@Autowired
+	@Resource
 	private SysOssService sysOssService;
-    @Autowired
+    @Resource
     private SysConfigService sysConfigService;
 
     private final static String KEY = ConfigConstant.CLOUD_STORAGE_CONFIG_KEY;
-	
+
 	/**
 	 * 列表
 	 */
@@ -95,7 +96,7 @@ public class SysOssController {
 
 		return R.ok();
 	}
-	
+
 
 	/**
 	 * 上传文件

@@ -24,12 +24,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.Map;
 
 @Service("sysConfigService")
 public class SysConfigServiceImpl extends ServiceImpl<SysConfigDao, SysConfigEntity> implements SysConfigService {
-	@Autowired
+	@Resource
 	private SysConfigRedis sysConfigRedis;
 
 	@Override
@@ -87,7 +88,7 @@ public class SysConfigServiceImpl extends ServiceImpl<SysConfigDao, SysConfigEnt
 
 		return config == null ? null : config.getParamValue();
 	}
-	
+
 	@Override
 	public <T> T getConfigObject(String key, Class<T> clazz) {
 		String value = getValue(key);

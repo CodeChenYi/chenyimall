@@ -26,6 +26,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -38,11 +39,11 @@ import java.util.Map;
  */
 @Service("sysRoleService")
 public class SysRoleServiceImpl extends ServiceImpl<SysRoleDao, SysRoleEntity> implements SysRoleService {
-	@Autowired
+	@Resource
 	private SysRoleMenuService sysRoleMenuService;
-	@Autowired
+	@Resource
 	private SysUserService sysUserService;
-    @Autowired
+    @Resource
     private SysUserRoleService sysUserRoleService;
 
 	@Override
@@ -112,10 +113,10 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleDao, SysRoleEntity> i
 		if(role.getCreateUserId() == Constant.SUPER_ADMIN){
 			return ;
 		}
-		
+
 		//查询用户所拥有的菜单列表
 		List<Long> menuIdList = sysUserService.queryAllMenuId(role.getCreateUserId());
-		
+
 		//判断是否越权
 		if(!menuIdList.containsAll(role.getMenuIdList())){
 			throw new RRException("新增角色的权限，已超出你的权限范围");

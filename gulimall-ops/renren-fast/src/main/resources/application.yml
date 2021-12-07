@@ -10,6 +10,12 @@ server:
     context-path: /renren-fast
 
 spring:
+  application:
+    name: guli-admin
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.137.1:8848
   # 环境 dev|test|prod
   profiles:
     active: dev

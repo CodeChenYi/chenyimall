@@ -4,17 +4,14 @@ import java.util.Arrays;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.chenyi.gulimall.order.entity.OrderEntity;
 import com.chenyi.gulimall.order.service.OrderService;
 import com.chenyi.gulimall.common.utils.PageUtils;
 import com.chenyi.gulimall.common.utils.R;
 
+import javax.annotation.Resource;
 
 
 /**
@@ -27,13 +24,13 @@ import com.chenyi.gulimall.common.utils.R;
 @RestController
 @RequestMapping("order/order")
 public class OrderController {
-    @Autowired
+    @Resource
     private OrderService orderService;
 
     /**
      * 列表
      */
-    @RequestMapping("/list")
+    @GetMapping("/list")
     // @RequiresPermissions("order:order:list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = orderService.queryPage(params);
@@ -45,7 +42,7 @@ public class OrderController {
     /**
      * 信息
      */
-    @RequestMapping("/info/{id}")
+    @GetMapping("/info/{id}")
     // @RequiresPermissions("order:order:info")
     public R info(@PathVariable("id") Long id){
 		OrderEntity order = orderService.getById(id);
@@ -56,7 +53,7 @@ public class OrderController {
     /**
      * 保存
      */
-    @RequestMapping("/save")
+    @PostMapping("/save")
     // @RequiresPermissions("order:order:save")
     public R save(@RequestBody OrderEntity order){
 		orderService.save(order);
@@ -67,7 +64,7 @@ public class OrderController {
     /**
      * 修改
      */
-    @RequestMapping("/update")
+    @PutMapping("/update")
     // @RequiresPermissions("order:order:update")
     public R update(@RequestBody OrderEntity order){
 		orderService.updateById(order);
@@ -78,7 +75,7 @@ public class OrderController {
     /**
      * 删除
      */
-    @RequestMapping("/delete")
+    @DeleteMapping("/delete")
     // @RequiresPermissions("order:order:delete")
     public R delete(@RequestBody Long[] ids){
 		orderService.removeByIds(Arrays.asList(ids));

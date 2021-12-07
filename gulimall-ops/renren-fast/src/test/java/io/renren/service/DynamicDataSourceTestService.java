@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
+
 /**
  * 测试多数据源
  *
@@ -23,7 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 //@DataSource("slave1")
 public class DynamicDataSourceTestService {
-    @Autowired
+    @Resource
     private SysUserDao sysUserDao;
 
     @Transactional

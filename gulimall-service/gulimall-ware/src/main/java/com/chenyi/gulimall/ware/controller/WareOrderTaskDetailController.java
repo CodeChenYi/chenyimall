@@ -4,17 +4,14 @@ import java.util.Arrays;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.chenyi.gulimall.ware.entity.WareOrderTaskDetailEntity;
 import com.chenyi.gulimall.ware.service.WareOrderTaskDetailService;
 import com.chenyi.gulimall.common.utils.PageUtils;
 import com.chenyi.gulimall.common.utils.R;
 
+import javax.annotation.Resource;
 
 
 /**
@@ -27,13 +24,13 @@ import com.chenyi.gulimall.common.utils.R;
 @RestController
 @RequestMapping("ware/wareordertaskdetail")
 public class WareOrderTaskDetailController {
-    @Autowired
+    @Resource
     private WareOrderTaskDetailService wareOrderTaskDetailService;
 
     /**
      * 列表
      */
-    @RequestMapping("/list")
+    @GetMapping("/list")
     // @RequiresPermissions("ware:wareordertaskdetail:list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = wareOrderTaskDetailService.queryPage(params);
@@ -45,7 +42,7 @@ public class WareOrderTaskDetailController {
     /**
      * 信息
      */
-    @RequestMapping("/info/{id}")
+    @GetMapping("/info/{id}")
     // @RequiresPermissions("ware:wareordertaskdetail:info")
     public R info(@PathVariable("id") Long id){
 		WareOrderTaskDetailEntity wareOrderTaskDetail = wareOrderTaskDetailService.getById(id);
@@ -56,7 +53,7 @@ public class WareOrderTaskDetailController {
     /**
      * 保存
      */
-    @RequestMapping("/save")
+    @PostMapping("/save")
     // @RequiresPermissions("ware:wareordertaskdetail:save")
     public R save(@RequestBody WareOrderTaskDetailEntity wareOrderTaskDetail){
 		wareOrderTaskDetailService.save(wareOrderTaskDetail);
@@ -67,7 +64,7 @@ public class WareOrderTaskDetailController {
     /**
      * 修改
      */
-    @RequestMapping("/update")
+    @PutMapping("/update")
     // @RequiresPermissions("ware:wareordertaskdetail:update")
     public R update(@RequestBody WareOrderTaskDetailEntity wareOrderTaskDetail){
 		wareOrderTaskDetailService.updateById(wareOrderTaskDetail);
@@ -78,7 +75,7 @@ public class WareOrderTaskDetailController {
     /**
      * 删除
      */
-    @RequestMapping("/delete")
+    @DeleteMapping("/delete")
     // @RequiresPermissions("ware:wareordertaskdetail:delete")
     public R delete(@RequestBody Long[] ids){
 		wareOrderTaskDetailService.removeByIds(Arrays.asList(ids));

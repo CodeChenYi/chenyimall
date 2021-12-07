@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import java.util.Map;
 
 
@@ -30,9 +31,9 @@ import java.util.Map;
 @Controller
 @RequestMapping("/sys/log")
 public class SysLogController {
-	@Autowired
+	@Resource
 	private SysLogService sysLogService;
-	
+
 	/**
 	 * 列表
 	 */
@@ -44,5 +45,5 @@ public class SysLogController {
 
 		return R.ok().put("page", page);
 	}
-	
+
 }

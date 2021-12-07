@@ -19,6 +19,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.Set;
 
 /**
@@ -28,7 +29,7 @@ import java.util.Set;
  */
 @Component
 public class OAuth2Realm extends AuthorizingRealm {
-    @Autowired
+    @Resource
     private ShiroService shiroService;
 
     @Override

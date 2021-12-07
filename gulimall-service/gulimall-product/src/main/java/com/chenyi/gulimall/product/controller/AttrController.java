@@ -4,17 +4,14 @@ import java.util.Arrays;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.chenyi.gulimall.product.entity.AttrEntity;
 import com.chenyi.gulimall.product.service.AttrService;
 import com.chenyi.gulimall.common.utils.PageUtils;
 import com.chenyi.gulimall.common.utils.R;
 
+import javax.annotation.Resource;
 
 
 /**
@@ -25,15 +22,15 @@ import com.chenyi.gulimall.common.utils.R;
  * @date 2021-10-04 22:58:32
  */
 @RestController
-@RequestMapping("product/attr")
+@RequestMapping("/attr")
 public class AttrController {
-    @Autowired
+    @Resource
     private AttrService attrService;
 
     /**
      * 列表
      */
-    @RequestMapping("/list")
+    @GetMapping("/list")
     // @RequiresPermissions("product:attr:list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = attrService.queryPage(params);
@@ -56,7 +53,7 @@ public class AttrController {
     /**
      * 保存
      */
-    @RequestMapping("/save")
+    @PostMapping("/save")
     // @RequiresPermissions("product:attr:save")
     public R save(@RequestBody AttrEntity attr){
 		attrService.save(attr);
@@ -67,7 +64,7 @@ public class AttrController {
     /**
      * 修改
      */
-    @RequestMapping("/update")
+    @PutMapping("/update")
     // @RequiresPermissions("product:attr:update")
     public R update(@RequestBody AttrEntity attr){
 		attrService.updateById(attr);
@@ -78,7 +75,7 @@ public class AttrController {
     /**
      * 删除
      */
-    @RequestMapping("/delete")
+    @DeleteMapping("/delete")
     // @RequiresPermissions("product:attr:delete")
     public R delete(@RequestBody Long[] attrIds){
 		attrService.removeByIds(Arrays.asList(attrIds));

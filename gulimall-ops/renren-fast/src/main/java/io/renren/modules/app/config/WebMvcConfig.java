@@ -16,6 +16,7 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -25,9 +26,9 @@ import java.util.List;
  */
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
-    @Autowired
+    @Resource
     private AuthorizationInterceptor authorizationInterceptor;
-    @Autowired
+    @Resource
     private LoginUserHandlerMethodArgumentResolver loginUserHandlerMethodArgumentResolver;
 
     @Override

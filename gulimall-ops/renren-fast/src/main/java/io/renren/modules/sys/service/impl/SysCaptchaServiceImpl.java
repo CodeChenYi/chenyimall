@@ -21,6 +21,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.awt.image.BufferedImage;
 import java.util.Date;
 
@@ -31,7 +32,7 @@ import java.util.Date;
  */
 @Service("sysCaptchaService")
 public class SysCaptchaServiceImpl extends ServiceImpl<SysCaptchaDao, SysCaptchaEntity> implements SysCaptchaService {
-    @Autowired
+    @Resource
     private Producer producer;
 
     @Override
