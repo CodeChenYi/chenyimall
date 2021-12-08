@@ -7,11 +7,11 @@ server:
   port: 8080
   connection-timeout: 5000ms
   servlet:
-    context-path: /renren-fast
+    context-path: /api/admin
 
 spring:
   application:
-    name: guli-admin
+    name: gulimall-admin
   cloud:
     nacos:
       discovery:

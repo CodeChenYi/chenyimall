@@ -17,8 +17,14 @@ spring:
           uri: lb://gulimall-coupon
           predicates:
             - Path=/api/coupon/**
+
         - id: gulimall-product
           uri: lb://gulimall-product
           predicates:
             - Path=/api/product/**
+
+        - id: gulimall-admin
+          uri: lb://gulimall-admin
+          predicates:
+            - Path=/api/admin/**
 

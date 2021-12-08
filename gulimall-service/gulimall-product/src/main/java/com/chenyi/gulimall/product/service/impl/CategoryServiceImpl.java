@@ -13,6 +13,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -49,6 +50,8 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, CategoryEnt
                 .filter(categoryEntity -> categoryEntity.getParentCid() == 0)
                 // 递归查询子菜单
                 .peek(categoryEntityVO -> categoryEntityVO.setCategoryEntityChildrenList(getChildrens(categoryEntityVO, categoryEntityVOList)))
+                // 排序
+                .sorted(Comparator.comparingInt(menu -> (menu.getSort() == null ? 0 : menu.getSort())))
                 .collect(Collectors.toList());
     }
 
@@ -61,7 +64,10 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, CategoryEnt
     private List<CategoryEntityVO> getChildrens(CategoryEntityVO root, List<CategoryEntityVO> all) {
         return all.stream()
                 .filter(categoryEntityVO -> categoryEntityVO.getParentCid().equals(root.getCatId()))
+                // 查询子菜单
                 .peek(categoryEntityVO -> categoryEntityVO.setCategoryEntityChildrenList(getChildrens(categoryEntityVO, all)))
+                // 排序
+                .sorted(Comparator.comparingInt(menu -> (menu.getSort() == null ? 0 : menu.getSort())))
                 .collect(Collectors.toList());
     }
 }
