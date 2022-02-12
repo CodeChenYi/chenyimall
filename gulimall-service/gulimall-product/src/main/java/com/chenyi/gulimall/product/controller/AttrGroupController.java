@@ -1,17 +1,14 @@
 package com.chenyi.gulimall.product.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import com.chenyi.gulimall.product.entity.AttrGroupEntity;
-import com.chenyi.gulimall.product.service.AttrGroupService;
 import com.chenyi.gulimall.common.utils.PageUtils;
 import com.chenyi.gulimall.common.utils.R;
+import com.chenyi.gulimall.product.entity.AttrGroupEntity;
+import com.chenyi.gulimall.product.service.AttrGroupService;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
+import java.util.Map;
 
 
 /**
@@ -27,11 +24,21 @@ public class AttrGroupController {
     @Resource
     private AttrGroupService attrGroupService;
 
+    @GetMapping("/list/{catelogId}")
+    public R listCateLogById(@RequestParam Map<String, Object> map, @PathVariable String catelogId) {
+        PageUtils page = attrGroupService.queryPageById(map, catelogId);
+        return R.ok().put("page", page);
+    }
+
+    @GetMapping("/test/")
+    public R test(@RequestParam Map test) {
+        return R.ok().put("data", test);
+    }
+
     /**
      * 列表
      */
     @GetMapping("/list")
-    // @RequiresPermissions("product:attrgroup:list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = attrGroupService.queryPage(params);
 
@@ -42,9 +49,9 @@ public class AttrGroupController {
     /**
      * 信息
      */
-    @RequestMapping("/info/{attrGroupId}")
+    @GetMapping("/info/{attrGroupId}")
     // @RequiresPermissions("product:attrgroup:info")
-    public R info(@PathVariable("attrGroupId") Long attrGroupId){
+    public R info(@PathVariable("attrGroupId") String attrGroupId){
 		AttrGroupEntity attrGroup = attrGroupService.getById(attrGroupId);
 
         return R.ok().put("attrGroup", attrGroup);
@@ -77,7 +84,7 @@ public class AttrGroupController {
      */
     @DeleteMapping("/delete")
     // @RequiresPermissions("product:attrgroup:delete")
-    public R delete(@RequestBody Long[] attrGroupIds){
+    public R delete(@RequestBody String[] attrGroupIds){
 		attrGroupService.removeByIds(Arrays.asList(attrGroupIds));
 
         return R.ok();

@@ -1,9 +1,8 @@
 package com.chenyi.gulimall.product.vo;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.chenyi.gulimall.product.entity.CategoryEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
@@ -14,13 +13,14 @@ import java.util.List;
  */
 
 @Data
+@EqualsAndHashCode
 public class CategoryEntityVO {
 
     /**
      * 分类id
      */
     @TableId
-    private Long catId;
+    private String catId;
     /**
      * 分类名称
      */
@@ -28,7 +28,7 @@ public class CategoryEntityVO {
     /**
      * 父分类id
      */
-    private Long parentCid;
+    private String parentCid;
     /**
      * 层级
      */

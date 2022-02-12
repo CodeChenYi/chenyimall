@@ -12,7 +12,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 192.168.137.1:8848
+        server-addr: 192.168.31.235:8848
   application:
     name: gulimall-product
 
@@ -27,4 +27,8 @@ swagger:
   description: 商品服务接口文档
   version: 1.0
   ip-address: ${spring.cloud.client.ipAddress}:${server.port}
-
+logging:
+  level:
+    com:
+      chenyi:
+        gulimall: debug

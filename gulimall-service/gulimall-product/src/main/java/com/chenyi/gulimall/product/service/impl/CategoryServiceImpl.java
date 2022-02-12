@@ -47,7 +47,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, CategoryEnt
 
         // 递归查询菜单数据
         return categoryEntityVOList.stream()
-                .filter(categoryEntity -> categoryEntity.getParentCid() == 0)
+                .filter(categoryEntity -> "0".equals(categoryEntity.getParentCid()))
                 // 递归查询子菜单
                 .peek(categoryEntityVO -> categoryEntityVO.setCategoryEntityChildrenList(getChildrens(categoryEntityVO, categoryEntityVOList)))
                 // 排序

@@ -7,7 +7,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 192.168.137.1:8848
+        server-addr: 192.168.31.235:8848
     gateway:
       discovery:
         locator:
@@ -17,14 +17,12 @@ spring:
           uri: lb://gulimall-coupon
           predicates:
             - Path=/api/coupon/**
-
         - id: gulimall-product
           uri: lb://gulimall-product
           predicates:
             - Path=/api/product/**
-
         - id: gulimall-admin
           uri: lb://gulimall-admin
           predicates:
-            - Path=/api/admin/**
+            - Path=/api/**
 

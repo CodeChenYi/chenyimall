@@ -7,7 +7,7 @@ server:
   port: 8080
   connection-timeout: 5000ms
   servlet:
-    context-path: /api/admin
+    context-path: /api
 
 spring:
   application:
@@ -15,7 +15,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 192.168.137.1:8848
+        server-addr: 192.168.31.235:8848
   # 环境 dev|test|prod
   profiles:
     active: dev
