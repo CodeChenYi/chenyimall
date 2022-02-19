@@ -4,10 +4,14 @@ import com.chenyi.gulimall.common.utils.PageUtils;
 import com.chenyi.gulimall.common.utils.R;
 import com.chenyi.gulimall.product.entity.AttrGroupEntity;
 import com.chenyi.gulimall.product.service.AttrGroupService;
+import com.chenyi.gulimall.product.service.CategoryService;
+import com.chenyi.gulimall.product.vo.AttrGroupEntityVO;
+import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 
@@ -24,15 +28,13 @@ public class AttrGroupController {
     @Resource
     private AttrGroupService attrGroupService;
 
+    @Resource
+    private CategoryService categoryService;
+
     @GetMapping("/list/{catelogId}")
     public R listCateLogById(@RequestParam Map<String, Object> map, @PathVariable String catelogId) {
         PageUtils page = attrGroupService.queryPageById(map, catelogId);
         return R.ok().put("page", page);
-    }
-
-    @GetMapping("/test/")
-    public R test(@RequestParam Map test) {
-        return R.ok().put("data", test);
     }
 
     /**
@@ -41,7 +43,6 @@ public class AttrGroupController {
     @GetMapping("/list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = attrGroupService.queryPage(params);
-
         return R.ok().put("page", page);
     }
 
@@ -53,8 +54,13 @@ public class AttrGroupController {
     // @RequiresPermissions("product:attrgroup:info")
     public R info(@PathVariable("attrGroupId") String attrGroupId){
 		AttrGroupEntity attrGroup = attrGroupService.getById(attrGroupId);
-
-        return R.ok().put("attrGroup", attrGroup);
+        AttrGroupEntityVO attrGroupEntityVO = new AttrGroupEntityVO();
+        if (attrGroup != null) {
+            List<String> catelogPath = categoryService.getCatelogIdPath(attrGroup.getCatelogId());
+            BeanUtils.copyProperties(attrGroup, attrGroupEntityVO);
+            attrGroupEntityVO.setCatelogIdPath(catelogPath);
+        }
+        return R.ok().put("attrGroup", attrGroupEntityVO);
     }
 
     /**

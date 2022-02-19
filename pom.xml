@@ -20,6 +20,7 @@
         <module>gulimall-service</module>
         <module>gulimall-ops</module>
         <module>gulimall-gateway</module>
+        <module>gulimall-third-party</module>
     </modules>
 
     <properties>
@@ -30,6 +31,9 @@
         <lombok.version>1.18.12</lombok.version>
         <httpcore.version>4.4.13</httpcore.version>
         <swagger2.version>2.9.2</swagger2.version>
+        <oss.version>2.2.0.RELEASE</oss.version>
+        <fastjson.version>1.2.79</fastjson.version>
+        <redisson.version>3.16.8</redisson.version>
     </properties>
 
     <dependencyManagement>
@@ -41,6 +45,24 @@
                 <version>${spring.cloud.alibaba.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>${redisson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alicloud-oss</artifactId>
+                <version>${oss.version}</version>
             </dependency>
 
             <!-- spring cloud -->

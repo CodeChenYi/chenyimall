@@ -17,12 +17,32 @@ spring:
           uri: lb://gulimall-coupon
           predicates:
             - Path=/api/coupon/**
+          filters:
+            - RewritePath=/api/coupon/(?<segment>.*), /$\{segment}
         - id: gulimall-product
           uri: lb://gulimall-product
           predicates:
             - Path=/api/product/**
+          filters:
+            - RewritePath=/api/product/(?<segment>.*), /$\{segment}
+        - id: gulimall-third-party
+          uri: lb://gulimall-third-party
+          predicates:
+            - Path=/api/thirdParty/**
+          filters:
+            - RewritePath=/api/thirdParty/(?<segment>.*), /$\{segment}
         - id: gulimall-admin
           uri: lb://gulimall-admin
           predicates:
             - Path=/api/**
+          filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment}
+        - id: gulimall-index-router
+          uri: lb://gulimall-product
+          predicates:
+            - Host=gulimall.com
+        - id: gulimall-search-router
+          uri: lb://gulimall-search
+          predicates:
+            - Host=search.gulimall.com
 

@@ -19,5 +19,7 @@ public interface AttrGroupService extends IService<AttrGroupEntity> {
 
 
     PageUtils queryPageById(Map<String, Object> map, String catelogId);
+
+
 }
 

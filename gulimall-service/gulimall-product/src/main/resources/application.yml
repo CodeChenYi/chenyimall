@@ -1,7 +1,5 @@
 server:
   port: 8004
-  servlet:
-    context-path: /api/product
 
 spring:
   datasource:
@@ -15,6 +13,17 @@ spring:
         server-addr: 192.168.31.235:8848
   application:
     name: gulimall-product
+  thymeleaf:
+    cache: false
+  redis:
+    host: 192.168.56.10
+    port: 6379
+    password: 5201314xuan
+    timeout: 50000ms
+  cache:
+    type: redis
+    redis:
+      time-to-live: 86400000 # key过期时间，单位毫秒
 
 
 mybatis-plus:
@@ -32,3 +41,7 @@ logging:
     com:
       chenyi:
         gulimall: debug
+
+#  用户登录名称 gulimall-chenyi@1039786181812554.onaliyun.com
+#  AccessKey ID LTAI5tGCrBhwb1FpZFnpXmUR
+#  AccessKey Secret me4sheYTh3BkNtddkpfsmOGcQhxlG7

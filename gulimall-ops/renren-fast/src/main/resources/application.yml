@@ -6,8 +6,6 @@ server:
     min-spare-threads: 30
   port: 8080
   connection-timeout: 5000ms
-  servlet:
-    context-path: /api
 
 spring:
   application:
@@ -29,9 +27,9 @@ spring:
       max-request-size: 100MB
       enabled: true
   redis:
-    open: false  # 是否开启redis缓存  true开启   false关闭
+    open: falst  # 是否开启redis缓存  true开启   false关闭
     database: 0
-    host: localhost
+    host: 192.168.56.10
     port: 6379
     password:    # 密码（默认为空）
     timeout: 6000ms  # 连接超时时长（毫秒）

@@ -3,6 +3,7 @@ package com.chenyi.gulimall.product.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.chenyi.gulimall.common.utils.PageUtils;
 import com.chenyi.gulimall.product.entity.CategoryEntity;
+import com.chenyi.gulimall.product.vo.CategoryEntityTwoVO;
 import com.chenyi.gulimall.product.vo.CategoryEntityVO;
 
 import java.util.List;
@@ -25,5 +26,23 @@ public interface CategoryService extends IService<CategoryEntity> {
      */
     List<CategoryEntityVO> listWithTree();
 
+    /**
+     * 查询catelogId路径
+     * @param catelogId
+     * @return
+     */
+    List<String> getCatelogIdPath(String catelogId);
+
+    /**
+     * 查询一级分类
+     * @return
+     */
+    List<CategoryEntity> getCategoryLevelOne();
+
+    /**
+     * 查询首页分页数据
+     * @return
+     */
+    Map<String, List<CategoryEntityTwoVO>> categoryLevelJson();
 }
 

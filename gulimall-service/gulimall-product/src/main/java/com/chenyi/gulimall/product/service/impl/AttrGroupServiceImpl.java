@@ -7,7 +7,9 @@ import com.chenyi.gulimall.common.utils.PageUtils;
 import com.chenyi.gulimall.common.utils.Query;
 import com.chenyi.gulimall.product.entity.AttrGroupEntity;
 import com.chenyi.gulimall.product.mapper.AttrGroupMapper;
+import com.chenyi.gulimall.product.mapper.CategoryMapper;
 import com.chenyi.gulimall.product.service.AttrGroupService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -16,6 +18,9 @@ import java.util.Map;
 
 @Service("attrGroupService")
 public class AttrGroupServiceImpl extends ServiceImpl<AttrGroupMapper, AttrGroupEntity> implements AttrGroupService {
+
+    @Autowired
+    private CategoryMapper categoryMapper;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
@@ -46,4 +51,5 @@ public class AttrGroupServiceImpl extends ServiceImpl<AttrGroupMapper, AttrGroup
             return new PageUtils(page);
         }
     }
+
 }

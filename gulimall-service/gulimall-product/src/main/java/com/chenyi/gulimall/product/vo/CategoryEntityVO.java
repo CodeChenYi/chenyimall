@@ -1,6 +1,7 @@
 package com.chenyi.gulimall.product.vo;
 
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -53,10 +54,10 @@ public class CategoryEntityVO {
      * 商品数量
      */
     private Integer productCount;
-
     /**
      * 子分类数据
      */
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<CategoryEntityVO> categoryEntityChildrenList;
 
 }
