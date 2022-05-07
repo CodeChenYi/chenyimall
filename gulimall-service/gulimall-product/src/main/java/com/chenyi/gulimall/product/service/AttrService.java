@@ -2,8 +2,11 @@ package com.chenyi.gulimall.product.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.chenyi.gulimall.common.utils.PageUtils;
+import com.chenyi.gulimall.product.dto.AttrDTO;
 import com.chenyi.gulimall.product.entity.AttrEntity;
+import com.chenyi.gulimall.product.vo.AttrVO;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,5 +19,38 @@ import java.util.Map;
 public interface AttrService extends IService<AttrEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+
+    void saveDetail(AttrDTO attrDTO);
+
+    AttrVO getAttrInfo(String attrId);
+
+    /**
+     * 修改商品属性
+     * @param attrDTO
+     */
+    void updateDetail(AttrDTO attrDTO);
+
+    /**
+     * 根据三级分类id查询商品属性
+     *
+     * @param params
+     * @param catId
+     * @return
+     */
+    PageUtils getAttrByCatId(Map<String, Object> params, String catId);
+
+    /**
+     * 删除商品属性详细信息
+     * @param asList
+     */
+    void removeDetail(List<String> asList);
+
+    /**
+     * 根据attrGroupId查询分组信息
+     * @param attrGroupId
+     * @return
+     */
+    List<AttrEntity> getRelationByAttrGroupId(String attrGroupId);
 }
 

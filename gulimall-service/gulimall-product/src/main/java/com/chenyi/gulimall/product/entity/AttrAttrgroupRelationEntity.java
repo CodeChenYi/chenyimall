@@ -2,10 +2,9 @@ package com.chenyi.gulimall.product.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Date;
-import lombok.Data;
 
 /**
  * 属性&属性分组关联
@@ -23,15 +22,15 @@ public class AttrAttrgroupRelationEntity implements Serializable {
 	 * id
 	 */
 	@TableId
-	private Long id;
+	private String id;
 	/**
 	 * 属性id
 	 */
-	private Long attrId;
+	private String attrId;
 	/**
 	 * 属性分组id
 	 */
-	private Long attrGroupId;
+	private String attrGroupId;
 	/**
 	 * 属性组内排序
 	 */

@@ -2,10 +2,13 @@ package com.chenyi.gulimall.product.controller;
 
 import com.chenyi.gulimall.common.utils.PageUtils;
 import com.chenyi.gulimall.common.utils.R;
+import com.chenyi.gulimall.product.entity.AttrEntity;
 import com.chenyi.gulimall.product.entity.AttrGroupEntity;
 import com.chenyi.gulimall.product.service.AttrGroupService;
+import com.chenyi.gulimall.product.service.AttrService;
 import com.chenyi.gulimall.product.service.CategoryService;
 import com.chenyi.gulimall.product.vo.AttrGroupEntityVO;
+import io.swagger.annotations.Api;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +25,7 @@ import java.util.Map;
  * @email codezixuan@outlook.com
  * @date 2021-10-04 22:53:33
  */
+@Api(tags = "三级分类属性分组")
 @RestController
 @RequestMapping("/attrgroup")
 public class AttrGroupController {
@@ -31,10 +35,19 @@ public class AttrGroupController {
     @Resource
     private CategoryService categoryService;
 
+    @Resource
+    private AttrService attrService;
+
     @GetMapping("/list/{catelogId}")
     public R listCateLogById(@RequestParam Map<String, Object> map, @PathVariable String catelogId) {
         PageUtils page = attrGroupService.queryPageById(map, catelogId);
         return R.ok().put("page", page);
+    }
+
+    @GetMapping("/getRelationByAttrGroupId/{attrGroupId}")
+    public R getRelationByAttrGroupId(@PathVariable String attrGroupId) {
+        List<AttrEntity> list = attrService.getRelationByAttrGroupId(attrGroupId);
+        return R.ok().put("list", list);
     }
 
     /**

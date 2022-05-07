@@ -44,5 +44,18 @@ public interface CategoryService extends IService<CategoryEntity> {
      * @return
      */
     Map<String, List<CategoryEntityTwoVO>> categoryLevelJson();
+
+    /**
+     * 按照名称查询tree
+     * @param treeName
+     * @return
+     */
+    List<CategoryEntityVO> listTreeByName(String treeName);
+
+    /**
+     * 修改商品三级分类以及中间表信息
+     * @param category
+     */
+    void updateDetail(CategoryEntity category);
 }
 

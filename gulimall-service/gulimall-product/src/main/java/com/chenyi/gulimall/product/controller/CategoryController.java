@@ -37,6 +37,13 @@ public class CategoryController {
         return R.ok().put("data", categoryEntityList);
     }
 
+    @ApiOperation("按名称查询三级分类")
+    @GetMapping("/listTreeByName")
+    public R listTreeByName(@RequestParam String treeName) {
+        List<CategoryEntityVO> categoryEntityList = categoryService.listTreeByName(treeName);
+        return R.ok().put("data", categoryEntityList);
+    }
+
     /**
      * 列表
      */
@@ -83,7 +90,7 @@ public class CategoryController {
      */
     @PutMapping("/update")
     public R update(@RequestBody CategoryEntity category){
-		categoryService.updateById(category);
+		categoryService.updateDetail(category);
 
         return R.ok();
     }

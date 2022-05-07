@@ -10,6 +10,7 @@ import com.chenyi.gulimall.common.utils.Query;
 import com.chenyi.gulimall.product.constans.CacheKeyName;
 import com.chenyi.gulimall.product.entity.CategoryEntity;
 import com.chenyi.gulimall.product.mapper.CategoryMapper;
+import com.chenyi.gulimall.product.service.CategoryBrandRelationService;
 import com.chenyi.gulimall.product.service.CategoryService;
 import com.chenyi.gulimall.product.vo.CategoryEntityThreeVO;
 import com.chenyi.gulimall.product.vo.CategoryEntityTwoVO;
@@ -20,6 +21,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
@@ -36,6 +38,9 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, CategoryEnt
 
     @Resource
     private RedissonClient redissonClient;
+
+    @Resource
+    private CategoryBrandRelationService categoryBrandRelationService;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
@@ -59,7 +64,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, CategoryEnt
             BeanUtils.copyProperties(categoryEntity, categoryEntityVO);
             categoryEntityVOList.add(categoryEntityVO);
         }
-
+        categoryEntities = null;
         // 递归查询菜单数据
         return categoryEntityVOList.stream()
                 .filter(categoryEntity -> "0".equals(categoryEntity.getParentCid()))
@@ -193,5 +198,30 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, CategoryEnt
      */
     private List<CategoryEntity> getParentId(List<CategoryEntity> categoryEntityList, String parentId) {
         return categoryEntityList.stream().filter(item -> item.getParentCid().equals(parentId)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<CategoryEntityVO> listTreeByName(String treeName) {
+        // 添加查询条件
+        QueryWrapper<CategoryEntity> wrapper = new QueryWrapper<>();
+        wrapper.likeRight("name", treeName);
+        List<CategoryEntity> categoryEntities = baseMapper.selectList(wrapper);
+        // copy到vo对象中
+        List<CategoryEntityVO> categoryEntityVOList = new ArrayList<>(categoryEntities.size());
+        categoryEntities.forEach(category -> {
+            CategoryEntityVO categoryEntityVO = new CategoryEntityVO();
+            BeanUtils.copyProperties(category, categoryEntityVO);
+            categoryEntityVOList.add(categoryEntityVO);
+        });
+        // 将查询对象设置为null
+        categoryEntities = null;
+        return categoryEntityVOList;
+    }
+
+    @Transactional
+    @Override
+    public void updateDetail(CategoryEntity category) {
+        baseMapper.updateById(category);
+        categoryBrandRelationService.updateCategory(category.getCatId(), category.getName());
     }
 }

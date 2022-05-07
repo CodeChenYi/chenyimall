@@ -20,7 +20,6 @@
         <module>gulimall-service</module>
         <module>gulimall-ops</module>
         <module>gulimall-gateway</module>
-        <module>gulimall-third-party</module>
     </modules>
 
     <properties>

@@ -3,7 +3,7 @@
 
 <mapper namespace="com.chenyi.gulimall.product.mapper.AttrMapper">
 
-	<!-- 可根据自己的需求，是否要使用 -->
+    <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.chenyi.gulimall.product.entity.AttrEntity" id="attrMap">
         <result property="attrId" column="attr_id"/>
         <result property="attrName" column="attr_name"/>
@@ -15,6 +15,29 @@
         <result property="catelogId" column="catelog_id"/>
         <result property="showDesc" column="show_desc"/>
     </resultMap>
+
+    <select id="queryPage" resultType="com.chenyi.gulimall.product.vo.AttrVO">
+        SELECT attr.attr_id attrId,
+               attr.attr_name attrName,
+               attr.attr_type attrType,
+               attr.attr_name attrName,
+               attr.`enable` enable,
+               attr.icon icon,
+               attr.search_type searchType,
+               attr.show_desc showDesc,
+               attr.value_select valueSelect,
+               ca.`name` categoryName
+        FROM pms_attr attr
+                 LEFT JOIN pms_category ca ON attr.catelog_id = ca.cat_id
+        <where>
+            <if test="key != null and key != ''">
+                attr.attr_name = #{key}
+            </if>
+            <if test="key != null and key != ''">
+                OR ca.`name` = #{key}
+            </if>
+        </where>
+    </select>
 
 
 </mapper>

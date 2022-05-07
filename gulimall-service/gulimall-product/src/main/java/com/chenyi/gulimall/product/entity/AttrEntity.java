@@ -2,10 +2,9 @@ package com.chenyi.gulimall.product.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Date;
-import lombok.Data;
 
 /**
  * 商品属性
@@ -23,7 +22,7 @@ public class AttrEntity implements Serializable {
 	 * 属性id
 	 */
 	@TableId
-	private Long attrId;
+	private String attrId;
 	/**
 	 * 属性名
 	 */
@@ -51,7 +50,7 @@ public class AttrEntity implements Serializable {
 	/**
 	 * 所属分类
 	 */
-	private Long catelogId;
+	private String catelogId;
 	/**
 	 * 快速展示【是否展示在介绍上；0-否 1-是】，在sku中仍然可以调整
 	 */

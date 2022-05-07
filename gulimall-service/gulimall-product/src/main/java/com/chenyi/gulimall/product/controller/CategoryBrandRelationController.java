@@ -1,17 +1,17 @@
 package com.chenyi.gulimall.product.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import com.chenyi.gulimall.product.entity.CategoryBrandRelationEntity;
-import com.chenyi.gulimall.product.service.CategoryBrandRelationService;
 import com.chenyi.gulimall.common.utils.PageUtils;
 import com.chenyi.gulimall.common.utils.R;
+import com.chenyi.gulimall.product.entity.CategoryBrandRelationEntity;
+import com.chenyi.gulimall.product.service.CategoryBrandRelationService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -21,9 +21,11 @@ import javax.annotation.Resource;
  * @email codezixuan@outlook.com
  * @date 2021-10-04 22:58:32
  */
+@Api(tags = "品牌分类关联")
 @RestController
 @RequestMapping("/categorybrandrelation")
 public class CategoryBrandRelationController {
+
     @Resource
     private CategoryBrandRelationService categoryBrandRelationService;
 
@@ -44,10 +46,17 @@ public class CategoryBrandRelationController {
      */
     @GetMapping("/info/{id}")
     // @RequiresPermissions("product:categorybrandrelation:info")
-    public R info(@PathVariable("id") Long id){
+    public R info(@PathVariable("id") String id){
 		CategoryBrandRelationEntity categoryBrandRelation = categoryBrandRelationService.getById(id);
 
         return R.ok().put("categoryBrandRelation", categoryBrandRelation);
+    }
+
+    @ApiOperation("根据品牌id查询分组关系信息")
+    @GetMapping("/infoByBrandId/{brandId}")
+    public R infoByBrandId(@PathVariable("brandId") String brandId) {
+        List<CategoryBrandRelationEntity> list = categoryBrandRelationService.infoByBrandId(brandId);
+        return R.ok().put("list", list);
     }
 
     /**
@@ -56,8 +65,7 @@ public class CategoryBrandRelationController {
     @PostMapping("/save")
     // @RequiresPermissions("product:categorybrandrelation:save")
     public R save(@RequestBody CategoryBrandRelationEntity categoryBrandRelation){
-		categoryBrandRelationService.save(categoryBrandRelation);
-
+        categoryBrandRelationService.saveCategoryBrandRelation(categoryBrandRelation);
         return R.ok();
     }
 
@@ -77,7 +85,7 @@ public class CategoryBrandRelationController {
      */
     @DeleteMapping("/delete")
     // @RequiresPermissions("product:categorybrandrelation:delete")
-    public R delete(@RequestBody Long[] ids){
+    public R delete(@RequestBody String[] ids){
 		categoryBrandRelationService.removeByIds(Arrays.asList(ids));
 
         return R.ok();

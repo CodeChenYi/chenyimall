@@ -27,7 +27,7 @@ spring:
       max-request-size: 100MB
       enabled: true
   redis:
-    open: falst  # 是否开启redis缓存  true开启   false关闭
+    open: true  # 是否开启redis缓存  true开启   false关闭
     database: 0
     host: 192.168.56.10
     port: 6379
