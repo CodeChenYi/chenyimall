@@ -1,6 +1,6 @@
 package com.chenyi.gulimall.common.utils;
 
-import org.apache.http.HttpStatus;
+import com.chenyi.gulimall.common.enums.ResultEnum;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,16 +14,16 @@ public class R extends HashMap<String, Object> {
     private static final long serialVersionUID = 1L;
 
     public R() {
-        put("code", 0);
-        put("msg", "success");
+        put("code", ResultEnum.SUCCESS.getCode());
+        put("msg", ResultEnum.SUCCESS.getMsg());
     }
 
     public static R error() {
-        return error(HttpStatus.SC_INTERNAL_SERVER_ERROR, "未知异常，请联系管理员");
+        return error(ResultEnum.INTERNAL_SERVER_ERROR.getCode(), "未知异常，请联系管理员");
     }
 
     public static R error(String msg) {
-        return error(HttpStatus.SC_INTERNAL_SERVER_ERROR, msg);
+        return error(ResultEnum.INTERNAL_SERVER_ERROR.getCode(), msg);
     }
 
     public static R error(int code, String msg) {

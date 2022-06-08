@@ -22,7 +22,7 @@ import javax.annotation.Resource;
  * @date 2021-10-04 23:13:30
  */
 @RestController
-@RequestMapping("ware/purchasedetail")
+@RequestMapping("/purchasedetail")
 public class PurchaseDetailController {
     @Resource
     private PurchaseDetailService purchaseDetailService;

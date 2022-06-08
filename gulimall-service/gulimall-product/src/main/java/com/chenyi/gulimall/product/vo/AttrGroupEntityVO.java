@@ -40,4 +40,9 @@ public class AttrGroupEntityVO {
      * catelog完整路径
      */
     private List<String> catelogIdPath;
+
+    /**
+     * 三级分类名称
+     */
+    private String categoryName;
 }

@@ -8,10 +8,12 @@ import com.chenyi.gulimall.product.service.AttrService;
 import com.chenyi.gulimall.product.vo.AttrVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 
@@ -22,6 +24,7 @@ import java.util.Map;
  * @email codezixuan@outlook.com
  * @date 2021-10-04 22:58:32
  */
+@Slf4j
 @Api(tags = "商品属性")
 @RestController
 @RequestMapping("/attr")
@@ -41,10 +44,26 @@ public class AttrController {
         return R.ok().put("page", page);
     }
 
+    @ApiOperation("查询商品销售属性信息")
+    @GetMapping("/list/SaleInfo")
+    public R getSaleInfo(@RequestParam Map<String, Object> params) {
+        PageUtils page = attrService.getSaleInfo(params);
+        return R.ok().put("page", page);
+    }
+
+    @GetMapping("/list/sale/{catId}")
+    public R getSaleList(@PathVariable String catId) {
+        List<AttrEntity> list = attrService.getSaleList(catId);
+        return R.ok().put("list", list);
+    }
+
     @ApiOperation("根据三级分类id查询商品属性")
-    @GetMapping("/list/{catId}")
-    public R getAttrByCatId(@RequestParam Map<String, Object> params, @PathVariable String catId) {
-        PageUtils page = attrService.getAttrByCatId(params, catId);
+    @GetMapping("/list/{catId}/{attrType}")
+    public R getAttrByCatId(
+            @RequestParam Map<String, Object> params,
+            @PathVariable String catId,
+            @PathVariable Integer attrType) {
+        PageUtils page = attrService.getAttrByCatId(params, catId, attrType);
         return R.ok().put("page", page);
     }
 

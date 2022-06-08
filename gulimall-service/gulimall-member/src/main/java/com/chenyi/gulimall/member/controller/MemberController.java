@@ -1,17 +1,16 @@
 package com.chenyi.gulimall.member.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import com.chenyi.gulimall.member.entity.MemberEntity;
-import com.chenyi.gulimall.member.service.MemberService;
 import com.chenyi.gulimall.common.utils.PageUtils;
 import com.chenyi.gulimall.common.utils.R;
+import com.chenyi.gulimall.member.entity.MemberEntity;
+import com.chenyi.gulimall.member.service.MemberService;
+import com.chenyi.gulimall.member.to.MemberInfo;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
+import java.util.Map;
 
 
 /**
@@ -22,7 +21,7 @@ import javax.annotation.Resource;
  * @date 2021-10-04 23:10:10
  */
 @RestController
-@RequestMapping("member/member")
+@RequestMapping("/memberUser")
 public class MemberController {
     @Resource
     private MemberService memberService;
@@ -38,6 +37,12 @@ public class MemberController {
         return R.ok().put("page", page);
     }
 
+    @ApiOperation("通过用户名称获取用户信息")
+    @PostMapping("/infoUser")
+    public MemberInfo infoByUserName(@RequestParam String userName) {
+        return memberService.getInfoByUserName(userName);
+    }
+
 
     /**
      * 信息
@@ -46,7 +51,6 @@ public class MemberController {
     // @RequiresPermissions("member:member:info")
     public R info(@PathVariable("id") Long id){
 		MemberEntity member = memberService.getById(id);
-
         return R.ok().put("member", member);
     }
 

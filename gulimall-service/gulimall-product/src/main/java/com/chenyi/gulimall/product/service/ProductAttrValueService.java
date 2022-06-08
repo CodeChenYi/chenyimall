@@ -2,8 +2,10 @@ package com.chenyi.gulimall.product.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.chenyi.gulimall.common.utils.PageUtils;
+import com.chenyi.gulimall.product.dto.SpuBaseAttrDTO;
 import com.chenyi.gulimall.product.entity.ProductAttrValueEntity;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,5 +18,12 @@ import java.util.Map;
 public interface ProductAttrValueService extends IService<ProductAttrValueEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    /**
+     * 保存spu规格参数信息
+     * @param spuInfoId
+     * @param baseAttrs
+     */
+    void saveSpuBaseAttr(String spuInfoId, List<SpuBaseAttrDTO> baseAttrs);
 }
 

@@ -3,7 +3,7 @@
 
 <mapper namespace="com.chenyi.gulimall.product.mapper.SkuSaleAttrValueMapper">
 
-	<!-- 可根据自己的需求，是否要使用 -->
+    <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.chenyi.gulimall.product.entity.SkuSaleAttrValueEntity" id="skuSaleAttrValueMap">
         <result property="id" column="id"/>
         <result property="skuId" column="sku_id"/>
@@ -12,6 +12,20 @@
         <result property="attrValue" column="attr_value"/>
         <result property="attrSort" column="attr_sort"/>
     </resultMap>
+    <select id="getSaleAttrValue" resultType="com.chenyi.gulimall.product.vo.SkuItemVO$SkuSaleAttrVO">
+        SELECT
+            ssav.attr_id,
+            ssav.attr_name,
+            GROUP_CONCAT( DISTINCT ssav.attr_value ) attrValueList
+        FROM
+            pms_sku_sale_attr_value ssav
+                LEFT JOIN pms_sku_info ski ON ski.sku_id = ssav.sku_id
+        WHERE
+            ski.spu_id = #{spuId}
+        GROUP BY
+            ssav.attr_id,
+            ssav.attr_name
+    </select>
 
 
 </mapper>

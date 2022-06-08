@@ -1,17 +1,14 @@
 package com.chenyi.gulimall.member.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import com.chenyi.gulimall.member.entity.MemberLoginLogEntity;
-import com.chenyi.gulimall.member.service.MemberLoginLogService;
 import com.chenyi.gulimall.common.utils.PageUtils;
 import com.chenyi.gulimall.common.utils.R;
+import com.chenyi.gulimall.member.entity.MemberLoginLogEntity;
+import com.chenyi.gulimall.member.service.MemberLoginLogService;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
+import java.util.Map;
 
 
 /**
@@ -22,7 +19,7 @@ import javax.annotation.Resource;
  * @date 2021-10-04 23:10:10
  */
 @RestController
-@RequestMapping("member/memberloginlog")
+@RequestMapping("/memberLoginLog")
 public class MemberLoginLogController {
     @Resource
     private MemberLoginLogService memberLoginLogService;

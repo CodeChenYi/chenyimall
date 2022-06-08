@@ -9,7 +9,7 @@
 	<id>gulimall-member</id>
 
 	<classpath>
-		<dir name="D:/github/gulimall/gulimall-service/gulimall-member/target/classes">
+		<dir name="${rebel.projectpath.gulimall-member}/target/classes">
 		</dir>
 	</classpath>
 

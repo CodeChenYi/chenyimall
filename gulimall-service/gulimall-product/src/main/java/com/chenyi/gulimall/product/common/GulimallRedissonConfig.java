@@ -13,7 +13,7 @@ public class GulimallRedissonConfig {
 //    @Bean(destroyMethod = "shutdown")
     public RedissonClient redissonClient() {
         Config config = new Config();
-        config.useSingleServer().setAddress("redis://111.229.191.225:6379").setPassword("5201314xuan");
+        config.useSingleServer().setAddress("redis://127.0.0.1:6379").setPassword("111111");
         return Redisson.create(config);
     }
 

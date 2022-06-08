@@ -3,7 +3,9 @@ package com.chenyi.gulimall.product.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.chenyi.gulimall.common.utils.PageUtils;
 import com.chenyi.gulimall.product.entity.AttrGroupEntity;
+import com.chenyi.gulimall.product.vo.AttrGroupWithAttrsVO;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,5 +21,19 @@ public interface AttrGroupService extends IService<AttrGroupEntity> {
 
 
     PageUtils queryPageById(Map<String, Object> map, String catelogId);
+
+    /**
+     * 获取属性分组信息和商品信息
+     * @param catId
+     * @return
+     */
+    List<AttrGroupWithAttrsVO> getAttrGroupWithAttrByCategoryId(String catId);
+
+    /**
+     * 更具categoryId获取分组信息
+     * @param catelogId
+     * @return
+     */
+    List<AttrGroupEntity> listCategoryById(String catelogId);
 }
 

@@ -7,6 +7,7 @@ import com.chenyi.gulimall.common.utils.PageUtils;
 import com.chenyi.gulimall.common.utils.Query;
 import com.chenyi.gulimall.product.entity.CategoryBrandRelationEntity;
 import com.chenyi.gulimall.product.entity.CategoryEntity;
+import com.chenyi.gulimall.product.mapper.BrandMapper;
 import com.chenyi.gulimall.product.mapper.CategoryBrandRelationMapper;
 import com.chenyi.gulimall.product.service.CategoryBrandRelationService;
 import com.chenyi.gulimall.product.service.CategoryService;
@@ -22,6 +23,9 @@ public class CategoryBrandRelationServiceImpl extends ServiceImpl<CategoryBrandR
 
     @Resource
     private CategoryService categoryService;
+
+    @Resource
+    private BrandMapper brandMapper;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
@@ -65,5 +69,13 @@ public class CategoryBrandRelationServiceImpl extends ServiceImpl<CategoryBrandR
         CategoryBrandRelationEntity relation = new CategoryBrandRelationEntity();
         relation.setCatelogName(name);
         baseMapper.update(relation, wrapper);
+    }
+
+    @Override
+    public List<CategoryBrandRelationEntity> getCategoryBrandByCatId(String catId) {
+        // 查询中间表信息
+        QueryWrapper<CategoryBrandRelationEntity> wrapper = new QueryWrapper<>();
+        wrapper.eq("catelog_id", catId);
+        return baseMapper.selectList(wrapper);
     }
 }

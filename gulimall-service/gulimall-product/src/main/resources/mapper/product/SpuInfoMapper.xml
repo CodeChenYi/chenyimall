@@ -16,5 +16,27 @@
         <result property="updateTime" column="update_time"/>
     </resultMap>
 
+    <resultMap id="spuAttrGroupVO" type="com.chenyi.gulimall.product.vo.SkuItemVO$SpuAttrGroupVO">
+        <result property="attrGroupId" column="attr_group_id"/>
+        <result property="attrGroupName" column="attr_group_name"/>
+        <collection property="spuBaseAttrVOList" ofType="com.chenyi.gulimall.product.vo.SkuItemVO$SpuBaseAttrVO">
+            <result property="attrName" column="attr_name"/>
+            <result property="attrValue" column="attr_value"/>
+        </collection>
+    </resultMap>
+    <select id="getSpuBaseAttrInfo" resultMap="spuAttrGroupVO">
+        SELECT
+            ag.attr_group_id,
+            ag.attr_group_name,
+            pav.attr_name,
+            pav.attr_value
+        FROM
+            pms_product_attr_value pav
+                LEFT JOIN pms_attr_attrgroup_relation aar ON aar.attr_id = pav.attr_id
+                LEFT JOIN pms_attr_group ag ON ag.attr_group_id = aar.attr_group_id
+        WHERE
+            pav.spu_id = #{spuId}
+    </select>
+
 
 </mapper>

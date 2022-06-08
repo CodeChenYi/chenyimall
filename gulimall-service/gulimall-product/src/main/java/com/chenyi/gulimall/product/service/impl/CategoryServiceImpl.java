@@ -1,13 +1,12 @@
 package com.chenyi.gulimall.product.service.impl;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.TypeReference;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.chenyi.gulimall.common.utils.JSONUtils;
 import com.chenyi.gulimall.common.utils.PageUtils;
 import com.chenyi.gulimall.common.utils.Query;
-import com.chenyi.gulimall.product.constans.CacheKeyName;
+import com.chenyi.gulimall.product.constant.CacheKeyName;
 import com.chenyi.gulimall.product.entity.CategoryEntity;
 import com.chenyi.gulimall.product.mapper.CategoryMapper;
 import com.chenyi.gulimall.product.service.CategoryBrandRelationService;
@@ -15,6 +14,7 @@ import com.chenyi.gulimall.product.service.CategoryService;
 import com.chenyi.gulimall.product.vo.CategoryEntityThreeVO;
 import com.chenyi.gulimall.product.vo.CategoryEntityTwoVO;
 import com.chenyi.gulimall.product.vo.CategoryEntityVO;
+import com.fasterxml.jackson.core.type.TypeReference;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.BeanUtils;
@@ -124,7 +124,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, CategoryEnt
         if (StringUtils.isEmpty(categoryLevelJson)) {
             return categoryLevelJsonLock();
         }
-        return JSON.parseObject(categoryLevelJson, new TypeReference<Map<String, List<CategoryEntityTwoVO>>>() {
+        return JSONUtils.parseObject(categoryLevelJson, new TypeReference<Map<String, List<CategoryEntityTwoVO>>>() {
         });
     }
 
@@ -140,13 +140,13 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, CategoryEnt
             // 再次确定redis中是否有数据有就直接返回
             if (!StringUtils.isEmpty(categoryLevelJson)) {
                 log.debug("缓存中已添加直接返回");
-                return JSON.parseObject(categoryLevelJson, new TypeReference<Map<String, List<CategoryEntityTwoVO>>>() {
+                JSONUtils.parseObject(categoryLevelJson, new TypeReference<Map<String, List<CategoryEntityTwoVO>>>() {
                 });
             }
             // 查询数据库数据
             categoryLevelJsonForDb = categoryLevelJsonForDb();
             stringRedisTemplate.opsForValue()
-                    .set(CacheKeyName.CATEGORY_CACHE + CacheKeyName.DOUBLE_COLON + "categoryLevelJson", JSON.toJSONString(categoryLevelJsonForDb));
+                    .set(CacheKeyName.CATEGORY_CACHE + CacheKeyName.DOUBLE_COLON + "categoryLevelJson", JSONUtils.toJSONString(categoryLevelJsonForDb));
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

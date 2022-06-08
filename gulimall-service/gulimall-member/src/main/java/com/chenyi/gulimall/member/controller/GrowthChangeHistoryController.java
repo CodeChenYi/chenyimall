@@ -1,17 +1,14 @@
 package com.chenyi.gulimall.member.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import com.chenyi.gulimall.member.entity.GrowthChangeHistoryEntity;
-import com.chenyi.gulimall.member.service.GrowthChangeHistoryService;
 import com.chenyi.gulimall.common.utils.PageUtils;
 import com.chenyi.gulimall.common.utils.R;
+import com.chenyi.gulimall.member.entity.GrowthChangeHistoryEntity;
+import com.chenyi.gulimall.member.service.GrowthChangeHistoryService;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
+import java.util.Map;
 
 
 /**
@@ -22,7 +19,7 @@ import javax.annotation.Resource;
  * @date 2021-10-04 23:10:10
  */
 @RestController
-@RequestMapping("member/growthchangehistory")
+@RequestMapping("/growthchangehistory")
 public class GrowthChangeHistoryController {
     @Resource
     private GrowthChangeHistoryService growthChangeHistoryService;

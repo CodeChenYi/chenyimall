@@ -30,6 +30,10 @@ public class AttrVO  implements Serializable {
      */
     private String icon;
     /**
+     * 是否支持多个值【0否，1是】
+     */
+    private Integer valueMany;
+    /**
      * 可选值列表[用逗号分隔]
      */
     private String valueSelect;

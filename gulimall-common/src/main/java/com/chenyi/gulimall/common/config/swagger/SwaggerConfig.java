@@ -1,6 +1,5 @@
 package com.chenyi.gulimall.common.config.swagger;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -28,6 +27,10 @@ public class SwaggerConfig {
 
     @Bean
     public Docket createRestApi() {
+        if (swaggerProperties.getEnabled().equals(false)) {
+            return new Docket(DocumentationType.SWAGGER_2)
+                    .enable(false);
+        }
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 //是否开启 (true 开启  false隐藏。生产环境建议隐藏)

@@ -1,17 +1,16 @@
 package com.chenyi.gulimall.ware.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import com.chenyi.gulimall.ware.entity.WareSkuEntity;
-import com.chenyi.gulimall.ware.service.WareSkuService;
 import com.chenyi.gulimall.common.utils.PageUtils;
 import com.chenyi.gulimall.common.utils.R;
+import com.chenyi.gulimall.ware.dto.WareSkuDTO;
+import com.chenyi.gulimall.ware.entity.WareSkuEntity;
+import com.chenyi.gulimall.ware.service.WareSkuService;
+import org.springframework.beans.BeanUtils;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
+import java.util.Map;
 
 
 /**
@@ -22,7 +21,7 @@ import javax.annotation.Resource;
  * @date 2021-10-04 23:13:30
  */
 @RestController
-@RequestMapping("ware/waresku")
+@RequestMapping("/waresku")
 public class WareSkuController {
     @Resource
     private WareSkuService wareSkuService;
@@ -44,7 +43,7 @@ public class WareSkuController {
      */
     @GetMapping("/info/{id}")
     // @RequiresPermissions("ware:waresku:info")
-    public R info(@PathVariable("id") Long id){
+    public R info(@PathVariable("id") String id){
 		WareSkuEntity wareSku = wareSkuService.getById(id);
 
         return R.ok().put("wareSku", wareSku);
@@ -55,8 +54,10 @@ public class WareSkuController {
      */
     @PostMapping("/save")
     // @RequiresPermissions("ware:waresku:save")
-    public R save(@RequestBody WareSkuEntity wareSku){
-		wareSkuService.save(wareSku);
+    public R save(@RequestBody WareSkuDTO wareSkuDTO){
+        WareSkuEntity wareSkuEntity = new WareSkuEntity();
+        BeanUtils.copyProperties(wareSkuDTO, wareSkuEntity);
+        wareSkuService.save(wareSkuEntity);
 
         return R.ok();
     }
@@ -77,7 +78,7 @@ public class WareSkuController {
      */
     @DeleteMapping("/delete")
     // @RequiresPermissions("ware:waresku:delete")
-    public R delete(@RequestBody Long[] ids){
+    public R delete(@RequestBody String[] ids){
 		wareSkuService.removeByIds(Arrays.asList(ids));
 
         return R.ok();

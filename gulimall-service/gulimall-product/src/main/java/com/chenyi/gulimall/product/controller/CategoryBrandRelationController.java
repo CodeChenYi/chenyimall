@@ -32,6 +32,7 @@ public class CategoryBrandRelationController {
     /**
      * 列表
      */
+    @ApiOperation("品牌分类关联")
     @GetMapping("/list")
     // @RequiresPermissions("product:categorybrandrelation:list")
     public R list(@RequestParam Map<String, Object> params){
@@ -44,12 +45,21 @@ public class CategoryBrandRelationController {
     /**
      * 信息
      */
+    @ApiOperation("根据id查询品牌分类关联")
     @GetMapping("/info/{id}")
     // @RequiresPermissions("product:categorybrandrelation:info")
     public R info(@PathVariable("id") String id){
 		CategoryBrandRelationEntity categoryBrandRelation = categoryBrandRelationService.getById(id);
 
         return R.ok().put("categoryBrandRelation", categoryBrandRelation);
+    }
+
+    @ApiOperation("根据三级分类id查询品牌信息")
+    @GetMapping("/category/{catId}")
+    public R getCategoryBrandByCatId(@PathVariable String catId) {
+        List<CategoryBrandRelationEntity> brandEntities =
+                categoryBrandRelationService.getCategoryBrandByCatId(catId);
+        return R.ok().put("list", brandEntities);
     }
 
     @ApiOperation("根据品牌id查询分组关系信息")
@@ -62,6 +72,7 @@ public class CategoryBrandRelationController {
     /**
      * 保存
      */
+    @ApiOperation("品牌分类关联新增")
     @PostMapping("/save")
     // @RequiresPermissions("product:categorybrandrelation:save")
     public R save(@RequestBody CategoryBrandRelationEntity categoryBrandRelation){
@@ -72,6 +83,7 @@ public class CategoryBrandRelationController {
     /**
      * 修改
      */
+    @ApiOperation("品牌分类关联修改")
     @PutMapping("/update")
     // @RequiresPermissions("product:categorybrandrelation:update")
     public R update(@RequestBody CategoryBrandRelationEntity categoryBrandRelation){
@@ -83,6 +95,7 @@ public class CategoryBrandRelationController {
     /**
      * 删除
      */
+    @ApiOperation("品牌分类关联删除")
     @DeleteMapping("/delete")
     // @RequiresPermissions("product:categorybrandrelation:delete")
     public R delete(@RequestBody String[] ids){

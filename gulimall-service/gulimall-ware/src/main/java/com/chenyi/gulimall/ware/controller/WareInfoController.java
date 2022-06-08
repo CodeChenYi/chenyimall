@@ -1,17 +1,16 @@
 package com.chenyi.gulimall.ware.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import com.chenyi.gulimall.ware.entity.WareInfoEntity;
-import com.chenyi.gulimall.ware.service.WareInfoService;
 import com.chenyi.gulimall.common.utils.PageUtils;
 import com.chenyi.gulimall.common.utils.R;
+import com.chenyi.gulimall.ware.entity.WareInfoEntity;
+import com.chenyi.gulimall.ware.service.WareInfoService;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -22,7 +21,7 @@ import javax.annotation.Resource;
  * @date 2021-10-04 23:13:30
  */
 @RestController
-@RequestMapping("ware/wareinfo")
+@RequestMapping("/wareinfo")
 public class WareInfoController {
     @Resource
     private WareInfoService wareInfoService;
@@ -30,12 +29,19 @@ public class WareInfoController {
     /**
      * 列表
      */
-    @GetMapping("/list")
+    @GetMapping("/listPage")
     // @RequiresPermissions("ware:wareinfo:list")
-    public R list(@RequestParam Map<String, Object> params){
+    public R listPage(@RequestParam Map<String, Object> params){
         PageUtils page = wareInfoService.queryPage(params);
 
         return R.ok().put("page", page);
+    }
+
+    @ApiOperation("查询列表信息")
+    @GetMapping("/list")
+    public R list() {
+        List<WareInfoEntity> list = wareInfoService.list();
+        return R.ok().put("list", list);
     }
 
 

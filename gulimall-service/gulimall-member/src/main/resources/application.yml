@@ -1,15 +1,33 @@
 server:
-  port: 8004
+  port: 8005
 
 spring:
   datasource:
     username: root
-    password: 5201314xuan
-    url: jdbc:mysql://111.229.191.225:3306/gulimall_ums?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    password: 111111
+    url: jdbc:mysql://192.168.56.10:3306/gulimall_ums?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.cj.jdbc.Driver
   cloud:
     nacos:
       discovery:
         server-addr: 192.168.31.235:8848
   application:
-    name: gulimall-product
+    name: gulimall-member
+  redis:
+    host: 192.168.56.10
+    port: 6379
+    password: 111111
+
+swagger:
+  enabled: true
+  title: 会员服务
+  base-package: com.chenyi.gulimall.member.controller
+  description: 会员服务接口文档
+  version: 1.0
+  ip-address: ${spring.cloud.client.ipAddress}:${server.port}
+
+logging:
+  level:
+    com:
+      chenyi:
+        gulimall: debug

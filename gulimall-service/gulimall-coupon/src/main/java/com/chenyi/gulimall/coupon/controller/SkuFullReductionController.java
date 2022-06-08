@@ -1,16 +1,16 @@
 package com.chenyi.gulimall.coupon.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
-import org.springframework.web.bind.annotation.*;
-
+import com.chenyi.gulimall.common.utils.PageUtils;
+import com.chenyi.gulimall.common.utils.R;
 import com.chenyi.gulimall.coupon.entity.SkuFullReductionEntity;
 import com.chenyi.gulimall.coupon.service.SkuFullReductionService;
-import com.chenyi.gulimall.common.utils.PageUtils;
+import com.chenyi.gulimall.product.to.SkuReductionTO;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import com.chenyi.gulimall.common.utils.R;
+import java.util.Arrays;
+import java.util.Map;
 
 
 
@@ -26,6 +26,14 @@ import com.chenyi.gulimall.common.utils.R;
 public class SkuFullReductionController {
     @Resource
     private SkuFullReductionService skuFullReductionService;
+
+
+    @ApiOperation("保存sku优惠满减信息")
+    @PostMapping("/saveInfo")
+    public R saveInfo(@RequestBody SkuReductionTO skuReductionTO) {
+        skuFullReductionService.saveSkuInfo(skuReductionTO);
+        return R.ok();
+    }
 
     /**
      * 列表

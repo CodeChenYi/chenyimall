@@ -2,11 +2,10 @@ package com.chenyi.gulimall.coupon.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-
-import java.math.BigDecimal;
-import java.io.Serializable;
-import java.util.Date;
 import lombok.Data;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * 商品阶梯价格
@@ -24,11 +23,11 @@ public class SkuLadderEntity implements Serializable {
 	 * id
 	 */
 	@TableId
-	private Long id;
+	private String id;
 	/**
 	 * spu_id
 	 */
-	private Long skuId;
+	private String skuId;
 	/**
 	 * 满几件
 	 */

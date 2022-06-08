@@ -1,17 +1,15 @@
 package com.chenyi.gulimall.product.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import com.chenyi.gulimall.product.entity.SpuInfoEntity;
-import com.chenyi.gulimall.product.service.SpuInfoService;
 import com.chenyi.gulimall.common.utils.PageUtils;
 import com.chenyi.gulimall.common.utils.R;
+import com.chenyi.gulimall.product.dto.SpuInfoDTO;
+import com.chenyi.gulimall.product.entity.SpuInfoEntity;
+import com.chenyi.gulimall.product.service.SpuInfoService;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
+import java.util.Map;
 
 
 /**
@@ -44,7 +42,7 @@ public class SpuInfoController {
      */
     @GetMapping("/info/{id}")
     // @RequiresPermissions("product:spuinfo:info")
-    public R info(@PathVariable("id") Long id){
+    public R info(@PathVariable("id") String id){
 		SpuInfoEntity spuInfo = spuInfoService.getById(id);
 
         return R.ok().put("spuInfo", spuInfo);
@@ -55,8 +53,8 @@ public class SpuInfoController {
      */
     @PostMapping("/save")
     // @RequiresPermissions("product:spuinfo:save")
-    public R save(@RequestBody SpuInfoEntity spuInfo){
-		spuInfoService.save(spuInfo);
+    public R save(@RequestBody SpuInfoDTO spuInfoDTO){
+		spuInfoService.saveSpuInfoDTO(spuInfoDTO);
 
         return R.ok();
     }
@@ -77,7 +75,7 @@ public class SpuInfoController {
      */
     @DeleteMapping("/delete")
     // @RequiresPermissions("product:spuinfo:delete")
-    public R delete(@RequestBody Long[] ids){
+    public R delete(@RequestBody String[] ids){
 		spuInfoService.removeByIds(Arrays.asList(ids));
 
         return R.ok();

@@ -9,7 +9,7 @@
 	<id>gulimall-ware</id>
 
 	<classpath>
-		<dir name="D:/github/gulimall/gulimall-service/gulimall-ware/target/classes">
+		<dir name="${rebel.projectpath.gulimall-ware}/target/classes">
 		</dir>
 	</classpath>
 

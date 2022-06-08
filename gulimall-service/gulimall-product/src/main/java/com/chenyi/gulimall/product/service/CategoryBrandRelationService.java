@@ -44,5 +44,12 @@ public interface CategoryBrandRelationService extends IService<CategoryBrandRela
      * @param name
      */
     void updateCategory(String catId, String name);
+
+    /**
+     * 更具三级分类id查询中间表信息
+     * @param catId
+     * @return
+     */
+    List<CategoryBrandRelationEntity> getCategoryBrandByCatId(String catId);
 }
 

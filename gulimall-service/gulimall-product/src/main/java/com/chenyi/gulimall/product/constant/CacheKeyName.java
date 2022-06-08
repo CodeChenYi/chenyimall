@@ -1,4 +1,4 @@
-package com.chenyi.gulimall.product.constans;
+package com.chenyi.gulimall.product.constant;
 
 public interface CacheKeyName {
 

@@ -1,17 +1,14 @@
 package com.chenyi.gulimall.ware.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import com.chenyi.gulimall.ware.entity.PurchaseEntity;
-import com.chenyi.gulimall.ware.service.PurchaseService;
 import com.chenyi.gulimall.common.utils.PageUtils;
 import com.chenyi.gulimall.common.utils.R;
+import com.chenyi.gulimall.ware.entity.PurchaseEntity;
+import com.chenyi.gulimall.ware.service.PurchaseService;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
+import java.util.Map;
 
 
 /**
@@ -22,7 +19,7 @@ import javax.annotation.Resource;
  * @date 2021-10-04 23:13:30
  */
 @RestController
-@RequestMapping("ware/purchase")
+@RequestMapping("/purchase")
 public class PurchaseController {
     @Resource
     private PurchaseService purchaseService;

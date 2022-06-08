@@ -2,7 +2,7 @@ package com.chenyi.gulimall.common.config.swagger;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 /**
  * @description: 映射配置文件Swagger基本属性
@@ -10,14 +10,14 @@ import org.springframework.context.annotation.Configuration;
  * @date 2021/4/25 13:18
  */
 @Data
-@Configuration
+@Component
 @ConfigurationProperties("swagger")
 public class SwaggerProperties {
 
     /**
      * 是否开启swagger
      */
-    private Boolean enabled;
+    private Boolean enabled = false;
 
     /**
      * swagger会解析的包路径

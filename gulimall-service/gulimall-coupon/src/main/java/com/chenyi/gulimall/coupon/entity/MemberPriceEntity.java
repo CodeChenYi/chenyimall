@@ -2,11 +2,10 @@ package com.chenyi.gulimall.coupon.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-
-import java.math.BigDecimal;
-import java.io.Serializable;
-import java.util.Date;
 import lombok.Data;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * 商品会员价格
@@ -24,15 +23,15 @@ public class MemberPriceEntity implements Serializable {
 	 * id
 	 */
 	@TableId
-	private Long id;
+	private String id;
 	/**
 	 * sku_id
 	 */
-	private Long skuId;
+	private String skuId;
 	/**
 	 * 会员等级id
 	 */
-	private Long memberLevelId;
+	private String memberLevelId;
 	/**
 	 * 会员等级名
 	 */

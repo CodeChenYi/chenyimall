@@ -2,11 +2,10 @@ package com.chenyi.gulimall.product.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-
-import java.math.BigDecimal;
-import java.io.Serializable;
-import java.util.Date;
 import lombok.Data;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * sku信息
@@ -24,11 +23,11 @@ public class SkuInfoEntity implements Serializable {
 	 * skuId
 	 */
 	@TableId
-	private Long skuId;
+	private String skuId;
 	/**
 	 * spuId
 	 */
-	private Long spuId;
+	private String spuId;
 	/**
 	 * sku名称
 	 */
@@ -40,11 +39,11 @@ public class SkuInfoEntity implements Serializable {
 	/**
 	 * 所属分类id
 	 */
-	private Long catalogId;
+	private String catalogId;
 	/**
 	 * 品牌id
 	 */
-	private Long brandId;
+	private String brandId;
 	/**
 	 * 默认图片
 	 */

@@ -22,7 +22,7 @@ import javax.annotation.Resource;
  * @date 2021-10-04 23:10:10
  */
 @RestController
-@RequestMapping("member/integrationchangehistory")
+@RequestMapping("/integrationchangehistory")
 public class IntegrationChangeHistoryController {
     @Resource
     private IntegrationChangeHistoryService integrationChangeHistoryService;

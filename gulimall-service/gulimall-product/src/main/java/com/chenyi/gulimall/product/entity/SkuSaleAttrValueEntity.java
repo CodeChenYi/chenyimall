@@ -2,10 +2,9 @@ package com.chenyi.gulimall.product.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Date;
-import lombok.Data;
 
 /**
  * sku销售属性&值
@@ -23,15 +22,15 @@ public class SkuSaleAttrValueEntity implements Serializable {
 	 * id
 	 */
 	@TableId
-	private Long id;
+	private String id;
 	/**
 	 * sku_id
 	 */
-	private Long skuId;
+	private String skuId;
 	/**
 	 * attr_id
 	 */
-	private Long attrId;
+	private String attrId;
 	/**
 	 * 销售属性名
 	 */

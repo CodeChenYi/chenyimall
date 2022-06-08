@@ -2,10 +2,9 @@ package com.chenyi.gulimall.product.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Date;
-import lombok.Data;
 
 /**
  * spu图片
@@ -23,11 +22,11 @@ public class SpuImagesEntity implements Serializable {
 	 * id
 	 */
 	@TableId
-	private Long id;
+	private String id;
 	/**
 	 * spu_id
 	 */
-	private Long spuId;
+	private String spuId;
 	/**
 	 * 图片名
 	 */

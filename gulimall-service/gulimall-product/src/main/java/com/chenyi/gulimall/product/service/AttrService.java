@@ -36,9 +36,10 @@ public interface AttrService extends IService<AttrEntity> {
      *
      * @param params
      * @param catId
+     * @param attrType
      * @return
      */
-    PageUtils getAttrByCatId(Map<String, Object> params, String catId);
+    PageUtils getAttrByCatId(Map<String, Object> params, String catId, Integer attrType);
 
     /**
      * 删除商品属性详细信息
@@ -52,5 +53,20 @@ public interface AttrService extends IService<AttrEntity> {
      * @return
      */
     List<AttrEntity> getRelationByAttrGroupId(String attrGroupId);
+
+    /**
+     * 获取销售属性信息
+     * @param params
+     * @return
+     */
+    PageUtils getSaleInfo(Map<String, Object> params);
+
+
+    /**
+     * 获取销售属性信息
+     * @param catId
+     * @return
+     */
+    List<AttrEntity> getSaleList(String catId);
 }
 

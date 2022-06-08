@@ -1,13 +1,16 @@
 package com.chenyi.gulimall.third.party.controller;
 
+import cn.hutool.core.util.StrUtil;
 import com.alibaba.alicloud.context.AliCloudProperties;
 import com.alibaba.alicloud.context.oss.OssProperties;
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.common.utils.BinaryUtil;
 import com.aliyun.oss.model.MatchMode;
 import com.aliyun.oss.model.PolicyConditions;
+import com.chenyi.gulimall.common.enums.ResultEnum;
 import com.chenyi.gulimall.common.utils.R;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -79,5 +82,22 @@ public class OssController {
         }
 
         return R.ok().put("data", respMap);
+    }
+
+    @DeleteMapping("/deletePolicy")
+    public R deletePolicy() {
+        String url = "https://gulimall-chenyi.oss-cn-shenzhen.aliyuncs.com/2022-05-10/113a96a2-6239-4694-87da-fd5a8302b6df_%E5%8D%8E%E4%B8%BAlogo.jpg";
+        String endpoint = ossProperties.getEndpoint();
+        url = StrUtil.removePrefix(url, "https://" + bucket + "." + endpoint + "/");
+        try {
+            ossClient.deleteObject(bucket, url);
+        } catch (Exception e) {
+            return R.error(ResultEnum.INTERNAL_SERVER_ERROR.getCode(), e.getMessage());
+        } finally{
+            if (ossClient != null) {
+                ossClient.shutdown();
+            }
+        }
+        return R.ok();
     }
 }

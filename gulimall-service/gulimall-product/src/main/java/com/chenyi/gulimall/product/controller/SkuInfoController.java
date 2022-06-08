@@ -1,17 +1,15 @@
 package com.chenyi.gulimall.product.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import com.chenyi.gulimall.product.entity.SkuInfoEntity;
-import com.chenyi.gulimall.product.service.SkuInfoService;
 import com.chenyi.gulimall.common.utils.PageUtils;
 import com.chenyi.gulimall.common.utils.R;
+import com.chenyi.gulimall.product.entity.SkuInfoEntity;
+import com.chenyi.gulimall.product.service.SkuInfoService;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -36,6 +34,12 @@ public class SkuInfoController {
         PageUtils page = skuInfoService.queryPage(params);
 
         return R.ok().put("page", page);
+    }
+
+    @GetMapping("/listSku")
+    public R listSku() {
+        List<SkuInfoEntity> list = skuInfoService.list();
+        return R.ok().put("list", list);
     }
 
 

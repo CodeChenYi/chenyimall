@@ -3,8 +3,11 @@ package com.chenyi.gulimall.product.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.chenyi.gulimall.common.enums.ResultEnum;
+import com.chenyi.gulimall.common.exception.GuliMallException;
 import com.chenyi.gulimall.common.utils.PageUtils;
 import com.chenyi.gulimall.common.utils.Query;
+import com.chenyi.gulimall.product.constant.ProductConstant;
 import com.chenyi.gulimall.product.dto.AttrDTO;
 import com.chenyi.gulimall.product.entity.AttrAttrgroupRelationEntity;
 import com.chenyi.gulimall.product.entity.AttrEntity;
@@ -42,24 +45,9 @@ public class AttrServiceImpl extends ServiceImpl<AttrMapper, AttrEntity> impleme
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
-        QueryWrapper<AttrEntity> wrapper = new QueryWrapper<>();
-        String key = (String) params.get("key");
-
-        if (!StringUtils.isEmpty(key)) {
-            wrapper.likeRight("attr_name", key);
-        }
-
-        IPage<AttrEntity> page = this.page(
-                new Query<AttrEntity>().getPage(params),
-                wrapper);
-
-        PageUtils pageUtils = new PageUtils(page);
-        List<AttrEntity> records = page.getRecords();
-        List<AttrVO> attrVOList = getAttrVO(records);
-
-        pageUtils.setList(attrVOList);
-
-        return pageUtils;
+        QueryWrapper<AttrEntity> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("attr_type", ProductConstant.ATTR_BASE_TYPE.getType());
+        return getAttrVOPage(params, queryWrapper);
     }
 
     private List<AttrVO> getAttrVO(List<AttrEntity> records) {
@@ -99,10 +87,14 @@ public class AttrServiceImpl extends ServiceImpl<AttrMapper, AttrEntity> impleme
         baseMapper.insert(attrEntity);
         log.info("=========123123==========={}", attrDTO.getAttrId());
         // 添加中间表数据
-        AttrAttrgroupRelationEntity relation = new AttrAttrgroupRelationEntity();
-        relation.setAttrId(attrEntity.getAttrId());
-        relation.setAttrGroupId(attrDTO.getAttrGroupId());
-        attrAttrgroupRelationMapper.insert(relation);
+        Integer attrType = attrEntity.getAttrType();
+        // 判断是否是基本属性的添加
+        if (ProductConstant.ATTR_BASE_TYPE.getType().equals(attrType)) {
+            AttrAttrgroupRelationEntity relation = new AttrAttrgroupRelationEntity();
+            relation.setAttrId(attrEntity.getAttrId());
+            relation.setAttrGroupId(attrDTO.getAttrGroupId());
+            attrAttrgroupRelationMapper.insert(relation);
+        }
 
     }
 
@@ -114,16 +106,20 @@ public class AttrServiceImpl extends ServiceImpl<AttrMapper, AttrEntity> impleme
 
         if (attrEntity != null) {
             BeanUtils.copyProperties(attrEntity, attrVO);
-
+            // 查询三级分类路径
             List<String> catelogIdPath = categoryService.getCatelogIdPath(attrEntity.getCatelogId());
             attrVO.setCategoryPath(catelogIdPath);
 
-            QueryWrapper<AttrAttrgroupRelationEntity> wrapper = new QueryWrapper<>();
-            wrapper.eq("attr_id", attrEntity.getAttrId());
-            AttrAttrgroupRelationEntity relation = attrAttrgroupRelationMapper.selectOne(wrapper);
-            attrVO.setAttrGroupId(relation.getAttrGroupId());
-            AttrGroupEntity attrGroupEntity = attrGroupMapper.selectById(relation.getAttrGroupId());
-            attrVO.setAttrGroupName(attrGroupEntity.getAttrGroupName());
+            Integer attrType = attrEntity.getAttrType();
+            // 判断是否是基本属性
+            if (ProductConstant.ATTR_BASE_TYPE.getType().equals(attrType)) {
+                QueryWrapper<AttrAttrgroupRelationEntity> wrapper = new QueryWrapper<>();
+                wrapper.eq("attr_id", attrEntity.getAttrId());
+                AttrAttrgroupRelationEntity relation = attrAttrgroupRelationMapper.selectOne(wrapper);
+                attrVO.setAttrGroupId(relation.getAttrGroupId());
+                AttrGroupEntity attrGroupEntity = attrGroupMapper.selectById(relation.getAttrGroupId());
+                attrVO.setAttrGroupName(attrGroupEntity.getAttrGroupName());
+            }
         }
 
 
@@ -136,22 +132,32 @@ public class AttrServiceImpl extends ServiceImpl<AttrMapper, AttrEntity> impleme
         AttrEntity attrEntity = new AttrEntity();
         BeanUtils.copyProperties(attrDTO, attrEntity);
         baseMapper.updateById(attrEntity);
-        // 修改分组中间表信息
-        String attrId = attrEntity.getAttrId();
-        QueryWrapper<AttrAttrgroupRelationEntity> wrapper = new QueryWrapper<>();
-        wrapper.eq("attr_id", attrId);
-        AttrAttrgroupRelationEntity relation = new AttrAttrgroupRelationEntity();
-        relation.setAttrGroupId(attrDTO.getAttrGroupId());
-        attrAttrgroupRelationMapper.update(relation, wrapper);
+
+        Integer attrType = attrEntity.getAttrType();
+        if (ProductConstant.ATTR_BASE_TYPE.getType().equals(attrType)) {
+            // 修改分组中间表信息
+            String attrId = attrEntity.getAttrId();
+            QueryWrapper<AttrAttrgroupRelationEntity> wrapper = new QueryWrapper<>();
+            wrapper.eq("attr_id", attrId);
+            AttrAttrgroupRelationEntity relation = new AttrAttrgroupRelationEntity();
+            relation.setAttrGroupId(attrDTO.getAttrGroupId());
+            attrAttrgroupRelationMapper.update(relation, wrapper);
+        }
     }
 
     @Override
-    public PageUtils getAttrByCatId(Map<String, Object> params, String catId) {
+    public PageUtils getAttrByCatId(Map<String, Object> params, String catId, Integer attrType) {
+        QueryWrapper<AttrEntity> queryWrapper = new QueryWrapper<>();
+        if (ProductConstant.ATTR_BASE_TYPE.getType().equals(attrType) || ProductConstant.ATTR_SALE_TYPE.getType().equals(attrType)) {
+            queryWrapper.eq("attr_type", attrType);
+        } else {
+            throw new GuliMallException(ResultEnum.PARAMETER_VERIFICATION_ERROR.getCode(),
+                    ResultEnum.PARAMETER_VERIFICATION_ERROR.getMsg());
+        }
+        queryWrapper.eq("catelog_id", catId);
         // 查询商品基本参数
         IPage<AttrEntity> page =
-                this.page(
-                        new Query<AttrEntity>().getPage(params),
-                        new QueryWrapper<AttrEntity>().eq("catelog_id", catId));
+                this.page(new Query<AttrEntity>().getPage(params), queryWrapper);
 
         // 查询商品详细系信息
         List<AttrEntity> records = page.getRecords();
@@ -165,11 +171,22 @@ public class AttrServiceImpl extends ServiceImpl<AttrMapper, AttrEntity> impleme
     @Override
     public void removeDetail(List<String> asList) {
         this.removeByIds(asList);
-        asList.forEach(attrId -> {
-            QueryWrapper<AttrAttrgroupRelationEntity> wrapper = new QueryWrapper<>();
-            wrapper.eq("attr_id", attrId);
-            attrAttrgroupRelationMapper.delete(wrapper);
-        });
+        // 查询当前id数据
+        List<AttrEntity> attrEntities = baseMapper.selectBatchIds(asList);
+        // 筛选出为基本属性的记录
+        List<AttrEntity> baseTypeIdList = attrEntities.stream()
+                .filter(attr -> ProductConstant.ATTR_BASE_TYPE.getType().equals(attr.getAttrType())).collect(Collectors.toList());
+
+        // 删除基本属性的关联信息
+        if (baseTypeIdList.size() > 0) {
+            baseTypeIdList.forEach(baseTypeAttr -> {
+                QueryWrapper<AttrAttrgroupRelationEntity> wrapper = new QueryWrapper<>();
+                wrapper.eq("attr_id", baseTypeAttr.getAttrId());
+                attrAttrgroupRelationMapper.delete(wrapper);
+            });
+        }
+
+
     }
 
     @Override
@@ -184,5 +201,39 @@ public class AttrServiceImpl extends ServiceImpl<AttrMapper, AttrEntity> impleme
             return baseMapper.selectBatchIds(attrIdList);
         }
         return null;
+    }
+
+    @Override
+    public PageUtils getSaleInfo(Map<String, Object> params) {
+        QueryWrapper<AttrEntity> wrapper = new QueryWrapper<>();
+        String SaleType = "0";
+        String both = "2";
+        wrapper.eq("attr_type", SaleType).or().eq("attr_type", both);
+        return getAttrVOPage(params, wrapper);
+    }
+
+    @Override
+    public List<AttrEntity> getSaleList(String catId) {
+        QueryWrapper<AttrEntity> wrapper = new QueryWrapper<>();
+        wrapper.eq("attr_type", "0");
+        return baseMapper.selectList(wrapper);
+    }
+
+    private PageUtils getAttrVOPage(Map<String, Object> params, QueryWrapper<AttrEntity> wrapper) {
+        String key = (String) params.get("key");
+        if (!StringUtils.isEmpty(key)) {
+            wrapper.likeRight("attr_name", key);
+        }
+
+        IPage<AttrEntity> page = this.page(
+                new Query<AttrEntity>().getPage(params),
+                wrapper);
+
+        PageUtils pageUtils = new PageUtils(page);
+        List<AttrEntity> records = page.getRecords();
+        List<AttrVO> attrVOList = getAttrVO(records);
+
+        pageUtils.setList(attrVOList);
+        return pageUtils;
     }
 }
