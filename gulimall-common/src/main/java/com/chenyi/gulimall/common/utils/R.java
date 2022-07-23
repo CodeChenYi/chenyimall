@@ -1,8 +1,10 @@
 package com.chenyi.gulimall.common.utils;
 
 import com.chenyi.gulimall.common.enums.ResultEnum;
+import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -61,6 +63,22 @@ public class R extends HashMap<String, Object> {
     public R put(String key, Object value) {
         super.put(key, value);
         return this;
+    }
+
+    public Object get(String key) {
+        return super.get(key);
+    }
+
+    public <T> T get(String key, Class<T> clazz) {
+        return JSONUtils.parseObject(JSONUtils.toJSONString(get(key)), clazz);
+    }
+
+    public <T> T get(String key, TypeReference<T> typeReference) {
+        return JSONUtils.parseObject(JSONUtils.toJSONString(get(key)), typeReference);
+    }
+
+    public <T> List<T> getList(String key, Class<T> clazz) {
+        return JSONUtils.parseList(JSONUtils.toJSONString(get(key)), clazz);
     }
 
     public Integer getCode() {

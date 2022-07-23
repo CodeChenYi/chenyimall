@@ -23,14 +23,17 @@ public class ThreadPool {
 
     @Bean
     public ThreadPoolExecutor threadPoolExecutor() {
-        return new ThreadPoolExecutor(
-                threadConfig.getCore(),
-                threadConfig.getMaxPoolSize(),
-                threadConfig.getTime(),
-                TimeUnit.SECONDS,
-                new LinkedBlockingQueue<>(100000),
-                Executors.defaultThreadFactory(),
-                new ThreadPoolExecutor.AbortPolicy());
+        if (threadConfig.isEnableThread()) {
+            return new ThreadPoolExecutor(
+                    threadConfig.getCore(),
+                    threadConfig.getMaxPoolSize(),
+                    threadConfig.getTime(),
+                    TimeUnit.SECONDS,
+                    new LinkedBlockingQueue<>(threadConfig.getQueueSize()),
+                    Executors.defaultThreadFactory(),
+                    new ThreadPoolExecutor.DiscardPolicy());
+        }
+        return null;
     }
 
 }

@@ -17,6 +17,9 @@
         <module>gulimall-member-api</module>
         <module>gulimall-coupon-api</module>
         <module>gulimall-order-api</module>
+        <module>gulimall-auth-api</module>
+        <module>gulimall-cart-api</module>
+        <module>gulimall-ware-api</module>
     </modules>
 
     <properties>

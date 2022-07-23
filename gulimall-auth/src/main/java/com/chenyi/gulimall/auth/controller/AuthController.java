@@ -2,13 +2,11 @@ package com.chenyi.gulimall.auth.controller;
 
 import com.chenyi.gulimall.auth.service.AuthTokenService;
 import com.chenyi.gulimall.common.utils.R;
+import com.chenyi.gulimall.member.to.MemberInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -32,6 +30,12 @@ public class AuthController {
         return R.ok().put("token", token);
     }
 
+    @ApiOperation("验证是否登录")
+    @GetMapping("/verifyToken")
+    public R verifyToken(@RequestParam String token) {
+        MemberInfo memberInfo = authTokenService.verifyToken(token);
+        return R.ok().put("memberInfo", memberInfo);
+    }
 
     @GetMapping("/test")
     public R test() {

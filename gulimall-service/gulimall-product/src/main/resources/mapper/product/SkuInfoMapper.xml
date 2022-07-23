@@ -3,7 +3,7 @@
 
 <mapper namespace="com.chenyi.gulimall.product.mapper.SkuInfoMapper">
 
-	<!-- 可根据自己的需求，是否要使用 -->
+    <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.chenyi.gulimall.product.entity.SkuInfoEntity" id="skuInfoMap">
         <result property="skuId" column="sku_id"/>
         <result property="spuId" column="spu_id"/>
@@ -17,6 +17,18 @@
         <result property="price" column="price"/>
         <result property="saleCount" column="sale_count"/>
     </resultMap>
+    <select id="getSkuPriceById" resultType="com.chenyi.gulimall.product.to.SkuInfoTO">
+        SELECT
+            sku_id skuId,
+            price
+        FROM
+            pms_sku_info
+        WHERE
+            sku_id in
+        <foreach item="item" collection="skuIds" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
 
 
 </mapper>

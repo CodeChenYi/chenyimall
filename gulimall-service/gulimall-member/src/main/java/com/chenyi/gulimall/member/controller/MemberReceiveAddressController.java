@@ -1,17 +1,15 @@
 package com.chenyi.gulimall.member.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import com.chenyi.gulimall.member.entity.MemberReceiveAddressEntity;
-import com.chenyi.gulimall.member.service.MemberReceiveAddressService;
 import com.chenyi.gulimall.common.utils.PageUtils;
 import com.chenyi.gulimall.common.utils.R;
+import com.chenyi.gulimall.member.entity.MemberReceiveAddressEntity;
+import com.chenyi.gulimall.member.service.MemberReceiveAddressService;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -22,10 +20,17 @@ import javax.annotation.Resource;
  * @date 2021-10-04 23:10:10
  */
 @RestController
-@RequestMapping("/memberreceiveaddress")
+@RequestMapping("/memberAddress")
 public class MemberReceiveAddressController {
     @Resource
     private MemberReceiveAddressService memberReceiveAddressService;
+
+    @GetMapping("/getInfoByMemberId/{memberId}")
+    public R getInfoByMemberId(@PathVariable Long memberId) {
+        List<MemberReceiveAddressEntity> memberAddressList =
+                memberReceiveAddressService.getInfoByMemberId(memberId);
+        return R.ok().put("memberAddressList", memberAddressList);
+    }
 
     /**
      * 列表

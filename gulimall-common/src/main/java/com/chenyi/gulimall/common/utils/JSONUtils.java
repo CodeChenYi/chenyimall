@@ -59,6 +59,11 @@ public class JSONUtils {
         return MAPPER.readValue(json, MAPPER.getTypeFactory().constructCollectionType(List.class, listType));
     }
 
+//    @SneakyThrows
+//    public static <K, V> List<Map<K, V>> parseList(String json, Class<K> key, Class<V> value) {
+//        parseList(parseList(json, Map.class)
+//    }
+
     /**
      * 将json转换为map
      *

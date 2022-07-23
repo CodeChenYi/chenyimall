@@ -13,6 +13,7 @@ import com.chenyi.gulimall.product.dto.SpuImagesDTO;
 import com.chenyi.gulimall.product.entity.*;
 import com.chenyi.gulimall.product.mapper.SkuInfoMapper;
 import com.chenyi.gulimall.product.service.*;
+import com.chenyi.gulimall.product.to.SkuInfoTO;
 import com.chenyi.gulimall.product.to.SkuReductionTO;
 import com.chenyi.gulimall.product.vo.SkuItemVO;
 import lombok.extern.slf4j.Slf4j;
@@ -178,6 +179,11 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoMapper, SkuInfoEntity
                 imageFuture).join();
 
         return skuItemVO;
+    }
+
+    @Override
+    public List<SkuInfoTO> getSkuPriceById(List<String> skuId) {
+       return baseMapper.getSkuPriceById(skuId);
     }
 
 }

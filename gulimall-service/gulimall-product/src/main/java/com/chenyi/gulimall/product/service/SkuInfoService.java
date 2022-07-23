@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.chenyi.gulimall.common.utils.PageUtils;
 import com.chenyi.gulimall.product.dto.SkuDTO;
 import com.chenyi.gulimall.product.entity.SkuInfoEntity;
+import com.chenyi.gulimall.product.to.SkuInfoTO;
 import com.chenyi.gulimall.product.vo.SkuItemVO;
 
 import java.util.List;
@@ -35,5 +36,13 @@ public interface SkuInfoService extends IService<SkuInfoEntity> {
      * @return
      */
     SkuItemVO getItem(String skuId);
+
+    /**
+     * 根据skuId查询价格
+     *
+     * @param skuId
+     * @return
+     */
+    List<SkuInfoTO> getSkuPriceById(List<String> skuId);
 }
 

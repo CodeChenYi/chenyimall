@@ -49,11 +49,13 @@ logging:
       chenyi:
         gulimall: debug
 
-gulimall:
+chenyimall:
   thread:
+    enable-thread: true
     core: 20
     max-pool-size: 200
     time: 10
+    queue-size: 10000
 #  用户登录名称 gulimall-chenyi@1039786181812554.onaliyun.com
 #  AccessKey ID LTAI5tGCrBhwb1FpZFnpXmUR
 #  AccessKey Secret me4sheYTh3BkNtddkpfsmOGcQhxlG7

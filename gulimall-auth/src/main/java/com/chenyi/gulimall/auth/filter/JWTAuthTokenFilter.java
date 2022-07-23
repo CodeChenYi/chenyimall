@@ -18,6 +18,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import javax.annotation.Resource;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -41,18 +42,35 @@ public class JWTAuthTokenFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         String token = request.getHeader("token");
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null && StringUtils.isEmpty(token)) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("chenyi_mall")) {
+                    token = cookie.getValue();
+                }
+            }
+        }
         if (!StringUtils.isEmpty(token)) {
             // 解析token
             try {
                 String jwtToken = (String) JWTUtils.getPayload(token);
-                log.info(jwtToken);
+                log.debug("userId: {}", jwtToken);
+                Object o = redisTemplate.opsForValue().get(GuliMallConstant.LOGIN_USER + jwtToken);
                 LoginUser loginUser = (LoginUser) redisTemplate.opsForValue()
                         .get(GuliMallConstant.LOGIN_USER + jwtToken);
+                log.debug("loginUser == null {}", loginUser == null);
                 if (loginUser != null) {
                     // 设置到SecurityContextHolder中
                     UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken
                             = new UsernamePasswordAuthenticationToken(loginUser, null, null);
                     SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+                } else {
+                    Long time = (Long) JWTUtils.getPayload(token, "time");
+                    long curTime = System.currentTimeMillis();
+                    if (curTime - time < GuliMallConstant.SEVEN_DAY_MILLIS_VALUE) {
+
+                    }
+                    response.sendRedirect("http://auth.gulimall.com/login");
                 }
             } catch (Exception e) {
                 log.error("jwt验证错误：{}", e.getMessage());

@@ -1,17 +1,15 @@
 package com.chenyi.gulimall.product.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import com.chenyi.gulimall.product.entity.SkuSaleAttrValueEntity;
-import com.chenyi.gulimall.product.service.SkuSaleAttrValueService;
 import com.chenyi.gulimall.common.utils.PageUtils;
 import com.chenyi.gulimall.common.utils.R;
+import com.chenyi.gulimall.product.entity.SkuSaleAttrValueEntity;
+import com.chenyi.gulimall.product.service.SkuSaleAttrValueService;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -26,6 +24,11 @@ import javax.annotation.Resource;
 public class SkuSaleAttrValueController {
     @Resource
     private SkuSaleAttrValueService skuSaleAttrValueService;
+
+    @GetMapping("/getSaleAttrBySkuId")
+    public List<String> getSaleAttrBySkuId(@RequestParam String skuId) {
+        return skuSaleAttrValueService.getSaleAttrBySkuId(skuId);
+    }
 
     /**
      * 列表

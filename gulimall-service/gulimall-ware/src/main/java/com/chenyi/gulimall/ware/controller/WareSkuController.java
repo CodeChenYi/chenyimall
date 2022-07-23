@@ -5,11 +5,13 @@ import com.chenyi.gulimall.common.utils.R;
 import com.chenyi.gulimall.ware.dto.WareSkuDTO;
 import com.chenyi.gulimall.ware.entity.WareSkuEntity;
 import com.chenyi.gulimall.ware.service.WareSkuService;
+import com.chenyi.gulimall.ware.to.WareSkuTo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 
@@ -25,6 +27,12 @@ import java.util.Map;
 public class WareSkuController {
     @Resource
     private WareSkuService wareSkuService;
+
+    @GetMapping("/infoBySkuId/{skuId}")
+    public R infoBySkuId(@PathVariable List<String> skuId) {
+        List<WareSkuTo> wareSkuTo = wareSkuService.infoBySkuId(skuId);
+        return R.ok().put("wareSkuList", wareSkuTo);
+    }
 
     /**
      * 列表

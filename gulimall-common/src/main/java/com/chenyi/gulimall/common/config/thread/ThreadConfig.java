@@ -11,8 +11,13 @@ import org.springframework.stereotype.Component;
  */
 @Data
 @Component
-@ConfigurationProperties("gulimall.thread")
+@ConfigurationProperties("chenyimall.thread")
 public class ThreadConfig {
+
+    /**
+     * 是否启用线程池
+     */
+    private boolean enableThread = true;
 
     /**
      * 核心线程数
@@ -28,6 +33,11 @@ public class ThreadConfig {
      * 空闲时间
      */
     private int time = 10;
+
+    /**
+     * 队列大小
+     */
+    private int queueSize = 10000;
 
 //    private TimeUnit unit = TimeUnit.SECONDS;
 //

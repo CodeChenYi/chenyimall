@@ -1,5 +1,7 @@
 package com.chenyi.gulimall.auth.service;
 
+import com.chenyi.gulimall.member.to.MemberInfo;
+
 /**
  * @author chenyi
  * @className AuthTokenService
@@ -13,4 +15,11 @@ public interface AuthTokenService {
      * @return
      */
     String infoByUserName(String userName, String password);
+
+    /**
+     * 验证token，登录信息
+     * @param token
+     * @return
+     */
+    MemberInfo verifyToken(String token);
 }

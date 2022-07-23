@@ -1,17 +1,16 @@
 package com.chenyi.gulimall.order.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import com.chenyi.gulimall.order.entity.OrderEntity;
-import com.chenyi.gulimall.order.service.OrderService;
 import com.chenyi.gulimall.common.utils.PageUtils;
 import com.chenyi.gulimall.common.utils.R;
+import com.chenyi.gulimall.order.dto.OrderDTO;
+import com.chenyi.gulimall.order.entity.OrderEntity;
+import com.chenyi.gulimall.order.service.OrderService;
+import com.chenyi.gulimall.order.vo.OrderConfirmVO;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
+import java.util.Map;
 
 
 /**
@@ -22,17 +21,28 @@ import javax.annotation.Resource;
  * @date 2021-10-04 23:07:20
  */
 @RestController
-@RequestMapping("order/order")
+@RequestMapping("/order")
 public class OrderController {
     @Resource
     private OrderService orderService;
+
+
+    /**
+     * 获取确认订单页面数据
+     * @return
+     */
+    @GetMapping("/getOrderConfirm")
+    public R getOrderConfirm() {
+        OrderConfirmVO confirmVO = orderService.getOrderConfirm();
+        return R.ok().put("orderConfirm", confirmVO);
+    }
 
     /**
      * 列表
      */
     @GetMapping("/list")
     // @RequiresPermissions("order:order:list")
-    public R list(@RequestParam Map<String, Object> params){
+    public R list(@RequestParam Map<String, Object> params) {
         PageUtils page = orderService.queryPage(params);
 
         return R.ok().put("page", page);
@@ -44,8 +54,8 @@ public class OrderController {
      */
     @GetMapping("/info/{id}")
     // @RequiresPermissions("order:order:info")
-    public R info(@PathVariable("id") Long id){
-		OrderEntity order = orderService.getById(id);
+    public R info(@PathVariable("id") Long id) {
+        OrderEntity order = orderService.getById(id);
 
         return R.ok().put("order", order);
     }
@@ -55,8 +65,8 @@ public class OrderController {
      */
     @PostMapping("/save")
     // @RequiresPermissions("order:order:save")
-    public R save(@RequestBody OrderEntity order){
-		orderService.save(order);
+    public R save(@RequestBody OrderDTO order) {
+        orderService.saveOrder(order);
 
         return R.ok();
     }
@@ -66,8 +76,8 @@ public class OrderController {
      */
     @PutMapping("/update")
     // @RequiresPermissions("order:order:update")
-    public R update(@RequestBody OrderEntity order){
-		orderService.updateById(order);
+    public R update(@RequestBody OrderEntity order) {
+        orderService.updateById(order);
 
         return R.ok();
     }
@@ -77,8 +87,8 @@ public class OrderController {
      */
     @DeleteMapping("/delete")
     // @RequiresPermissions("order:order:delete")
-    public R delete(@RequestBody Long[] ids){
-		orderService.removeByIds(Arrays.asList(ids));
+    public R delete(@RequestBody Long[] ids) {
+        orderService.removeByIds(Arrays.asList(ids));
 
         return R.ok();
     }

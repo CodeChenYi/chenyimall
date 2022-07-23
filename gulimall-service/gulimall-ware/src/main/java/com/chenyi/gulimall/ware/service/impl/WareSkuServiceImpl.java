@@ -10,6 +10,7 @@ import com.chenyi.gulimall.ware.entity.WareSkuEntity;
 import com.chenyi.gulimall.ware.mapper.WareSkuMapper;
 import com.chenyi.gulimall.ware.service.WareInfoService;
 import com.chenyi.gulimall.ware.service.WareSkuService;
+import com.chenyi.gulimall.ware.to.WareSkuTo;
 import com.chenyi.gulimall.ware.vo.WareSkuVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -48,6 +49,18 @@ public class WareSkuServiceImpl extends ServiceImpl<WareSkuMapper, WareSkuEntity
         PageUtils pageUtils = new PageUtils(page);
         pageUtils.setList(wareSkuVOList);
         return pageUtils;
+    }
+
+    @Override
+    public List<WareSkuTo> infoBySkuId(List<String> skuId) {
+        QueryWrapper<WareSkuEntity> wrapper = new QueryWrapper<>();
+        wrapper.in("sku_id", skuId);
+        List<WareSkuEntity> wareSkuEntities = baseMapper.selectList(wrapper);
+        return wareSkuEntities.stream().map(wareSkuEntity -> {
+            WareSkuTo wareSkuTo = new WareSkuTo();
+            BeanUtils.copyProperties(wareSkuEntity, wareSkuTo);
+            return wareSkuTo;
+        }).collect(Collectors.toList());
     }
 
 }

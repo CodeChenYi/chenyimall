@@ -27,6 +27,13 @@ spring:
             - Path=/api/product/**
           filters:
             - RewritePath=/api/product/(?<segment>.*), /$\{segment}
+        # 订单模块
+        - id: gulimall-order
+          uri: lb://gulimall-order
+          predicates:
+            - Path=/api/order/**
+          filters:
+            - RewritePath=/api/order/(?<segment>.*), /$\{segment}
         # 第三方服务模块
         - id: gulimall-third-party
           uri: lb://gulimall-third-party
@@ -70,4 +77,9 @@ spring:
           uri: lb://gulimall-auth
           predicates:
             - Host=auth.gulimall.com
+        # 购物车服务路由
+        - id: gulimall-cart-router
+          uri: lb://gulimall-cart
+          predicates:
+            - Host=cart.gulimall.com
 

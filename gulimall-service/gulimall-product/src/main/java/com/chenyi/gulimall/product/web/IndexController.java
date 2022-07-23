@@ -19,14 +19,14 @@ public class IndexController {
     private CategoryService categoryService;
 
 
-    @GetMapping(value = {"/", "/index.html"})
+    @GetMapping(value = {"/"})
     public String getIndex(Model model) {
         // 查询一级分类
         List<CategoryEntity> categoryEntityVOList = categoryService.getCategoryLevelOne();
 
         model.addAttribute("categoryList", categoryEntityVOList);
 
-        return "index";
+        return "gulimallIndex";
     }
 
     @ResponseBody

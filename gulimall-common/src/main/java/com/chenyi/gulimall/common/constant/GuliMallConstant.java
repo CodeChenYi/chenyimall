@@ -28,6 +28,11 @@ public interface GuliMallConstant {
     String LOGIN_USER = "loginUser::";
 
     /**
+     * 购物车key
+     */
+    String CART_USER = "cartUser::";
+
+    /**
      * 7天毫秒值
       */
     Long SEVEN_DAY_MILLIS_VALUE = 1000L * 60 * 60 * 24 * 7;
