@@ -9,19 +9,19 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>com.chenyi.gulimall</groupId>
-    <artifactId>gulimall</artifactId>
+    <groupId>com.chenyi.mall</groupId>
+    <artifactId>chenyimall</artifactId>
     <modelVersion>4.0.0</modelVersion>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>gulimall-common</module>
-        <module>gulimall-service</module>
-        <module>gulimall-ops</module>
-        <module>gulimall-gateway</module>
-        <module>gulimall-auth</module>
-        <module>gulimall-api</module>
+        <module>chenyimall-common</module>
+        <module>chenyimall-service</module>
+        <module>chenyimall-ops</module>
+        <module>chenyimall-gateway</module>
+        <module>chenyimall-auth</module>
+        <module>chenyimall-api</module>
     </modules>
 
     <properties>

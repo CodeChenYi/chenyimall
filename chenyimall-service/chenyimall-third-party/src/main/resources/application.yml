@@ -1,0 +1,20 @@
+server:
+  port: 8006
+
+spring:
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.31.32:8848
+        namespace: 64a6c427-b3be-4f9f-b7f8-5711d8f0292c
+        group: CHENYI_MALL
+    alicloud:
+      oss:
+        endpoint: oss-cn-shenzhen.aliyuncs.com
+      access-key: # 自行配置access key
+      secret-key:
+      bucket: gulimall-chenyi
+  application:
+    name: chenyimall-third-party

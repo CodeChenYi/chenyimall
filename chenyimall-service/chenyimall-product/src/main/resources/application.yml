@@ -1,0 +1,62 @@
+server:
+  port: 8004
+
+spring:
+  profiles:
+    active: dev
+  datasource:
+    username: root
+    password: 111111
+    url: jdbc:mysql://192.168.56.10:3306/gulimall_pms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.31.32:8848
+        namespace: 64a6c427-b3be-4f9f-b7f8-5711d8f0292c
+        group: CHENYI_MALL
+  application:
+    name: chenyimall-product
+  thymeleaf:
+    cache: false
+  redis:
+    host: 192.168.56.10
+    port: 6379
+    password: 111111
+    timeout: 50000ms
+  cache:
+    type: redis
+    redis:
+      time-to-live: 86400000 # key过期时间，单位毫秒
+  # 如果需要处理404请求的话需要设置这两个选项
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/**/*.xml
+
+swagger:
+  enabled: true
+  title: 商品服务
+  base-package: com.chenyi.mall.product.controller
+  description: 商品服务接口文档
+  version: 1.0
+  ip-address: ${spring.cloud.client.ipAddress}:${server.port}
+logging:
+  level:
+    com:
+      chenyi:
+        mall: debug
+
+chenyimall:
+  thread:
+    enable-thread: true
+    core: 20
+    max-pool-size: 200
+    time: 10
+    queue-size: 10000

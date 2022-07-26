@@ -1,4 +1,4 @@
-## gulimall
+## ChenyiMall
 
 ### 介绍
 谷粒商城后端

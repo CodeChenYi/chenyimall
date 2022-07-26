@@ -1,0 +1,29 @@
+server:
+  port: 8010
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: chenyimall-cart
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.31.32
+        namespace: 64a6c427-b3be-4f9f-b7f8-5711d8f0292c
+        group: CHENYI_MALL
+  redis:
+    host: 192.168.56.10
+    port: 6379
+    password: 111111
+    timeout: 50000ms
+  thymeleaf:
+    cache: false
+
+chenyimall:
+  thread:
+    enable-thread: true
+    core: 20
+    max-pool-size: 200
+    time: 10
+    queue-size: 10000

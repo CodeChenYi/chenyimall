@@ -1,0 +1,85 @@
+server:
+  port: 8000
+
+spring:
+  application:
+    name: chenyimall-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.31.32:8848
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        # 优惠卷模块
+        - id: chenyimall-coupon
+          uri: lb://chenyimall-coupon
+          predicates:
+            - Path=/api/coupon/**
+          filters:
+            - RewritePath=/api/coupon/(?<segment>.*), /$\{segment}
+        # 商品模块
+        - id: chenyimall-product
+          uri: lb://chenyimall-product
+          predicates:
+            - Path=/api/product/**
+          filters:
+            - RewritePath=/api/product/(?<segment>.*), /$\{segment}
+        # 订单模块
+        - id: chenyimall-order
+          uri: lb://chenyimall-order
+          predicates:
+            - Path=/api/order/**
+          filters:
+            - RewritePath=/api/order/(?<segment>.*), /$\{segment}
+        # 第三方服务模块
+        - id: chenyimall-third-party
+          uri: lb://chenyimall-third-party
+          predicates:
+            - Path=/api/thirdParty/**
+          filters:
+            - RewritePath=/api/thirdParty/(?<segment>.*), /$\{segment}
+        # 会员模块
+        - id: chenyimall-member
+          uri: lb://chenyimall-member
+          predicates:
+            - Path=/api/member/**
+          filters:
+            - RewritePath=/api/member/(?<segment>.*), /$\{segment}
+        # 库存模块
+        - id: chenyimall-ware
+          uri: lb://chenyimall-ware
+          predicates:
+            - Path=/api/ware/**
+          filters:
+            - RewritePath=/api/ware/(?<segment>.*), /$\{segment}
+        # 后台模块
+        - id: chenyimall-admin
+          uri: lb://chenyimall-admin
+          predicates:
+            - Path=/api/**
+          filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment}
+        # 商城路由
+        - id: chenyimall-index-router
+          uri: lb://chenyimall-product
+          predicates:
+            - Host=chenyimall.com,item.chenyimall.com
+        # 检索服务路由
+        - id: chenyimall-search-router
+          uri: lb://chenyimall-search
+          predicates:
+            - Host=search.chenyimall.com
+        # 认证服务
+        - id: chenyimall-auth-router
+          uri: lb://chenyimall-auth
+          predicates:
+            - Host=auth.chenyimall.com
+        # 购物车服务路由
+        - id: chenyimall-cart-router
+          uri: lb://chenyimall-cart
+          predicates:
+            - Host=cart.chenyimall.com
+
