@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : 192.168.56.10-chenyi
+ Source Server         : 192.168.56.10
  Source Server Type    : MySQL
  Source Server Version : 50736
  Source Host           : 192.168.56.10:3306
- Source Schema         : gulimall_admin
+ Source Schema         : chenyimall_admin
 
  Target Server Type    : MySQL
  Target Server Version : 50736
  File Encoding         : 65001
 
- Date: 08/06/2022 20:10:42
+ Date: 26/07/2022 20:37:45
 */
 
 SET NAMES utf8mb4;
@@ -29,7 +29,7 @@ CREATE TABLE `QRTZ_BLOB_TRIGGERS`  (
   PRIMARY KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) USING BTREE,
   INDEX `SCHED_NAME`(`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) USING BTREE,
   CONSTRAINT `QRTZ_BLOB_TRIGGERS_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `QRTZ_TRIGGERS` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of QRTZ_BLOB_TRIGGERS
@@ -44,7 +44,7 @@ CREATE TABLE `QRTZ_CALENDARS`  (
   `CALENDAR_NAME` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `CALENDAR` blob NOT NULL,
   PRIMARY KEY (`SCHED_NAME`, `CALENDAR_NAME`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of QRTZ_CALENDARS
@@ -62,7 +62,7 @@ CREATE TABLE `QRTZ_CRON_TRIGGERS`  (
   `TIME_ZONE_ID` varchar(80) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) USING BTREE,
   CONSTRAINT `QRTZ_CRON_TRIGGERS_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `QRTZ_TRIGGERS` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of QRTZ_CRON_TRIGGERS
@@ -94,7 +94,7 @@ CREATE TABLE `QRTZ_FIRED_TRIGGERS`  (
   INDEX `IDX_QRTZ_FT_JG`(`SCHED_NAME`, `JOB_GROUP`) USING BTREE,
   INDEX `IDX_QRTZ_FT_T_G`(`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) USING BTREE,
   INDEX `IDX_QRTZ_FT_TG`(`SCHED_NAME`, `TRIGGER_GROUP`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of QRTZ_FIRED_TRIGGERS
@@ -118,7 +118,7 @@ CREATE TABLE `QRTZ_JOB_DETAILS`  (
   PRIMARY KEY (`SCHED_NAME`, `JOB_NAME`, `JOB_GROUP`) USING BTREE,
   INDEX `IDX_QRTZ_J_REQ_RECOVERY`(`SCHED_NAME`, `REQUESTS_RECOVERY`) USING BTREE,
   INDEX `IDX_QRTZ_J_GRP`(`SCHED_NAME`, `JOB_GROUP`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of QRTZ_JOB_DETAILS
@@ -133,7 +133,7 @@ CREATE TABLE `QRTZ_LOCKS`  (
   `SCHED_NAME` varchar(120) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `LOCK_NAME` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`SCHED_NAME`, `LOCK_NAME`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of QRTZ_LOCKS
@@ -149,7 +149,7 @@ CREATE TABLE `QRTZ_PAUSED_TRIGGER_GRPS`  (
   `SCHED_NAME` varchar(120) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `TRIGGER_GROUP` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`SCHED_NAME`, `TRIGGER_GROUP`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of QRTZ_PAUSED_TRIGGER_GRPS
@@ -165,7 +165,7 @@ CREATE TABLE `QRTZ_SCHEDULER_STATE`  (
   `LAST_CHECKIN_TIME` bigint(13) NOT NULL,
   `CHECKIN_INTERVAL` bigint(13) NOT NULL,
   PRIMARY KEY (`SCHED_NAME`, `INSTANCE_NAME`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of QRTZ_SCHEDULER_STATE
@@ -185,7 +185,7 @@ CREATE TABLE `QRTZ_SIMPLE_TRIGGERS`  (
   `TIMES_TRIGGERED` bigint(10) NOT NULL,
   PRIMARY KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) USING BTREE,
   CONSTRAINT `QRTZ_SIMPLE_TRIGGERS_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `QRTZ_TRIGGERS` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of QRTZ_SIMPLE_TRIGGERS
@@ -212,7 +212,7 @@ CREATE TABLE `QRTZ_SIMPROP_TRIGGERS`  (
   `BOOL_PROP_2` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) USING BTREE,
   CONSTRAINT `QRTZ_SIMPROP_TRIGGERS_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `QRTZ_TRIGGERS` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of QRTZ_SIMPROP_TRIGGERS
@@ -253,12 +253,234 @@ CREATE TABLE `QRTZ_TRIGGERS`  (
   INDEX `IDX_QRTZ_T_NFT_ST_MISFIRE`(`SCHED_NAME`, `MISFIRE_INSTR`, `NEXT_FIRE_TIME`, `TRIGGER_STATE`) USING BTREE,
   INDEX `IDX_QRTZ_T_NFT_ST_MISFIRE_GRP`(`SCHED_NAME`, `MISFIRE_INSTR`, `NEXT_FIRE_TIME`, `TRIGGER_GROUP`, `TRIGGER_STATE`) USING BTREE,
   CONSTRAINT `QRTZ_TRIGGERS_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `JOB_NAME`, `JOB_GROUP`) REFERENCES `QRTZ_JOB_DETAILS` (`SCHED_NAME`, `JOB_NAME`, `JOB_GROUP`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of QRTZ_TRIGGERS
 -- ----------------------------
 INSERT INTO `QRTZ_TRIGGERS` VALUES ('RenrenScheduler', 'TASK_1', 'DEFAULT', 'TASK_1', 'DEFAULT', NULL, 1638788400000, -1, 5, 'WAITING', 'CRON', 1638787457000, 0, NULL, 2, 0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C7708000000100000000174000D4A4F425F504152414D5F4B45597372002E696F2E72656E72656E2E6D6F64756C65732E6A6F622E656E746974792E5363686564756C654A6F62456E7469747900000000000000010200074C00086265616E4E616D657400124C6A6176612F6C616E672F537472696E673B4C000A63726561746554696D657400104C6A6176612F7574696C2F446174653B4C000E63726F6E45787072657373696F6E71007E00094C00056A6F6249647400104C6A6176612F6C616E672F4C6F6E673B4C0006706172616D7371007E00094C000672656D61726B71007E00094C00067374617475737400134C6A6176612F6C616E672F496E74656765723B7870740008746573745461736B7372000E6A6176612E7574696C2E44617465686A81014B597419030000787077080000017D8D893FD07874000E3020302F3330202A202A202A203F7372000E6A6176612E6C616E672E4C6F6E673B8BE490CC8F23DF0200014A000576616C7565787200106A6176612E6C616E672E4E756D62657286AC951D0B94E08B0200007870000000000000000174000672656E72656E74000CE58F82E695B0E6B58BE8AF95737200116A6176612E6C616E672E496E746567657212E2A0A4F781873802000149000576616C75657871007E0013000000007800);
+
+-- ----------------------------
+-- Table structure for config_info
+-- ----------------------------
+DROP TABLE IF EXISTS `config_info`;
+CREATE TABLE `config_info`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `data_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'data_id',
+  `group_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `content` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'content',
+  `md5` varchar(32) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'md5',
+  `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间',
+  `src_user` text CHARACTER SET utf8 COLLATE utf8_bin NULL COMMENT 'source user',
+  `src_ip` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'source ip',
+  `app_name` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `tenant_id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '' COMMENT '租户字段',
+  `c_desc` varchar(256) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `c_use` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `effect` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `type` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `c_schema` text CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `uk_configinfo_datagrouptenant`(`data_id`, `group_id`, `tenant_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = 'config_info' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of config_info
+-- ----------------------------
+INSERT INTO `config_info` VALUES (1, 'gulimall-cart-dev.yaml', 'CHENYI_MALL', 'spring:\r\n  profiles:\r\n    active: dev\r\n  application:\r\n    name: gulimall-cart\r\n  cloud:\r\n    nacos:\r\n      discovery:\r\n        server-addr: 192.168.31.235:8848\r\n  redis:\r\n    host: 192.168.56.10\r\n    port: 6379\r\n    password: 111111\r\n    timeout: 50000ms\r\n  thymeleaf:\r\n    cache: false\r\n  zipkin:\r\n    base-url: http://localhost:9411\r\n  sleuth:\r\n    sampler:\r\n      probability: 1\r\n\r\nchenyimall:\r\n  thread:\r\n    enable-thread: true\r\n    core: 20\r\n    max-pool-size: 200\r\n    time: 10\r\n    queue-size: 10000', 'faa73fd4f4bb2aa3b7ee47a2aa8e8733', '2022-07-23 11:28:14', '2022-07-23 11:28:14', NULL, '0:0:0:0:0:0:0:1', '', '64a6c427-b3be-4f9f-b7f8-5711d8f0292c', '晨溢商城购物车服务开发环境', NULL, NULL, 'yaml', NULL);
+INSERT INTO `config_info` VALUES (2, 'gulimall-coupon-dev.yaml', 'CHENYI_MALL', 'spring:\r\n  profiles:\r\n    active: dev\r\n  datasource:\r\n    username: root\r\n    password: 111111\r\n    url: jdbc:mysql://192.168.56.10:3306/gulimall_sms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai\r\n    driver-class-name: com.mysql.cj.jdbc.Driver\r\n  cloud:\r\n    nacos:\r\n      discovery:\r\n        server-addr: 192.168.31.235:8848\r\n  application:\r\n    name: gulimall-coupon\r\n  zipkin:\r\n    base-url: http://localhost:9411\r\n  sleuth:\r\n    sampler:\r\n      probability: 1\r\n\r\nmybatis-plus:\r\n  mapper-locations: classpath:/mapper/**/*.xml\r\n\r\nswagger:\r\n  enabled: true\r\n  title: 优惠卷服务\r\n  base-package: com.chenyi.gulimall.coupon.controller\r\n  description: 优惠卷服务接口文档\r\n  version: 1.0\r\n  ip-address: ${spring.cloud.client.ipAddress}:${server.port}', 'ea865db5315e45cf65dbff9448dc7b96', '2022-07-23 11:28:14', '2022-07-23 11:28:14', NULL, '0:0:0:0:0:0:0:1', '', '64a6c427-b3be-4f9f-b7f8-5711d8f0292c', '晨溢商城优惠服务开发环境', NULL, NULL, 'yaml', NULL);
+INSERT INTO `config_info` VALUES (3, 'gulimall-member-dev.yaml', 'CHENYI_MALL', 'spring:\r\n  profiles:\r\n    active: dev\r\n  datasource:\r\n    username: root\r\n    password: 111111\r\n    url: jdbc:mysql://192.168.56.10:3306/gulimall_ums?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai\r\n    driver-class-name: com.mysql.cj.jdbc.Driver\r\n  cloud:\r\n    nacos:\r\n      discovery:\r\n        server-addr: 192.168.31.235:8848\r\n  application:\r\n    name: gulimall-member\r\n  redis:\r\n    host: 192.168.56.10\r\n    port: 6379\r\n    password: 111111\r\n  zipkin:\r\n    base-url: http://localhost:9411\r\n  sleuth:\r\n    sampler:\r\n      probability: 1\r\n\r\nswagger:\r\n  enabled: true\r\n  title: 会员服务\r\n  base-package: com.chenyi.gulimall.member.controller\r\n  description: 会员服务接口文档\r\n  version: 1.0\r\n  ip-address: ${spring.cloud.client.ipAddress}:${server.port}\r\n\r\nlogging:\r\n  level:\r\n    com:\r\n      chenyi:\r\n        gulimall: debug', '5e75aaedcfad15004521047786964afe', '2022-07-23 11:28:14', '2022-07-23 11:28:14', NULL, '0:0:0:0:0:0:0:1', '', '64a6c427-b3be-4f9f-b7f8-5711d8f0292c', NULL, NULL, NULL, 'yaml', NULL);
+INSERT INTO `config_info` VALUES (4, 'gulimall-order-dev.yaml', 'CHENYI_MALL', 'spring:\r\n  profiles:\r\n    active: dev\r\n  datasource:\r\n    username: root\r\n    password: 111111\r\n    url: jdbc:mysql://192.168.56.10:3306/gulimall_oms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai\r\n    driver-class-name: com.mysql.cj.jdbc.Driver\r\n  cloud:\r\n    nacos:\r\n      discovery:\r\n        server-addr: 192.168.31.235:8848\r\n  application:\r\n    name: gulimall-order\r\n  redis:\r\n    host: 192.168.56.10\r\n    port: 6379\r\n    password: 111111\r\n  rabbitmq:\r\n    host: 192.168.56.10\r\n    port: 5672\r\n    username: guest\r\n    password: guest\r\n    virtual-host: /\r\n    listener:\r\n      direct:\r\n        acknowledge-mode: manual\r\n  zipkin:\r\n    base-url: http://localhost:9411\r\n  sleuth:\r\n    sampler:\r\n      probability: 1\r\n\r\nchenyimall:\r\n  thread:\r\n    enable-thread: true\r\n    core: 20\r\n    max-pool-size: 200\r\n    time: 10', 'caa988542b25e0e8923249a89809e349', '2022-07-23 11:28:14', '2022-07-23 11:28:14', NULL, '0:0:0:0:0:0:0:1', '', '64a6c427-b3be-4f9f-b7f8-5711d8f0292c', NULL, NULL, NULL, 'yaml', NULL);
+INSERT INTO `config_info` VALUES (5, 'gulimall-product-dev.yaml', 'CHENYI_MALL', 'spring:\n  profiles:\n    active: dev\n  datasource:\n    username: root\n    password: 111111\n    url: jdbc:mysql://192.168.56.10:3306/gulimall_pms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai\n    driver-class-name: com.mysql.cj.jdbc.Driver\n  cloud:\n    nacos:\n      discovery:\n        server-addr: 192.168.31.235:8848\n  application:\n    name: gulimall-product\n  thymeleaf:\n    cache: false\n  redis:\n    host: 192.168.56.10\n    port: 6379\n    password: 111111\n    timeout: 50000ms\n  cache:\n    type: redis\n    redis:\n      time-to-live: 86400000 # key过期时间，单位毫秒\n  zipkin:\n    base-url: http://localhost:9411\n  sleuth:\n    sampler:\n      probability: 1\n  # 如果需要处理404请求的话需要设置这两个选项\n  mvc:\n    throw-exception-if-no-handler-found: true\n  resources:\n    add-mappings: false\n  jackson:\n    date-format: yyyy-MM-dd HH:mm:ss\n\n\nmybatis-plus:\n  mapper-locations: classpath:/mapper/**/*.xml\n\nswagger:\n  enabled: true\n  title: 商品服务\n  base-package: com.chenyi.gulimall.product.controller\n  description: 商品服务接口文档\n  version: 1.0\n  ip-address: ${spring.cloud.client.ipAddress}:${server.port}\nlogging:\n  level:\n    com:\n      chenyi:\n        gulimall: debug\n\nchenyimall:\n  thread:\n    enable-thread: true\n    core: 20\n    max-pool-size: 200\n    time: 10\n    queue-size: 10000', '7fcfc3a9c9371c04753be15e57c15147', '2022-07-23 11:28:14', '2022-07-23 11:28:14', NULL, '0:0:0:0:0:0:0:1', '', '64a6c427-b3be-4f9f-b7f8-5711d8f0292c', '', NULL, NULL, 'yaml', NULL);
+INSERT INTO `config_info` VALUES (6, 'gulimall-search-dev.yaml', 'CHENYI_MALL', 'spring:\r\n  profiles:\r\n    active: dev\r\n  datasource:\r\n    url: jdbc:mysql://192.168.56.10:3306/gulimall_pms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai\r\n    username: root\r\n    password: 111111\r\n    driver-class-name: com.mysql.cj.jdbc.Driver\r\n  cloud:\r\n    nacos:\r\n      discovery:\r\n        server-addr: 192.168.31.235:8848\r\n  application:\r\n    name: gulimall-search\r\n  thymeleaf:\r\n    cache: false\r\n  redis:\r\n    host: 192.168.56.10\r\n    port: 6379\r\n    password: 111111\r\n    timeout: 50000\r\n  cache:\r\n    type: redis\r\n    redis:\r\n      time-to-live: 86400000 # key过期时间，单位毫秒\r\n  zipkin:\r\n    base-url: http://localhost:9411\r\n  sleuth:\r\n    sampler:\r\n      probability: 1\r\n\r\nmybatis-plus:\r\n  mapper-locations: classpath:/mapper/**/*.xml\r\n\r\nswagger:\r\n  enabled: true\r\n  title: 商品服务\r\n  base-package: com.chenyi.gulimall.product.controller\r\n  description: 商品服务接口文档\r\n  version: 1.0\r\n  ip-address: ${spring.cloud.client.ipAddress}:${server.port}\r\n\r\nlogging:\r\n  level:\r\n    com:\r\n      chenyi:\r\n        gulimall: debug', '2b75ce39733402ab2e4b2806ee02edb5', '2022-07-23 11:28:14', '2022-07-23 11:28:14', NULL, '0:0:0:0:0:0:0:1', '', '64a6c427-b3be-4f9f-b7f8-5711d8f0292c', NULL, NULL, NULL, 'yaml', NULL);
+INSERT INTO `config_info` VALUES (7, 'gulimall-third-party-dev.yaml', 'CHENYI_MALL', 'spring:\r\n  profiles:\r\n    active: dev\r\n  cloud:\r\n    nacos:\r\n      discovery:\r\n        server-addr: 192.168.31.235:8848\r\n    alicloud:\r\n      oss:\r\n        endpoint: oss-cn-shenzhen.aliyuncs.com\r\n      access-key: LTAI5tGCrBhwb1FpZFnpXmUR\r\n      secret-key: me4sheYTh3BkNtddkpfsmOGcQhxlG7\r\n      bucket: gulimall-chenyi\r\n  application:\r\n    name: gulimall-third-party\r\n  zipkin:\r\n    base-url: http://localhost:9411\r\n  sleuth:\r\n    sampler:\r\n      probability: 1', '8732f668bb224f0eb837e7a77b6680b9', '2022-07-23 11:28:14', '2022-07-23 11:28:14', NULL, '0:0:0:0:0:0:0:1', '', '64a6c427-b3be-4f9f-b7f8-5711d8f0292c', NULL, NULL, NULL, 'yaml', NULL);
+INSERT INTO `config_info` VALUES (8, 'gulimall-ware-dev.yaml', 'CHENYI_MALL', 'spring:\r\n  profiles:\r\n    active: dev\r\n  datasource:\r\n    username: root\r\n    password: 111111\r\n    url: jdbc:mysql://192.168.56.10:3306/gulimall_wms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai\r\n    driver-class-name: com.mysql.cj.jdbc.Driver\r\n  cloud:\r\n    nacos:\r\n      discovery:\r\n        server-addr: 192.168.31.235:8848\r\n  application:\r\n    name: gulimall-ware\r\n  redis:\r\n    host: 192.168.56.10\r\n    password: 111111\r\n    port: 6379\r\n  rabbitmq:\r\n    host: 192.168.56.10\r\n    port: 5672\r\n    username: guest\r\n    password: guest\r\n    virtual-host: /\r\n    listener:\r\n      direct:\r\n        acknowledge-mode: manual\r\n  zipkin:\r\n    base-url: http://localhost:9411\r\n  sleuth:\r\n    sampler:\r\n      probability: 1\r\n\r\nswagger:\r\n  enabled: true\r\n  title: 库存服务\r\n  base-package: com.chenyi.gulimall.ware.controller\r\n  description: 库存服务接口文档\r\n  version: 1.0\r\n  ip-address: ${spring.cloud.client.ipAddress}:${server.port}\r\nlogging:\r\n  level:\r\n    com:\r\n      chenyi:\r\n        gulimall: debug', '1d84f9553b60b0b5a1a77c97854eed4d', '2022-07-23 11:28:14', '2022-07-23 11:28:14', NULL, '0:0:0:0:0:0:0:1', '', '64a6c427-b3be-4f9f-b7f8-5711d8f0292c', NULL, NULL, NULL, 'yaml', NULL);
+INSERT INTO `config_info` VALUES (9, 'gulimall-auth-dev.yaml', 'CHENYI_MALL', 'spring:\r\n  profiles:\r\n    active: dev\r\n  application:\r\n    name: gulimall-auth\r\n  cloud:\r\n    nacos:\r\n      discovery:\r\n        server-addr: 192.168.31.235:8848\r\n  thymeleaf:\r\n    cache: false\r\n  redis:\r\n    host: 192.168.56.10\r\n    port: 6379\r\n    password: 111111\r\n    timeout: 50000ms\r\n\r\nlogging:\r\n  level:\r\n    com:\r\n      chenyi:\r\n        gulimall: debug', 'bbc268ad005fb6f964ede75602a3faff', '2022-07-23 11:28:14', '2022-07-23 11:28:14', NULL, '0:0:0:0:0:0:0:1', '', '64a6c427-b3be-4f9f-b7f8-5711d8f0292c', NULL, NULL, NULL, 'yaml', NULL);
+INSERT INTO `config_info` VALUES (10, 'gulimall-gateway-dev.yaml', 'CHENYI_MALL', 'spring:\r\n  profiles:\r\n    active: dev\r\n  application:\r\n    name: gulimall-gateway\r\n  cloud:\r\n    nacos:\r\n      discovery:\r\n        server-addr: 192.168.31.235:8848\r\n    gateway:\r\n      discovery:\r\n        locator:\r\n          enabled: true\r\n      routes:\r\n        # 优惠卷模块\r\n        - id: gulimall-coupon\r\n          uri: lb://gulimall-coupon\r\n          predicates:\r\n            - Path=/api/coupon/**\r\n          filters:\r\n            - RewritePath=/api/coupon/(?<segment>.*), /$\\{segment}\r\n        # 商品模块\r\n        - id: gulimall-product\r\n          uri: lb://gulimall-product\r\n          predicates:\r\n            - Path=/api/product/**\r\n          filters:\r\n            - RewritePath=/api/product/(?<segment>.*), /$\\{segment}\r\n        # 订单模块\r\n        - id: gulimall-order\r\n          uri: lb://gulimall-order\r\n          predicates:\r\n            - Path=/api/order/**\r\n          filters:\r\n            - RewritePath=/api/order/(?<segment>.*), /$\\{segment}\r\n        # 第三方服务模块\r\n        - id: gulimall-third-party\r\n          uri: lb://gulimall-third-party\r\n          predicates:\r\n            - Path=/api/thirdParty/**\r\n          filters:\r\n            - RewritePath=/api/thirdParty/(?<segment>.*), /$\\{segment}\r\n        # 会员模块\r\n        - id: gulimall-member\r\n          uri: lb://gulimall-member\r\n          predicates:\r\n            - Path=/api/member/**\r\n          filters:\r\n            - RewritePath=/api/member/(?<segment>.*), /$\\{segment}\r\n        # 库存模块\r\n        - id: gulimall-ware\r\n          uri: lb://gulimall-ware\r\n          predicates:\r\n            - Path=/api/ware/**\r\n          filters:\r\n            - RewritePath=/api/ware/(?<segment>.*), /$\\{segment}\r\n        # 后台模块\r\n        - id: gulimall-admin\r\n          uri: lb://gulimall-admin\r\n          predicates:\r\n            - Path=/api/**\r\n          filters:\r\n            - RewritePath=/api/(?<segment>.*), /$\\{segment}\r\n        # 商城路由\r\n        - id: gulimall-index-router\r\n          uri: lb://gulimall-product\r\n          predicates:\r\n            - Host=gulimall.com,item.gulimall.com\r\n        # 检索服务路由\r\n        - id: gulimall-search-router\r\n          uri: lb://gulimall-search\r\n          predicates:\r\n            - Host=search.gulimall.com\r\n        # 认证服务\r\n        - id: gulimall-auth-router\r\n          uri: lb://gulimall-auth\r\n          predicates:\r\n            - Host=auth.gulimall.com\r\n        # 购物车服务路由\r\n        - id: gulimall-cart-router\r\n          uri: lb://gulimall-cart\r\n          predicates:\r\n            - Host=cart.gulimall.com', '643077173105984f54aed34836a5873c', '2022-07-23 11:28:14', '2022-07-23 11:28:14', NULL, '0:0:0:0:0:0:0:1', '', '64a6c427-b3be-4f9f-b7f8-5711d8f0292c', NULL, NULL, NULL, 'yaml', NULL);
+
+-- ----------------------------
+-- Table structure for config_info_aggr
+-- ----------------------------
+DROP TABLE IF EXISTS `config_info_aggr`;
+CREATE TABLE `config_info_aggr`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `data_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'data_id',
+  `group_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'group_id',
+  `datum_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'datum_id',
+  `content` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '内容',
+  `gmt_modified` datetime NOT NULL COMMENT '修改时间',
+  `app_name` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `tenant_id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '' COMMENT '租户字段',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `uk_configinfoaggr_datagrouptenantdatum`(`data_id`, `group_id`, `tenant_id`, `datum_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '增加租户字段' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of config_info_aggr
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for config_info_beta
+-- ----------------------------
+DROP TABLE IF EXISTS `config_info_beta`;
+CREATE TABLE `config_info_beta`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `data_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'data_id',
+  `group_id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'group_id',
+  `app_name` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'app_name',
+  `content` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'content',
+  `beta_ips` varchar(1024) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'betaIps',
+  `md5` varchar(32) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'md5',
+  `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间',
+  `src_user` text CHARACTER SET utf8 COLLATE utf8_bin NULL COMMENT 'source user',
+  `src_ip` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'source ip',
+  `tenant_id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '' COMMENT '租户字段',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `uk_configinfobeta_datagrouptenant`(`data_id`, `group_id`, `tenant_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = 'config_info_beta' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of config_info_beta
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for config_info_tag
+-- ----------------------------
+DROP TABLE IF EXISTS `config_info_tag`;
+CREATE TABLE `config_info_tag`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `data_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'data_id',
+  `group_id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'group_id',
+  `tenant_id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '' COMMENT 'tenant_id',
+  `tag_id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'tag_id',
+  `app_name` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'app_name',
+  `content` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'content',
+  `md5` varchar(32) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'md5',
+  `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间',
+  `src_user` text CHARACTER SET utf8 COLLATE utf8_bin NULL COMMENT 'source user',
+  `src_ip` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'source ip',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `uk_configinfotag_datagrouptenanttag`(`data_id`, `group_id`, `tenant_id`, `tag_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = 'config_info_tag' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of config_info_tag
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for config_tags_relation
+-- ----------------------------
+DROP TABLE IF EXISTS `config_tags_relation`;
+CREATE TABLE `config_tags_relation`  (
+  `id` bigint(20) NOT NULL COMMENT 'id',
+  `tag_name` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'tag_name',
+  `tag_type` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'tag_type',
+  `data_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'data_id',
+  `group_id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'group_id',
+  `tenant_id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '' COMMENT 'tenant_id',
+  `nid` bigint(20) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`nid`) USING BTREE,
+  UNIQUE INDEX `uk_configtagrelation_configidtag`(`id`, `tag_name`, `tag_type`) USING BTREE,
+  INDEX `idx_tenant_id`(`tenant_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = 'config_tag_relation' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of config_tags_relation
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for group_capacity
+-- ----------------------------
+DROP TABLE IF EXISTS `group_capacity`;
+CREATE TABLE `group_capacity`  (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `group_id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT 'Group ID，空字符表示整个集群',
+  `quota` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '配额，0表示使用默认值',
+  `usage` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '使用量',
+  `max_size` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '单个配置大小上限，单位为字节，0表示使用默认值',
+  `max_aggr_count` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '聚合子配置最大个数，，0表示使用默认值',
+  `max_aggr_size` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '单个聚合数据的子配置大小上限，单位为字节，0表示使用默认值',
+  `max_history_count` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最大变更历史数量',
+  `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `uk_group_id`(`group_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '集群、各Group容量信息表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of group_capacity
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for his_config_info
+-- ----------------------------
+DROP TABLE IF EXISTS `his_config_info`;
+CREATE TABLE `his_config_info`  (
+  `id` bigint(64) UNSIGNED NOT NULL,
+  `nid` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `data_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `group_id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `app_name` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'app_name',
+  `content` longtext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `md5` varchar(32) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `src_user` text CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `src_ip` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `op_type` char(10) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
+  `tenant_id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '' COMMENT '租户字段',
+  PRIMARY KEY (`nid`) USING BTREE,
+  INDEX `idx_gmt_create`(`gmt_create`) USING BTREE,
+  INDEX `idx_gmt_modified`(`gmt_modified`) USING BTREE,
+  INDEX `idx_did`(`data_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '多租户改造' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of his_config_info
+-- ----------------------------
+INSERT INTO `his_config_info` VALUES (0, 1, 'gulimall-cart-dev.yaml', 'CHENYI_MALL', '', 'spring:\r\n  profiles:\r\n    active: dev\r\n  application:\r\n    name: gulimall-cart\r\n  cloud:\r\n    nacos:\r\n      discovery:\r\n        server-addr: 192.168.31.235:8848\r\n  redis:\r\n    host: 192.168.56.10\r\n    port: 6379\r\n    password: 111111\r\n    timeout: 50000ms\r\n  thymeleaf:\r\n    cache: false\r\n  zipkin:\r\n    base-url: http://localhost:9411\r\n  sleuth:\r\n    sampler:\r\n      probability: 1\r\n\r\nchenyimall:\r\n  thread:\r\n    enable-thread: true\r\n    core: 20\r\n    max-pool-size: 200\r\n    time: 10\r\n    queue-size: 10000', 'faa73fd4f4bb2aa3b7ee47a2aa8e8733', '2022-07-23 11:28:14', '2022-07-23 11:28:14', NULL, '0:0:0:0:0:0:0:1', 'I', '64a6c427-b3be-4f9f-b7f8-5711d8f0292c');
+INSERT INTO `his_config_info` VALUES (0, 2, 'gulimall-coupon-dev.yaml', 'CHENYI_MALL', '', 'spring:\r\n  profiles:\r\n    active: dev\r\n  datasource:\r\n    username: root\r\n    password: 111111\r\n    url: jdbc:mysql://192.168.56.10:3306/gulimall_sms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai\r\n    driver-class-name: com.mysql.cj.jdbc.Driver\r\n  cloud:\r\n    nacos:\r\n      discovery:\r\n        server-addr: 192.168.31.235:8848\r\n  application:\r\n    name: gulimall-coupon\r\n  zipkin:\r\n    base-url: http://localhost:9411\r\n  sleuth:\r\n    sampler:\r\n      probability: 1\r\n\r\nmybatis-plus:\r\n  mapper-locations: classpath:/mapper/**/*.xml\r\n\r\nswagger:\r\n  enabled: true\r\n  title: 优惠卷服务\r\n  base-package: com.chenyi.gulimall.coupon.controller\r\n  description: 优惠卷服务接口文档\r\n  version: 1.0\r\n  ip-address: ${spring.cloud.client.ipAddress}:${server.port}', 'ea865db5315e45cf65dbff9448dc7b96', '2022-07-23 11:28:14', '2022-07-23 11:28:14', NULL, '0:0:0:0:0:0:0:1', 'I', '64a6c427-b3be-4f9f-b7f8-5711d8f0292c');
+INSERT INTO `his_config_info` VALUES (0, 3, 'gulimall-member-dev.yaml', 'CHENYI_MALL', '', 'spring:\r\n  profiles:\r\n    active: dev\r\n  datasource:\r\n    username: root\r\n    password: 111111\r\n    url: jdbc:mysql://192.168.56.10:3306/gulimall_ums?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai\r\n    driver-class-name: com.mysql.cj.jdbc.Driver\r\n  cloud:\r\n    nacos:\r\n      discovery:\r\n        server-addr: 192.168.31.235:8848\r\n  application:\r\n    name: gulimall-member\r\n  redis:\r\n    host: 192.168.56.10\r\n    port: 6379\r\n    password: 111111\r\n  zipkin:\r\n    base-url: http://localhost:9411\r\n  sleuth:\r\n    sampler:\r\n      probability: 1\r\n\r\nswagger:\r\n  enabled: true\r\n  title: 会员服务\r\n  base-package: com.chenyi.gulimall.member.controller\r\n  description: 会员服务接口文档\r\n  version: 1.0\r\n  ip-address: ${spring.cloud.client.ipAddress}:${server.port}\r\n\r\nlogging:\r\n  level:\r\n    com:\r\n      chenyi:\r\n        gulimall: debug', '5e75aaedcfad15004521047786964afe', '2022-07-23 11:28:14', '2022-07-23 11:28:14', NULL, '0:0:0:0:0:0:0:1', 'I', '64a6c427-b3be-4f9f-b7f8-5711d8f0292c');
+INSERT INTO `his_config_info` VALUES (0, 4, 'gulimall-order-dev.yaml', 'CHENYI_MALL', '', 'spring:\r\n  profiles:\r\n    active: dev\r\n  datasource:\r\n    username: root\r\n    password: 111111\r\n    url: jdbc:mysql://192.168.56.10:3306/gulimall_oms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai\r\n    driver-class-name: com.mysql.cj.jdbc.Driver\r\n  cloud:\r\n    nacos:\r\n      discovery:\r\n        server-addr: 192.168.31.235:8848\r\n  application:\r\n    name: gulimall-order\r\n  redis:\r\n    host: 192.168.56.10\r\n    port: 6379\r\n    password: 111111\r\n  rabbitmq:\r\n    host: 192.168.56.10\r\n    port: 5672\r\n    username: guest\r\n    password: guest\r\n    virtual-host: /\r\n    listener:\r\n      direct:\r\n        acknowledge-mode: manual\r\n  zipkin:\r\n    base-url: http://localhost:9411\r\n  sleuth:\r\n    sampler:\r\n      probability: 1\r\n\r\nchenyimall:\r\n  thread:\r\n    enable-thread: true\r\n    core: 20\r\n    max-pool-size: 200\r\n    time: 10', 'caa988542b25e0e8923249a89809e349', '2022-07-23 11:28:14', '2022-07-23 11:28:14', NULL, '0:0:0:0:0:0:0:1', 'I', '64a6c427-b3be-4f9f-b7f8-5711d8f0292c');
+INSERT INTO `his_config_info` VALUES (0, 5, 'gulimall-product-dev.yaml', 'CHENYI_MALL', '', 'spring:\n  profiles:\n    active: dev\n  datasource:\n    username: root\n    password: 111111\n    url: jdbc:mysql://192.168.56.10:3306/gulimall_pms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai\n    driver-class-name: com.mysql.cj.jdbc.Driver\n  cloud:\n    nacos:\n      discovery:\n        server-addr: 192.168.31.235:8848\n  application:\n    name: gulimall-product\n  thymeleaf:\n    cache: false\n  redis:\n    host: 192.168.56.10\n    port: 6379\n    password: 111111\n    timeout: 50000ms\n  cache:\n    type: redis\n    redis:\n      time-to-live: 86400000 # key过期时间，单位毫秒\n  zipkin:\n    base-url: http://localhost:9411\n  sleuth:\n    sampler:\n      probability: 1\n  # 如果需要处理404请求的话需要设置这两个选项\n  mvc:\n    throw-exception-if-no-handler-found: true\n  resources:\n    add-mappings: false\n  jackson:\n    date-format: yyyy-MM-dd HH:mm:ss\n\n\nmybatis-plus:\n  mapper-locations: classpath:/mapper/**/*.xml\n\nswagger:\n  enabled: true\n  title: 商品服务\n  base-package: com.chenyi.gulimall.product.controller\n  description: 商品服务接口文档\n  version: 1.0\n  ip-address: ${spring.cloud.client.ipAddress}:${server.port}\nlogging:\n  level:\n    com:\n      chenyi:\n        gulimall: debug\n\nchenyimall:\n  thread:\n    enable-thread: true\n    core: 20\n    max-pool-size: 200\n    time: 10\n    queue-size: 10000', '7fcfc3a9c9371c04753be15e57c15147', '2022-07-23 11:28:14', '2022-07-23 11:28:14', NULL, '0:0:0:0:0:0:0:1', 'I', '64a6c427-b3be-4f9f-b7f8-5711d8f0292c');
+INSERT INTO `his_config_info` VALUES (0, 6, 'gulimall-search-dev.yaml', 'CHENYI_MALL', '', 'spring:\r\n  profiles:\r\n    active: dev\r\n  datasource:\r\n    url: jdbc:mysql://192.168.56.10:3306/gulimall_pms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai\r\n    username: root\r\n    password: 111111\r\n    driver-class-name: com.mysql.cj.jdbc.Driver\r\n  cloud:\r\n    nacos:\r\n      discovery:\r\n        server-addr: 192.168.31.235:8848\r\n  application:\r\n    name: gulimall-search\r\n  thymeleaf:\r\n    cache: false\r\n  redis:\r\n    host: 192.168.56.10\r\n    port: 6379\r\n    password: 111111\r\n    timeout: 50000\r\n  cache:\r\n    type: redis\r\n    redis:\r\n      time-to-live: 86400000 # key过期时间，单位毫秒\r\n  zipkin:\r\n    base-url: http://localhost:9411\r\n  sleuth:\r\n    sampler:\r\n      probability: 1\r\n\r\nmybatis-plus:\r\n  mapper-locations: classpath:/mapper/**/*.xml\r\n\r\nswagger:\r\n  enabled: true\r\n  title: 商品服务\r\n  base-package: com.chenyi.gulimall.product.controller\r\n  description: 商品服务接口文档\r\n  version: 1.0\r\n  ip-address: ${spring.cloud.client.ipAddress}:${server.port}\r\n\r\nlogging:\r\n  level:\r\n    com:\r\n      chenyi:\r\n        gulimall: debug', '2b75ce39733402ab2e4b2806ee02edb5', '2022-07-23 11:28:14', '2022-07-23 11:28:14', NULL, '0:0:0:0:0:0:0:1', 'I', '64a6c427-b3be-4f9f-b7f8-5711d8f0292c');
+INSERT INTO `his_config_info` VALUES (0, 7, 'gulimall-third-party-dev.yaml', 'CHENYI_MALL', '', 'spring:\r\n  profiles:\r\n    active: dev\r\n  cloud:\r\n    nacos:\r\n      discovery:\r\n        server-addr: 192.168.31.235:8848\r\n    alicloud:\r\n      oss:\r\n        endpoint: oss-cn-shenzhen.aliyuncs.com\r\n      access-key: LTAI5tGCrBhwb1FpZFnpXmUR\r\n      secret-key: me4sheYTh3BkNtddkpfsmOGcQhxlG7\r\n      bucket: gulimall-chenyi\r\n  application:\r\n    name: gulimall-third-party\r\n  zipkin:\r\n    base-url: http://localhost:9411\r\n  sleuth:\r\n    sampler:\r\n      probability: 1', '8732f668bb224f0eb837e7a77b6680b9', '2022-07-23 11:28:14', '2022-07-23 11:28:14', NULL, '0:0:0:0:0:0:0:1', 'I', '64a6c427-b3be-4f9f-b7f8-5711d8f0292c');
+INSERT INTO `his_config_info` VALUES (0, 8, 'gulimall-ware-dev.yaml', 'CHENYI_MALL', '', 'spring:\r\n  profiles:\r\n    active: dev\r\n  datasource:\r\n    username: root\r\n    password: 111111\r\n    url: jdbc:mysql://192.168.56.10:3306/gulimall_wms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai\r\n    driver-class-name: com.mysql.cj.jdbc.Driver\r\n  cloud:\r\n    nacos:\r\n      discovery:\r\n        server-addr: 192.168.31.235:8848\r\n  application:\r\n    name: gulimall-ware\r\n  redis:\r\n    host: 192.168.56.10\r\n    password: 111111\r\n    port: 6379\r\n  rabbitmq:\r\n    host: 192.168.56.10\r\n    port: 5672\r\n    username: guest\r\n    password: guest\r\n    virtual-host: /\r\n    listener:\r\n      direct:\r\n        acknowledge-mode: manual\r\n  zipkin:\r\n    base-url: http://localhost:9411\r\n  sleuth:\r\n    sampler:\r\n      probability: 1\r\n\r\nswagger:\r\n  enabled: true\r\n  title: 库存服务\r\n  base-package: com.chenyi.gulimall.ware.controller\r\n  description: 库存服务接口文档\r\n  version: 1.0\r\n  ip-address: ${spring.cloud.client.ipAddress}:${server.port}\r\nlogging:\r\n  level:\r\n    com:\r\n      chenyi:\r\n        gulimall: debug', '1d84f9553b60b0b5a1a77c97854eed4d', '2022-07-23 11:28:14', '2022-07-23 11:28:14', NULL, '0:0:0:0:0:0:0:1', 'I', '64a6c427-b3be-4f9f-b7f8-5711d8f0292c');
+INSERT INTO `his_config_info` VALUES (0, 9, 'gulimall-auth-dev.yaml', 'CHENYI_MALL', '', 'spring:\r\n  profiles:\r\n    active: dev\r\n  application:\r\n    name: gulimall-auth\r\n  cloud:\r\n    nacos:\r\n      discovery:\r\n        server-addr: 192.168.31.235:8848\r\n  thymeleaf:\r\n    cache: false\r\n  redis:\r\n    host: 192.168.56.10\r\n    port: 6379\r\n    password: 111111\r\n    timeout: 50000ms\r\n\r\nlogging:\r\n  level:\r\n    com:\r\n      chenyi:\r\n        gulimall: debug', 'bbc268ad005fb6f964ede75602a3faff', '2022-07-23 11:28:14', '2022-07-23 11:28:14', NULL, '0:0:0:0:0:0:0:1', 'I', '64a6c427-b3be-4f9f-b7f8-5711d8f0292c');
+INSERT INTO `his_config_info` VALUES (0, 10, 'gulimall-gateway-dev.yaml', 'CHENYI_MALL', '', 'spring:\r\n  profiles:\r\n    active: dev\r\n  application:\r\n    name: gulimall-gateway\r\n  cloud:\r\n    nacos:\r\n      discovery:\r\n        server-addr: 192.168.31.235:8848\r\n    gateway:\r\n      discovery:\r\n        locator:\r\n          enabled: true\r\n      routes:\r\n        # 优惠卷模块\r\n        - id: gulimall-coupon\r\n          uri: lb://gulimall-coupon\r\n          predicates:\r\n            - Path=/api/coupon/**\r\n          filters:\r\n            - RewritePath=/api/coupon/(?<segment>.*), /$\\{segment}\r\n        # 商品模块\r\n        - id: gulimall-product\r\n          uri: lb://gulimall-product\r\n          predicates:\r\n            - Path=/api/product/**\r\n          filters:\r\n            - RewritePath=/api/product/(?<segment>.*), /$\\{segment}\r\n        # 订单模块\r\n        - id: gulimall-order\r\n          uri: lb://gulimall-order\r\n          predicates:\r\n            - Path=/api/order/**\r\n          filters:\r\n            - RewritePath=/api/order/(?<segment>.*), /$\\{segment}\r\n        # 第三方服务模块\r\n        - id: gulimall-third-party\r\n          uri: lb://gulimall-third-party\r\n          predicates:\r\n            - Path=/api/thirdParty/**\r\n          filters:\r\n            - RewritePath=/api/thirdParty/(?<segment>.*), /$\\{segment}\r\n        # 会员模块\r\n        - id: gulimall-member\r\n          uri: lb://gulimall-member\r\n          predicates:\r\n            - Path=/api/member/**\r\n          filters:\r\n            - RewritePath=/api/member/(?<segment>.*), /$\\{segment}\r\n        # 库存模块\r\n        - id: gulimall-ware\r\n          uri: lb://gulimall-ware\r\n          predicates:\r\n            - Path=/api/ware/**\r\n          filters:\r\n            - RewritePath=/api/ware/(?<segment>.*), /$\\{segment}\r\n        # 后台模块\r\n        - id: gulimall-admin\r\n          uri: lb://gulimall-admin\r\n          predicates:\r\n            - Path=/api/**\r\n          filters:\r\n            - RewritePath=/api/(?<segment>.*), /$\\{segment}\r\n        # 商城路由\r\n        - id: gulimall-index-router\r\n          uri: lb://gulimall-product\r\n          predicates:\r\n            - Host=gulimall.com,item.gulimall.com\r\n        # 检索服务路由\r\n        - id: gulimall-search-router\r\n          uri: lb://gulimall-search\r\n          predicates:\r\n            - Host=search.gulimall.com\r\n        # 认证服务\r\n        - id: gulimall-auth-router\r\n          uri: lb://gulimall-auth\r\n          predicates:\r\n            - Host=auth.gulimall.com\r\n        # 购物车服务路由\r\n        - id: gulimall-cart-router\r\n          uri: lb://gulimall-cart\r\n          predicates:\r\n            - Host=cart.gulimall.com', '643077173105984f54aed34836a5873c', '2022-07-23 11:28:14', '2022-07-23 11:28:14', NULL, '0:0:0:0:0:0:0:1', 'I', '64a6c427-b3be-4f9f-b7f8-5711d8f0292c');
+
+-- ----------------------------
+-- Table structure for permissions
+-- ----------------------------
+DROP TABLE IF EXISTS `permissions`;
+CREATE TABLE `permissions`  (
+  `role` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `resource` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `action` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  UNIQUE INDEX `uk_role_permission`(`role`, `resource`, `action`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of permissions
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for roles
+-- ----------------------------
+DROP TABLE IF EXISTS `roles`;
+CREATE TABLE `roles`  (
+  `username` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `role` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  UNIQUE INDEX `idx_user_role`(`username`, `role`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of roles
+-- ----------------------------
+INSERT INTO `roles` VALUES ('nacos', 'ROLE_ADMIN');
 
 -- ----------------------------
 -- Table structure for schedule_job
@@ -273,7 +495,7 @@ CREATE TABLE `schedule_job`  (
   `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`job_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '定时任务' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '定时任务' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of schedule_job
@@ -295,7 +517,7 @@ CREATE TABLE `schedule_job_log`  (
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`log_id`) USING BTREE,
   INDEX `job_id`(`job_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 269 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '定时任务日志' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 269 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '定时任务日志' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of schedule_job_log
@@ -578,7 +800,7 @@ CREATE TABLE `sys_captcha`  (
   `code` varchar(6) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '验证码',
   `expire_time` datetime NULL DEFAULT NULL COMMENT '过期时间',
   PRIMARY KEY (`uuid`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统验证码' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统验证码' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_captcha
@@ -627,7 +849,7 @@ CREATE TABLE `sys_config`  (
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `param_key`(`param_key`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统配置信息表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统配置信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_config
@@ -648,7 +870,7 @@ CREATE TABLE `sys_log`  (
   `ip` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'IP地址',
   `create_date` datetime NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统日志' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统日志' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_log
@@ -671,7 +893,7 @@ CREATE TABLE `sys_menu`  (
   `icon` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '菜单图标',
   `order_num` int(11) NULL DEFAULT NULL COMMENT '排序',
   PRIMARY KEY (`menu_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 76 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '菜单管理' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 76 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '菜单管理' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_menu
@@ -757,7 +979,7 @@ CREATE TABLE `sys_oss`  (
   `url` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'URL地址',
   `create_date` datetime NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '文件上传' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '文件上传' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_oss
@@ -774,7 +996,7 @@ CREATE TABLE `sys_role`  (
   `create_user_id` bigint(20) NULL DEFAULT NULL COMMENT '创建者ID',
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`role_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '角色' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '角色' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_role
@@ -789,7 +1011,7 @@ CREATE TABLE `sys_role_menu`  (
   `role_id` bigint(20) NULL DEFAULT NULL COMMENT '角色ID',
   `menu_id` bigint(20) NULL DEFAULT NULL COMMENT '菜单ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '角色与菜单对应关系' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '角色与菜单对应关系' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_role_menu
@@ -811,7 +1033,7 @@ CREATE TABLE `sys_user`  (
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`user_id`) USING BTREE,
   UNIQUE INDEX `username`(`username`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统用户' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统用户' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_user
@@ -827,7 +1049,7 @@ CREATE TABLE `sys_user_role`  (
   `user_id` bigint(20) NULL DEFAULT NULL COMMENT '用户ID',
   `role_id` bigint(20) NULL DEFAULT NULL COMMENT '角色ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户与角色对应关系' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户与角色对应关系' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_user_role
@@ -844,7 +1066,7 @@ CREATE TABLE `sys_user_token`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`user_id`) USING BTREE,
   UNIQUE INDEX `token`(`token`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统用户Token' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统用户Token' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_user_token
@@ -863,11 +1085,73 @@ CREATE TABLE `tb_user`  (
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`user_id`) USING BTREE,
   UNIQUE INDEX `username`(`username`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_user
 -- ----------------------------
 INSERT INTO `tb_user` VALUES (1, 'mark', '13612345678', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', '2017-03-23 22:37:41');
+
+-- ----------------------------
+-- Table structure for tenant_capacity
+-- ----------------------------
+DROP TABLE IF EXISTS `tenant_capacity`;
+CREATE TABLE `tenant_capacity`  (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `tenant_id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT 'Tenant ID',
+  `quota` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '配额，0表示使用默认值',
+  `usage` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '使用量',
+  `max_size` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '单个配置大小上限，单位为字节，0表示使用默认值',
+  `max_aggr_count` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '聚合子配置最大个数',
+  `max_aggr_size` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '单个聚合数据的子配置大小上限，单位为字节，0表示使用默认值',
+  `max_history_count` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最大变更历史数量',
+  `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `uk_tenant_id`(`tenant_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '租户容量信息表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tenant_capacity
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tenant_info
+-- ----------------------------
+DROP TABLE IF EXISTS `tenant_info`;
+CREATE TABLE `tenant_info`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `kp` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'kp',
+  `tenant_id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '' COMMENT 'tenant_id',
+  `tenant_name` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '' COMMENT 'tenant_name',
+  `tenant_desc` varchar(256) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'tenant_desc',
+  `create_source` varchar(32) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'create_source',
+  `gmt_create` bigint(20) NOT NULL COMMENT '创建时间',
+  `gmt_modified` bigint(20) NOT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `uk_tenant_info_kptenantid`(`kp`, `tenant_id`) USING BTREE,
+  INDEX `idx_tenant_id`(`tenant_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = 'tenant_info' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tenant_info
+-- ----------------------------
+INSERT INTO `tenant_info` VALUES (1, '1', '64a6c427-b3be-4f9f-b7f8-5711d8f0292c', 'dev', '开发配置', 'nacos', 1658575684603, 1658575684603);
+
+-- ----------------------------
+-- Table structure for users
+-- ----------------------------
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users`  (
+  `username` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `enabled` tinyint(1) NOT NULL,
+  PRIMARY KEY (`username`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of users
+-- ----------------------------
+INSERT INTO `users` VALUES ('nacos', '$2a$10$EuWPZHzz32dJN7jexM34MOeYirDdFAZm2kuWj7VEOJhhZkDrxfvUu', 1);
 
 SET FOREIGN_KEY_CHECKS = 1;

@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : 192.168.56.10-chenyi
+ Source Server         : 192.168.56.10
  Source Server Type    : MySQL
  Source Server Version : 50736
  Source Host           : 192.168.56.10:3306
- Source Schema         : gulimall_sms
+ Source Schema         : chenyimall_sms
 
  Target Server Type    : MySQL
  Target Server Version : 50736
  File Encoding         : 65001
 
- Date: 08/06/2022 20:11:32
+ Date: 26/07/2022 20:38:10
 */
 
 SET NAMES utf8mb4;
@@ -43,7 +43,7 @@ CREATE TABLE `sms_coupon`  (
   `member_level` tinyint(1) NULL DEFAULT NULL COMMENT '可以领取的会员等级[0->不限等级，其他-对应等级]',
   `publish` tinyint(1) NULL DEFAULT NULL COMMENT '发布状态[0-未发布，1-已发布]',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '优惠券信息' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '优惠券信息' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sms_coupon
@@ -65,7 +65,7 @@ CREATE TABLE `sms_coupon_history`  (
   `order_id` bigint(20) NULL DEFAULT NULL COMMENT '订单id',
   `order_sn` bigint(20) NULL DEFAULT NULL COMMENT '订单号',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '优惠券领取历史记录' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '优惠券领取历史记录' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sms_coupon_history
@@ -81,7 +81,7 @@ CREATE TABLE `sms_coupon_spu_category_relation`  (
   `category_id` bigint(20) NULL DEFAULT NULL COMMENT '产品分类id',
   `category_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '产品分类名称',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '优惠券分类关联' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '优惠券分类关联' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sms_coupon_spu_category_relation
@@ -97,7 +97,7 @@ CREATE TABLE `sms_coupon_spu_relation`  (
   `spu_id` bigint(20) NULL DEFAULT NULL COMMENT 'spu_id',
   `spu_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'spu_name',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '优惠券与产品关联' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '优惠券与产品关联' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sms_coupon_spu_relation
@@ -121,7 +121,7 @@ CREATE TABLE `sms_home_adv`  (
   `publisher_id` bigint(20) NULL DEFAULT NULL COMMENT '发布者',
   `auth_id` bigint(20) NULL DEFAULT NULL COMMENT '审核者',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '首页轮播广告' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '首页轮播广告' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sms_home_adv
@@ -141,7 +141,7 @@ CREATE TABLE `sms_home_subject`  (
   `sort` int(11) NULL DEFAULT NULL COMMENT '排序',
   `img` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '专题图片地址',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '首页专题表【jd首页下面很多专题，每个专题链接新的页面，展示专题商品信息】' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '首页专题表【jd首页下面很多专题，每个专题链接新的页面，展示专题商品信息】' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sms_home_subject
@@ -158,7 +158,7 @@ CREATE TABLE `sms_home_subject_spu`  (
   `spu_id` bigint(20) NULL DEFAULT NULL COMMENT 'spu_id',
   `sort` int(11) NULL DEFAULT NULL COMMENT '排序',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '专题商品' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '专题商品' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sms_home_subject_spu
@@ -176,7 +176,7 @@ CREATE TABLE `sms_member_price`  (
   `member_price` decimal(18, 4) NULL DEFAULT NULL COMMENT '会员对应价格',
   `add_other` tinyint(1) NULL DEFAULT NULL COMMENT '可否叠加其他优惠[0-不可叠加优惠，1-可叠加]',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '商品会员价格' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '商品会员价格' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sms_member_price
@@ -219,7 +219,7 @@ CREATE TABLE `sms_seckill_promotion`  (
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `user_id` bigint(20) NULL DEFAULT NULL COMMENT '创建人',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '秒杀活动' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '秒杀活动' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sms_seckill_promotion
@@ -237,7 +237,7 @@ CREATE TABLE `sms_seckill_session`  (
   `status` tinyint(1) NULL DEFAULT NULL COMMENT '启用状态',
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '秒杀活动场次' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '秒杀活动场次' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sms_seckill_session
@@ -256,7 +256,7 @@ CREATE TABLE `sms_seckill_sku_notice`  (
   `send_time` datetime NULL DEFAULT NULL COMMENT '发送时间',
   `notice_type` tinyint(1) NULL DEFAULT NULL COMMENT '通知方式[0-短信，1-邮件]',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '秒杀商品通知订阅' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '秒杀商品通知订阅' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sms_seckill_sku_notice
@@ -276,7 +276,7 @@ CREATE TABLE `sms_seckill_sku_relation`  (
   `seckill_limit` decimal(10, 0) NULL DEFAULT NULL COMMENT '每人限购数量',
   `seckill_sort` int(11) NULL DEFAULT NULL COMMENT '排序',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '秒杀活动商品关联' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '秒杀活动商品关联' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sms_seckill_sku_relation
@@ -293,7 +293,7 @@ CREATE TABLE `sms_sku_full_reduction`  (
   `reduce_price` decimal(18, 4) NULL DEFAULT NULL COMMENT '减多少',
   `add_other` tinyint(1) NULL DEFAULT NULL COMMENT '是否参与其他优惠',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '商品满减信息' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '商品满减信息' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sms_sku_full_reduction
@@ -323,7 +323,7 @@ CREATE TABLE `sms_sku_ladder`  (
   `price` decimal(18, 4) NULL DEFAULT NULL COMMENT '折后价',
   `add_other` tinyint(1) NULL DEFAULT NULL COMMENT '是否叠加其他优惠[0-不可叠加，1-可叠加]',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '商品阶梯价格' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '商品阶梯价格' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sms_sku_ladder
@@ -341,7 +341,7 @@ CREATE TABLE `sms_spu_bounds`  (
   `buy_bounds` decimal(18, 4) NULL DEFAULT NULL COMMENT '购物积分',
   `work` tinyint(1) NULL DEFAULT NULL COMMENT '优惠生效情况[1111（四个状态位，从右到左）;0 - 无优惠，成长积分是否赠送;1 - 无优惠，购物积分是否赠送;2 - 有优惠，成长积分是否赠送;3 - 有优惠，购物积分是否赠送【状态位0：不赠送，1：赠送】]',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '商品spu积分设置' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '商品spu积分设置' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sms_spu_bounds
