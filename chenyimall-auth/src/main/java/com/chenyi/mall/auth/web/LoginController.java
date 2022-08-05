@@ -23,7 +23,7 @@ public class LoginController {
                 if ("chenyi_mall".equals(cookie.getName())) {
                     String token = cookie.getValue();
 
-                    return "redirect:http://mall.com";
+                    return "redirect:http://cym.com";
                 }
             }
         }
@@ -32,7 +32,7 @@ public class LoginController {
 
     @GetMapping("/")
     public String indexLogin(){
-        return "redirect:http://auth.mall.com/login";
+        return "redirect:http://auth.cym.com/login";
     }
 
 }

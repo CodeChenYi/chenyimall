@@ -17,7 +17,7 @@
         <result property="price" column="price"/>
         <result property="saleCount" column="sale_count"/>
     </resultMap>
-    <select id="getSkuPriceById" resultType="com.chenyi.mall.product.to.SkuInfoTO">
+    <select id="getSkuPriceById" resultType="com.chenyi.mall.api.product.to.SkuInfoTO">
         SELECT
             sku_id skuId,
             price

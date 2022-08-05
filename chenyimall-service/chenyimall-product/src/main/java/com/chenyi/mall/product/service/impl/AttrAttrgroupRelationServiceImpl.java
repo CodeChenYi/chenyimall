@@ -1,5 +1,6 @@
 package com.chenyi.mall.product.service.impl;
 
+import com.chenyi.mall.product.service.AttrAttrgroupRelationService;
 import com.chenyi.mall.common.utils.PageUtils;
 import com.chenyi.mall.common.utils.Query;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,6 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 import com.chenyi.mall.product.mapper.AttrAttrgroupRelationMapper;
 import com.chenyi.mall.product.entity.AttrAttrgroupRelationEntity;
-import com.chenyi.mall.product.service.AttrAttrgroupRelationService;
 
 
 @Service("attrAttrgroupRelationService")

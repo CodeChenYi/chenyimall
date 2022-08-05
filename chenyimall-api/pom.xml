@@ -32,12 +32,6 @@
             <groupId>com.chenyi.mall.common</groupId>
             <artifactId>chenyimall-common</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.baomidou</groupId>
-                    <artifactId>mybatis-plus-boot-starter</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <dependency>

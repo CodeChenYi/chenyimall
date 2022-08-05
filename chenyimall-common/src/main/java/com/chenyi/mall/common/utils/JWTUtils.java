@@ -2,7 +2,7 @@ package com.chenyi.mall.common.utils;
 
 import cn.hutool.jwt.JWT;
 import cn.hutool.jwt.JWTUtil;
-import com.chenyi.mall.common.constant.ChenYiMallContant;
+import com.chenyi.mall.common.constant.ChenYiMallConstant;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +23,7 @@ public class JWTUtils {
     }
 
     static {
-        PAYLOAD.put("time", System.currentTimeMillis() + ChenYiMallContant.SEVEN_DAY_MILLIS_VALUE);
+        PAYLOAD.put("time", System.currentTimeMillis() + ChenYiMallConstant.SEVEN_DAY_MILLIS_VALUE);
     }
 
     public static JWTUtils getInstance() {

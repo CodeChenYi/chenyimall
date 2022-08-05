@@ -2,7 +2,7 @@ package com.chenyi.mall.product.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.chenyi.mall.product.entity.SkuInfoEntity;
-import com.chenyi.mall.product.to.SkuInfoTO;
+import com.chenyi.mall.api.product.to.SkuInfoTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

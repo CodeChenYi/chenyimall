@@ -1,14 +1,15 @@
 package com.chenyi.mall.product.controller;
 
+import com.chenyi.mall.product.service.AttrService;
 import com.chenyi.mall.common.utils.PageUtils;
 import com.chenyi.mall.common.utils.R;
 import com.chenyi.mall.product.dto.AttrDTO;
 import com.chenyi.mall.product.entity.AttrEntity;
-import com.chenyi.mall.product.service.AttrService;
 import com.chenyi.mall.product.vo.AttrVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -31,6 +32,14 @@ import java.util.Map;
 public class AttrController {
     @Resource
     private AttrService attrService;
+
+    @Value("${chenyimall.test}")
+    private String test;
+
+    @GetMapping("/test")
+    public String test() {
+        return test;
+    }
 
     /**
      * 列表

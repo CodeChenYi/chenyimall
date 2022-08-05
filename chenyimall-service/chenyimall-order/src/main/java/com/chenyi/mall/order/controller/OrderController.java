@@ -5,6 +5,7 @@ import com.chenyi.mall.common.utils.R;
 import com.chenyi.mall.order.dto.OrderDTO;
 import com.chenyi.mall.order.entity.OrderEntity;
 import com.chenyi.mall.order.service.OrderService;
+import com.chenyi.mall.order.vo.OrderBackInfoVO;
 import com.chenyi.mall.order.vo.OrderConfirmVO;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,15 +49,21 @@ public class OrderController {
         return R.ok().put("page", page);
     }
 
+    @PutMapping("/closeOrder/{id}")
+    public R closeOrder(@PathVariable Long id) {
+        OrderEntity orderEntity = new OrderEntity();
+        orderEntity.setId(id);
+        orderService.closeOrder(orderEntity);
+        return R.ok();
+    }
+
 
     /**
      * 信息
      */
     @GetMapping("/info/{id}")
-    // @RequiresPermissions("order:order:info")
     public R info(@PathVariable("id") Long id) {
         OrderEntity order = orderService.getById(id);
-
         return R.ok().put("order", order);
     }
 
@@ -64,11 +71,9 @@ public class OrderController {
      * 保存
      */
     @PostMapping("/save")
-    // @RequiresPermissions("order:order:save")
     public R save(@RequestBody OrderDTO order) {
-        orderService.saveOrder(order);
-
-        return R.ok();
+        OrderBackInfoVO orderBackInfoVO = orderService.saveOrder(order);
+        return R.ok().put("orderBackInfo", orderBackInfoVO);
     }
 
     /**

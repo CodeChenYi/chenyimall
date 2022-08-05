@@ -9,7 +9,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.chenyi.mall.auth</groupId>
+    <packaging>jar</packaging>
+    <groupId>com.chenyi.mall.api.auth</groupId>
     <artifactId>chenyimall-auth-api</artifactId>
 
     <properties>

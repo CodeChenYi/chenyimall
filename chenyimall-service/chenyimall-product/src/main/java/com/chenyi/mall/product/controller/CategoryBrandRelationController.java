@@ -1,9 +1,9 @@
 package com.chenyi.mall.product.controller;
 
+import com.chenyi.mall.product.service.CategoryBrandRelationService;
 import com.chenyi.mall.common.utils.PageUtils;
 import com.chenyi.mall.common.utils.R;
 import com.chenyi.mall.product.entity.CategoryBrandRelationEntity;
-import com.chenyi.mall.product.service.CategoryBrandRelationService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;

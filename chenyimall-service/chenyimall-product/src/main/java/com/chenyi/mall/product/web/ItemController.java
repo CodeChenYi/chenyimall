@@ -1,8 +1,8 @@
 package com.chenyi.mall.product.web;
 
-import com.chenyi.mall.common.utils.JSONUtils;
 import com.chenyi.mall.product.service.SkuInfoService;
 import com.chenyi.mall.product.vo.SkuItemVO;
+import com.chenyi.mall.common.utils.JSONUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

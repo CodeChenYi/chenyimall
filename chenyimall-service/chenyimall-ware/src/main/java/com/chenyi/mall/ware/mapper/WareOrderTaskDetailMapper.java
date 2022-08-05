@@ -3,6 +3,7 @@ package com.chenyi.mall.ware.mapper;
 import com.chenyi.mall.ware.entity.WareOrderTaskDetailEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 库存工作单
@@ -13,5 +14,5 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface WareOrderTaskDetailMapper extends BaseMapper<WareOrderTaskDetailEntity> {
-	
+
 }

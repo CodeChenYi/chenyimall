@@ -3,14 +3,14 @@ package com.chenyi.mall.product.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.chenyi.mall.product.service.AttrService;
+import com.chenyi.mall.product.service.ProductAttrValueService;
 import com.chenyi.mall.common.utils.PageUtils;
 import com.chenyi.mall.common.utils.Query;
 import com.chenyi.mall.product.dto.SpuBaseAttrDTO;
 import com.chenyi.mall.product.entity.AttrEntity;
 import com.chenyi.mall.product.entity.ProductAttrValueEntity;
 import com.chenyi.mall.product.mapper.ProductAttrValueMapper;
-import com.chenyi.mall.product.service.AttrService;
-import com.chenyi.mall.product.service.ProductAttrValueService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 

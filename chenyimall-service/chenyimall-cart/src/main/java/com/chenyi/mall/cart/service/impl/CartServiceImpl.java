@@ -1,17 +1,17 @@
 package com.chenyi.mall.cart.service.impl;
 
-import com.chenyi.mall.cart.interceptor.CartInterceptor;
 import com.chenyi.mall.cart.service.CartService;
+import com.chenyi.mall.cart.interceptor.CartInterceptor;
 import com.chenyi.mall.cart.vo.Cart;
 import com.chenyi.mall.cart.vo.CartItem;
-import com.chenyi.mall.common.constant.ChenYiMallContant;
+import com.chenyi.mall.common.constant.ChenYiMallConstant;
 import com.chenyi.mall.common.enums.ResultEnum;
 import com.chenyi.mall.common.utils.R;
-import com.chenyi.mall.member.to.MemberInfo;
-import com.chenyi.mall.product.feign.ProductFeignService;
-import com.chenyi.mall.product.to.SkuInfoTO;
-import com.chenyi.mall.ware.feign.WareFeignService;
-import com.chenyi.mall.ware.to.WareSkuTo;
+import com.chenyi.mall.api.member.to.MemberInfo;
+import com.chenyi.mall.api.product.feign.ProductFeignService;
+import com.chenyi.mall.api.product.to.SkuInfoTO;
+import com.chenyi.mall.api.ware.feign.WareFeignService;
+import com.chenyi.mall.api.ware.to.WareSkuTo;
 import com.fasterxml.jackson.core.type.TypeReference;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.BoundHashOperations;
@@ -49,6 +49,7 @@ public class CartServiceImpl implements CartService {
     @Override
     public CartItem addCartItem(String skuId, Integer count) {
         BoundHashOperations<String, Object, Object> cartRedisHash = getCartRedisHash();
+        log.info("cartRedisHash {}", cartRedisHash);
         // 先查看当前购物车是否已经存在当前商品
         CartItem jsonCartItem = (CartItem) cartRedisHash.get(skuId);
         if (jsonCartItem != null) {
@@ -71,12 +72,12 @@ public class CartServiceImpl implements CartService {
                 }
             }, executor);
 
-            CompletableFuture<Void> SaleAttrFuture = CompletableFuture.runAsync(() -> {
+            CompletableFuture<Void> saleAttrFuture = CompletableFuture.runAsync(() -> {
                 List<String> saleAttr = productFeignService.getSaleAttrBySkuId(skuId);
                 cartItem.setAttr(saleAttr);
             }, executor);
 
-            CompletableFuture.allOf(skuInfoFuture, SaleAttrFuture).join();
+            CompletableFuture.allOf(skuInfoFuture, saleAttrFuture).join();
             cartRedisHash.put(skuId, cartItem);
             return cartItem;
         }
@@ -135,10 +136,16 @@ public class CartServiceImpl implements CartService {
     @Override
     public List<CartItem> getCheckCartItem() {
         BoundHashOperations<String, Object, Object> cartRedisHash = getCartRedisHash();
+        log.info("cartRedisHash {}", cartRedisHash);
         List<Object> values = cartRedisHash.values();
+        log.info("values{}", values);
+        log.info("--------------------查询选中商品-----------------------");
         if (values != null && values.size() > 0) {
+            log.info("-------------开始过滤-------------");
             // 过滤掉未选中的商品项
-            List<CartItem> cartItems = values.stream().map(item -> (CartItem) item).filter(CartItem::isCheck).collect(Collectors.toList());
+            List<CartItem> cartItems = values.stream()
+                    .map(item -> (CartItem) item)
+                    .filter(CartItem::isCheck).collect(Collectors.toList());
             // 获取选中的全部skuId
             List<String> cartItemSkuIds =
                     cartItems.stream().map(CartItem::getSkuId).collect(Collectors.toList());
@@ -191,6 +198,6 @@ public class CartServiceImpl implements CartService {
         MemberInfo memberInfo = CartInterceptor.threadLocal.get();
         assert memberInfo != null;
         Long id = memberInfo.getMember().getId();
-        return redisTemplate.boundHashOps(ChenYiMallContant.CART_USER + id);
+        return redisTemplate.boundHashOps(ChenYiMallConstant.CART_USER + id);
     }
 }

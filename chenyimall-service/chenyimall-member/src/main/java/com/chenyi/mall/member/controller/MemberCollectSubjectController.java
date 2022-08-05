@@ -3,11 +3,10 @@ package com.chenyi.mall.member.controller;
 import java.util.Arrays;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 import com.chenyi.mall.member.entity.MemberCollectSubjectEntity;
 import com.chenyi.mall.member.service.MemberCollectSubjectService;
+import org.springframework.web.bind.annotation.*;
+
 import com.chenyi.mall.common.utils.PageUtils;
 import com.chenyi.mall.common.utils.R;
 

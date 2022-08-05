@@ -1,6 +1,6 @@
 package com.chenyi.mall.auth.service;
 
-import com.chenyi.mall.member.to.MemberInfo;
+import com.chenyi.mall.api.member.to.MemberInfo;
 
 /**
  * @author chenyi

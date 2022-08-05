@@ -2,7 +2,7 @@ package com.chenyi.mall.auth.controller;
 
 import com.chenyi.mall.auth.service.AuthTokenService;
 import com.chenyi.mall.common.utils.R;
-import com.chenyi.mall.member.to.MemberInfo;
+import com.chenyi.mall.api.member.to.MemberInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +34,7 @@ public class AuthController {
     @GetMapping("/verifyToken")
     public R verifyToken(@RequestParam String token) {
         MemberInfo memberInfo = authTokenService.verifyToken(token);
+        log.debug("memberInfo, {}", memberInfo);
         return R.ok().put("memberInfo", memberInfo);
     }
 

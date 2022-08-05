@@ -3,11 +3,10 @@ package com.chenyi.mall.ware.controller;
 import java.util.Arrays;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.chenyi.mall.ware.service.WareOrderTaskDetailService;
 import org.springframework.web.bind.annotation.*;
 
 import com.chenyi.mall.ware.entity.WareOrderTaskDetailEntity;
-import com.chenyi.mall.ware.service.WareOrderTaskDetailService;
 import com.chenyi.mall.common.utils.PageUtils;
 import com.chenyi.mall.common.utils.R;
 

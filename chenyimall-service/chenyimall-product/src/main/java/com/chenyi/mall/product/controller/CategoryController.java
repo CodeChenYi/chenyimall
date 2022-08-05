@@ -1,9 +1,9 @@
 package com.chenyi.mall.product.controller;
 
+import com.chenyi.mall.product.service.CategoryService;
 import com.chenyi.mall.common.utils.PageUtils;
 import com.chenyi.mall.common.utils.R;
 import com.chenyi.mall.product.entity.CategoryEntity;
-import com.chenyi.mall.product.service.CategoryService;
 import com.chenyi.mall.product.vo.CategoryEntityVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

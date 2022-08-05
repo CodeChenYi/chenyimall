@@ -1,9 +1,9 @@
 package com.chenyi.mall.member.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.chenyi.mall.common.utils.PageUtils;
 import com.chenyi.mall.member.entity.MemberEntity;
-import com.chenyi.mall.member.to.MemberInfo;
+import com.chenyi.mall.api.member.to.MemberInfo;
+import com.chenyi.mall.common.utils.PageUtils;
 
 import java.util.Map;
 

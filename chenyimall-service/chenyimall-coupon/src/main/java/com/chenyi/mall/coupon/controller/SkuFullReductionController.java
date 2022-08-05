@@ -4,7 +4,7 @@ import com.chenyi.mall.common.utils.PageUtils;
 import com.chenyi.mall.common.utils.R;
 import com.chenyi.mall.coupon.entity.SkuFullReductionEntity;
 import com.chenyi.mall.coupon.service.SkuFullReductionService;
-import com.chenyi.mall.product.to.SkuReductionTO;
+import com.chenyi.mall.api.product.to.SkuReductionTO;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 

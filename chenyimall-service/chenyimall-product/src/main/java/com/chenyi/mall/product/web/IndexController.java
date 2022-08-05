@@ -1,8 +1,8 @@
 package com.chenyi.mall.product.web;
 
-import com.chenyi.mall.product.entity.CategoryEntity;
 import com.chenyi.mall.product.service.CategoryService;
 import com.chenyi.mall.product.vo.CategoryEntityTwoVO;
+import com.chenyi.mall.product.entity.CategoryEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +26,7 @@ public class IndexController {
 
         model.addAttribute("categoryList", categoryEntityVOList);
 
-        return "mallIndex";
+        return "chenyimallIndex";
     }
 
     @ResponseBody

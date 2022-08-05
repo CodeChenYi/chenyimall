@@ -1,12 +1,12 @@
 package com.chenyi.mall.product.controller;
 
+import com.chenyi.mall.product.service.AttrGroupService;
+import com.chenyi.mall.product.service.AttrService;
+import com.chenyi.mall.product.service.CategoryService;
 import com.chenyi.mall.common.utils.PageUtils;
 import com.chenyi.mall.common.utils.R;
 import com.chenyi.mall.product.entity.AttrEntity;
 import com.chenyi.mall.product.entity.AttrGroupEntity;
-import com.chenyi.mall.product.service.AttrGroupService;
-import com.chenyi.mall.product.service.AttrService;
-import com.chenyi.mall.product.service.CategoryService;
 import com.chenyi.mall.product.vo.AttrGroupEntityVO;
 import com.chenyi.mall.product.vo.AttrGroupWithAttrsVO;
 import io.swagger.annotations.Api;

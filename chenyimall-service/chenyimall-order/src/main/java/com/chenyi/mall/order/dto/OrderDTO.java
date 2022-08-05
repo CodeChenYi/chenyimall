@@ -60,31 +60,7 @@ public class OrderDTO {
      * 后台调整订单使用的折扣金额
      */
     private BigDecimal discountAmount;
-    /**
-     * 支付方式【1->支付宝；2->微信；3->银联； 4->货到付款；】
-     */
-    private Integer payType;
-    /**
-     * 订单来源[0->PC订单；1->app订单]
-     */
-    private Integer sourceType;
-    /**
-     * 订单状态【0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单】
-     */
-    private Integer status;
 
-    /**
-     * 自动确认时间（天）
-     */
-    private Integer autoConfirmDay;
-    /**
-     * 可以获得的积分
-     */
-    private Integer integration;
-    /**
-     * 可以获得的成长值
-     */
-    private Integer growth;
     /**
      * 发票类型[0->不开发票；1->电子发票；2->纸质发票]
      */
@@ -111,18 +87,6 @@ public class OrderDTO {
      */
     private Long memberAddressId;
 
-    /**
-     * 收货人姓名
-     */
-    private String receiverName;
-    /**
-     * 收货人电话
-     */
-    private String receiverPhone;
-    /**
-     * 收货人邮编
-     */
-    private String receiverPostCode;
     /**
      * 省份/直辖市
      */

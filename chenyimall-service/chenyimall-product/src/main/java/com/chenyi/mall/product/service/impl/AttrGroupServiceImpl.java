@@ -3,7 +3,11 @@ package com.chenyi.mall.product.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.chenyi.mall.common.constant.ChenYiMallContant;
+import com.chenyi.mall.product.mapper.AttrGroupMapper;
+import com.chenyi.mall.product.mapper.AttrMapper;
+import com.chenyi.mall.product.service.AttrGroupService;
+import com.chenyi.mall.product.service.CategoryService;
+import com.chenyi.mall.common.constant.ChenYiMallConstant;
 import com.chenyi.mall.common.utils.PageUtils;
 import com.chenyi.mall.common.utils.Query;
 import com.chenyi.mall.product.entity.AttrAttrgroupRelationEntity;
@@ -11,10 +15,6 @@ import com.chenyi.mall.product.entity.AttrEntity;
 import com.chenyi.mall.product.entity.AttrGroupEntity;
 import com.chenyi.mall.product.entity.CategoryEntity;
 import com.chenyi.mall.product.mapper.AttrAttrgroupRelationMapper;
-import com.chenyi.mall.product.mapper.AttrGroupMapper;
-import com.chenyi.mall.product.mapper.AttrMapper;
-import com.chenyi.mall.product.service.AttrGroupService;
-import com.chenyi.mall.product.service.CategoryService;
 import com.chenyi.mall.product.vo.AttrGroupEntityVO;
 import com.chenyi.mall.product.vo.AttrGroupWithAttrsVO;
 import lombok.extern.slf4j.Slf4j;
@@ -43,10 +43,10 @@ public class AttrGroupServiceImpl extends ServiceImpl<AttrGroupMapper, AttrGroup
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         log.debug("========================={}", params);
-        String key = (String) params.get(ChenYiMallContant.STRING_KEY);
+        String key = (String) params.get(ChenYiMallConstant.STRING_KEY);
         QueryWrapper<AttrGroupEntity> wrapper = new QueryWrapper<>();
         IPage<AttrGroupEntity> page;
-        if (!ChenYiMallContant.NULL_STRING.equals(key)) {
+        if (!ChenYiMallConstant.NULL_STRING.equals(key)) {
             wrapper.likeRight("attr_group_name", key);
         }
         page = this.page(

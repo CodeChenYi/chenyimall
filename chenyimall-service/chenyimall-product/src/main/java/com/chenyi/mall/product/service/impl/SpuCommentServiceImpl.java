@@ -1,5 +1,6 @@
 package com.chenyi.mall.product.service.impl;
 
+import com.chenyi.mall.product.service.SpuCommentService;
 import org.springframework.stereotype.Service;
 import java.util.Map;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -10,7 +11,6 @@ import com.chenyi.mall.common.utils.Query;
 
 import com.chenyi.mall.product.mapper.SpuCommentMapper;
 import com.chenyi.mall.product.entity.SpuCommentEntity;
-import com.chenyi.mall.product.service.SpuCommentService;
 
 
 @Service("spuCommentService")

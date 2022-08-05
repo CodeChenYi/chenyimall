@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.chenyi.mall.common.utils.PageUtils;
 import com.chenyi.mall.order.dto.OrderDTO;
 import com.chenyi.mall.order.entity.OrderEntity;
+import com.chenyi.mall.order.vo.OrderBackInfoVO;
 import com.chenyi.mall.order.vo.OrderConfirmVO;
 
 import java.util.Map;
@@ -27,8 +28,13 @@ public interface OrderService extends IService<OrderEntity> {
 
     /**
      * 保存订单信息
+     *
      * @param order
+     * @return
      */
-    void saveOrder(OrderDTO order);
+    OrderBackInfoVO saveOrder(OrderDTO order);
+
+    void closeOrder(OrderEntity orderEntity);
+
 }
 

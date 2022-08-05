@@ -1,10 +1,10 @@
 package com.chenyi.mall.member.controller;
 
-import com.chenyi.mall.common.utils.PageUtils;
-import com.chenyi.mall.common.utils.R;
 import com.chenyi.mall.member.entity.MemberEntity;
 import com.chenyi.mall.member.service.MemberService;
-import com.chenyi.mall.member.to.MemberInfo;
+import com.chenyi.mall.api.member.to.MemberInfo;
+import com.chenyi.mall.common.utils.PageUtils;
+import com.chenyi.mall.common.utils.R;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 

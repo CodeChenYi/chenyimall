@@ -22,15 +22,15 @@ public class WareSkuEntity implements Serializable {
 	 * id
 	 */
 	@TableId
-	private String id;
+	private Long id;
 	/**
 	 * sku_id
 	 */
-	private String skuId;
+	private Long skuId;
 	/**
 	 * 仓库id
 	 */
-	private String wareId;
+	private Long wareId;
 	/**
 	 * 库存数
 	 */

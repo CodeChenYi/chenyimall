@@ -3,11 +3,11 @@ package com.chenyi.mall.product.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.chenyi.mall.product.service.SkuSaleAttrValueService;
 import com.chenyi.mall.common.utils.PageUtils;
 import com.chenyi.mall.common.utils.Query;
 import com.chenyi.mall.product.entity.SkuSaleAttrValueEntity;
 import com.chenyi.mall.product.mapper.SkuSaleAttrValueMapper;
-import com.chenyi.mall.product.service.SkuSaleAttrValueService;
 import com.chenyi.mall.product.vo.SkuItemVO;
 import org.springframework.stereotype.Service;
 

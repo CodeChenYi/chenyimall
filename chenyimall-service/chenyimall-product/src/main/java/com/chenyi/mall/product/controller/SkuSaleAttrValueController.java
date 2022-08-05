@@ -1,9 +1,9 @@
 package com.chenyi.mall.product.controller;
 
+import com.chenyi.mall.product.service.SkuSaleAttrValueService;
 import com.chenyi.mall.common.utils.PageUtils;
 import com.chenyi.mall.common.utils.R;
 import com.chenyi.mall.product.entity.SkuSaleAttrValueEntity;
-import com.chenyi.mall.product.service.SkuSaleAttrValueService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

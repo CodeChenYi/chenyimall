@@ -1,7 +1,8 @@
 package com.chenyi.mall.order.vo;
 
-import com.chenyi.mall.cart.to.CartItemTO;
-import com.chenyi.mall.member.to.MemberReceiveAddressTO;
+import com.chenyi.mall.api.cart.to.CartItemTO;
+import com.chenyi.mall.api.member.to.MemberReceiveAddressTO;
+import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
  * @className OrderConfirmVO
  * @date 2022/6/30 23:24
  */
+@ToString
 public class OrderConfirmVO {
 
     /**
@@ -102,4 +104,6 @@ public class OrderConfirmVO {
     public void setPayPrice(BigDecimal payPrice) {
         this.payPrice = payPrice;
     }
+
+
 }

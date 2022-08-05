@@ -1,6 +1,7 @@
 package com.chenyi.mall.ware.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.chenyi.mall.api.ware.to.WareDetailTO;
 import com.chenyi.mall.common.utils.PageUtils;
 import com.chenyi.mall.ware.entity.WareOrderTaskDetailEntity;
 

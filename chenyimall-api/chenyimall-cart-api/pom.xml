@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.chenyi.mall.cart</groupId>
+    <groupId>com.chenyi.mall.api.cart</groupId>
     <artifactId>chenyimall-cart-api</artifactId>
 
     <properties>

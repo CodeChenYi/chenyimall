@@ -1,9 +1,9 @@
 package com.chenyi.mall.member.controller;
 
-import com.chenyi.mall.common.utils.PageUtils;
-import com.chenyi.mall.common.utils.R;
 import com.chenyi.mall.member.entity.MemberReceiveAddressEntity;
 import com.chenyi.mall.member.service.MemberReceiveAddressService;
+import com.chenyi.mall.common.utils.PageUtils;
+import com.chenyi.mall.common.utils.R;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -48,7 +48,6 @@ public class MemberReceiveAddressController {
      * 信息
      */
     @GetMapping("/info/{id}")
-    // @RequiresPermissions("member:memberreceiveaddress:info")
     public R info(@PathVariable("id") Long id){
 		MemberReceiveAddressEntity memberReceiveAddress = memberReceiveAddressService.getById(id);
 

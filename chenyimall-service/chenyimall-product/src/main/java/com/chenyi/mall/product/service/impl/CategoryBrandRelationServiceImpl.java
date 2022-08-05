@@ -3,14 +3,14 @@ package com.chenyi.mall.product.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.chenyi.mall.product.service.CategoryBrandRelationService;
+import com.chenyi.mall.product.service.CategoryService;
 import com.chenyi.mall.common.utils.PageUtils;
 import com.chenyi.mall.common.utils.Query;
 import com.chenyi.mall.product.entity.CategoryBrandRelationEntity;
 import com.chenyi.mall.product.entity.CategoryEntity;
 import com.chenyi.mall.product.mapper.BrandMapper;
 import com.chenyi.mall.product.mapper.CategoryBrandRelationMapper;
-import com.chenyi.mall.product.service.CategoryBrandRelationService;
-import com.chenyi.mall.product.service.CategoryService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

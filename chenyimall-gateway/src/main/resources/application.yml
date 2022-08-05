@@ -2,12 +2,21 @@ server:
   port: 8000
 
 spring:
+  profiles:
+    active: dev
   application:
     name: chenyimall-gateway
+  zipkin:
+    base-url: http://localhost:9411
+  sleuth:
+    sampler:
+      probability: 1
   cloud:
     nacos:
       discovery:
-        server-addr: 192.168.31.32:8848
+        server-addr: localhost:8848
+        group: CHENYI_MALL
+        namespace: 64a6c427-b3be-4f9f-b7f8-5711d8f0292c
     gateway:
       discovery:
         locator:
@@ -66,20 +75,20 @@ spring:
         - id: chenyimall-index-router
           uri: lb://chenyimall-product
           predicates:
-            - Host=chenyimall.com,item.chenyimall.com
+            - Host=cym.com,item.cym.com
         # 检索服务路由
         - id: chenyimall-search-router
           uri: lb://chenyimall-search
           predicates:
-            - Host=search.chenyimall.com
+            - Host=search.cym.com
         # 认证服务
         - id: chenyimall-auth-router
           uri: lb://chenyimall-auth
           predicates:
-            - Host=auth.chenyimall.com
+            - Host=auth.cym.com
         # 购物车服务路由
         - id: chenyimall-cart-router
           uri: lb://chenyimall-cart
           predicates:
-            - Host=cart.chenyimall.com
+            - Host=cart.cym.com
 

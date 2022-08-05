@@ -1,9 +1,9 @@
 package com.chenyi.mall.member.controller;
 
-import com.chenyi.mall.common.utils.PageUtils;
-import com.chenyi.mall.common.utils.R;
 import com.chenyi.mall.member.entity.MemberLevelEntity;
 import com.chenyi.mall.member.service.MemberLevelService;
+import com.chenyi.mall.common.utils.PageUtils;
+import com.chenyi.mall.common.utils.R;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

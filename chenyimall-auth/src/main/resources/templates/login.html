@@ -93,7 +93,7 @@
             </ul>
             <h5 class="rig">
                 <img src="/static/login/JD_img/4de5019d2404d347897dee637895d02b_25.png"/>
-                <span><a href="http://auth.mall.com/register">立即注册</a></span>
+                <span><a href="http://auth.cym.com/register">立即注册</a></span>
             </h5>
         </div>
     </div>
@@ -161,7 +161,7 @@
             err_img2.src = '/static/login/JD_img/img22.png';
         } else {
             $.ajax({
-                url: "http://auth.mall.com/token",
+                url: "http://auth.cym.com/token",
                 data: {userName: user.value, password: pass.value},
                 type: "POST",
                 dataType: "json",
@@ -169,8 +169,8 @@
                     const Days = 7;
                     const exp = new Date(new Date().getTime() + Days * 24 * 60 * 60 * 1000);
                     // 设置cookie，作用域，和过期时间
-                    document.cookie = 'chenyi_mall' + '=' + data.token + ';domain=mall.com' + ';expires=' + exp;
-                    window.location.href = "http://mall.com";
+                    // document.cookie = 'chenyi_mall' + '=' + data.token + ';domain=mall.com' + ';expires=' + exp;
+                    window.location.href = "http://cym.com";
                 }
             });
 

@@ -3,11 +3,10 @@ package com.chenyi.mall.product.controller;
 import java.util.Arrays;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.chenyi.mall.product.service.SpuCommentService;
 import org.springframework.web.bind.annotation.*;
 
 import com.chenyi.mall.product.entity.SpuCommentEntity;
-import com.chenyi.mall.product.service.SpuCommentService;
 import com.chenyi.mall.common.utils.PageUtils;
 import com.chenyi.mall.common.utils.R;
 

@@ -4,13 +4,13 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.chenyi.mall.common.utils.PageUtils;
-import com.chenyi.mall.common.utils.Query;
 import com.chenyi.mall.member.entity.MemberEntity;
 import com.chenyi.mall.member.mapper.MemberMapper;
 import com.chenyi.mall.member.service.MemberService;
-import com.chenyi.mall.member.to.Member;
-import com.chenyi.mall.member.to.MemberInfo;
+import com.chenyi.mall.api.member.to.Member;
+import com.chenyi.mall.api.member.to.MemberInfo;
+import com.chenyi.mall.common.utils.PageUtils;
+import com.chenyi.mall.common.utils.Query;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 

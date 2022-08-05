@@ -1,8 +1,8 @@
 package com.chenyi.mall.product.mapper;
 
 import com.chenyi.mall.product.entity.SkuSaleAttrValueEntity;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.chenyi.mall.product.vo.SkuItemVO;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

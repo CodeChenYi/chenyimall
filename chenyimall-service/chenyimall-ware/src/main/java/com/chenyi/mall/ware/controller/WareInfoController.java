@@ -1,9 +1,9 @@
 package com.chenyi.mall.ware.controller;
 
+import com.chenyi.mall.ware.service.WareInfoService;
 import com.chenyi.mall.common.utils.PageUtils;
 import com.chenyi.mall.common.utils.R;
 import com.chenyi.mall.ware.entity.WareInfoEntity;
-import com.chenyi.mall.ware.service.WareInfoService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 

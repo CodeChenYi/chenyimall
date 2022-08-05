@@ -9,7 +9,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.chenyi.mall.order</groupId>
+    <packaging>jar</packaging>
+    <groupId>com.chenyi.mall.api.order</groupId>
     <artifactId>chenyimall-order-api</artifactId>
 
     <properties>

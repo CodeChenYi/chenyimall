@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.chenyi.mall.common.utils.PageUtils;
 import com.chenyi.mall.product.dto.SkuDTO;
 import com.chenyi.mall.product.entity.SkuInfoEntity;
-import com.chenyi.mall.product.to.SkuInfoTO;
+import com.chenyi.mall.api.product.to.SkuInfoTO;
 import com.chenyi.mall.product.vo.SkuItemVO;
 
 import java.util.List;

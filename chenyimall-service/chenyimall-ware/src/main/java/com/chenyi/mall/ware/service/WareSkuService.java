@@ -1,9 +1,12 @@
 package com.chenyi.mall.ware.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.chenyi.mall.common.utils.PageUtils;
+import com.chenyi.mall.api.order.to.LockOrderItemTO;
+import com.chenyi.mall.api.order.to.OrderTO;
+import com.chenyi.mall.api.ware.to.StockLockTO;
 import com.chenyi.mall.ware.entity.WareSkuEntity;
-import com.chenyi.mall.ware.to.WareSkuTo;
+import com.chenyi.mall.common.utils.PageUtils;
+import com.chenyi.mall.api.ware.to.WareSkuTo;
 
 import java.util.List;
 import java.util.Map;
@@ -25,5 +28,24 @@ public interface WareSkuService extends IService<WareSkuEntity> {
      * @return
      */
     List<WareSkuTo> infoBySkuId(List<String> skuId);
+
+    /**
+     * 锁定商品库存信息
+     * @param orderItems
+     * @return
+     */
+    boolean lockOrderWare(List<LockOrderItemTO> orderItems);
+
+    /**
+     * 库存补偿自动解锁解锁
+     * @param stockLockTO
+     */
+    void unLockStock(StockLockTO stockLockTO);
+
+    /**
+     * 订单自动库存解锁
+     * @param order
+     */
+    void unLockStock(OrderTO order);
 }
 

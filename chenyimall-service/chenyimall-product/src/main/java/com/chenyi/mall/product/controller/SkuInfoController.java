@@ -1,10 +1,10 @@
 package com.chenyi.mall.product.controller;
 
+import com.chenyi.mall.product.service.SkuInfoService;
 import com.chenyi.mall.common.utils.PageUtils;
 import com.chenyi.mall.common.utils.R;
 import com.chenyi.mall.product.entity.SkuInfoEntity;
-import com.chenyi.mall.product.service.SkuInfoService;
-import com.chenyi.mall.product.to.SkuInfoTO;
+import com.chenyi.mall.api.product.to.SkuInfoTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;

@@ -2,11 +2,13 @@ package com.chenyi.mall.auth.filter;
 
 import cn.hutool.http.ContentType;
 import com.chenyi.mall.auth.entity.LoginUser;
-import com.chenyi.mall.common.constant.ChenYiMallContant;
+import com.chenyi.mall.common.constant.ChenYiMallConstant;
 import com.chenyi.mall.common.enums.ResultEnum;
+import com.chenyi.mall.common.exception.ChenYiMallException;
 import com.chenyi.mall.common.utils.JSONUtils;
 import com.chenyi.mall.common.utils.JWTUtils;
 import com.chenyi.mall.common.utils.R;
+import com.chenyi.mall.common.utils.ServletUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -41,23 +43,15 @@ public class JWTAuthTokenFilter extends OncePerRequestFilter {
                                     FilterChain filter)
             throws ServletException, IOException {
 
-        String token = request.getHeader("token");
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null && StringUtils.isEmpty(token)) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("chenyi_mall")) {
-                    token = cookie.getValue();
-                }
-            }
-        }
+        String token = ServletUtils.getCookies();
         if (!StringUtils.isEmpty(token)) {
             // 解析token
             try {
                 String jwtToken = (String) JWTUtils.getPayload(token);
                 log.debug("userId: {}", jwtToken);
-                Object o = redisTemplate.opsForValue().get(ChenYiMallContant.LOGIN_USER + jwtToken);
+                Object o = redisTemplate.opsForValue().get(ChenYiMallConstant.LOGIN_USER + jwtToken);
                 LoginUser loginUser = (LoginUser) redisTemplate.opsForValue()
-                        .get(ChenYiMallContant.LOGIN_USER + jwtToken);
+                        .get(ChenYiMallConstant.LOGIN_USER + jwtToken);
                 log.debug("loginUser == null {}", loginUser == null);
                 if (loginUser != null) {
                     // 设置到SecurityContextHolder中
@@ -65,12 +59,7 @@ public class JWTAuthTokenFilter extends OncePerRequestFilter {
                             = new UsernamePasswordAuthenticationToken(loginUser, null, null);
                     SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
                 } else {
-                    Long time = (Long) JWTUtils.getPayload(token, "time");
-                    long curTime = System.currentTimeMillis();
-                    if (curTime - time < ChenYiMallContant.SEVEN_DAY_MILLIS_VALUE) {
-
-                    }
-                    response.sendRedirect("http://auth.mall.com/login");
+                    throw new ChenYiMallException(10005, "登录信息已过期！");
                 }
             } catch (Exception e) {
                 log.error("jwt验证错误：{}", e.getMessage());

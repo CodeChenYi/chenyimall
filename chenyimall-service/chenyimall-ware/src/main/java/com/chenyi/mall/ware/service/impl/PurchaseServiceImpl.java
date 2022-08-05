@@ -1,5 +1,7 @@
 package com.chenyi.mall.ware.service.impl;
 
+import com.chenyi.mall.ware.mapper.PurchaseMapper;
+import com.chenyi.mall.ware.service.PurchaseService;
 import org.springframework.stereotype.Service;
 import java.util.Map;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -8,9 +10,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.chenyi.mall.common.utils.PageUtils;
 import com.chenyi.mall.common.utils.Query;
 
-import com.chenyi.mall.ware.mapper.PurchaseMapper;
 import com.chenyi.mall.ware.entity.PurchaseEntity;
-import com.chenyi.mall.ware.service.PurchaseService;
 
 
 @Service("purchaseService")

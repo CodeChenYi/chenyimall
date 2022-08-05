@@ -3,7 +3,7 @@ package com.chenyi.mall.coupon.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.chenyi.mall.common.utils.PageUtils;
 import com.chenyi.mall.coupon.entity.SkuFullReductionEntity;
-import com.chenyi.mall.product.to.SkuReductionTO;
+import com.chenyi.mall.api.product.to.SkuReductionTO;
 
 import java.util.Map;
 
