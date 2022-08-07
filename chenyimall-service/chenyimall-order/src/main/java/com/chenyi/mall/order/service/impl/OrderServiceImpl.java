@@ -5,17 +5,18 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.chenyi.mall.api.cart.feign.CartFeignService;
 import com.chenyi.mall.api.cart.to.CartItemTO;
+import com.chenyi.mall.api.coupon.feign.CouponFeignService;
+import com.chenyi.mall.api.member.feign.MemberFeignService;
+import com.chenyi.mall.api.member.to.MemberInfo;
+import com.chenyi.mall.api.member.to.MemberReceiveAddressTO;
 import com.chenyi.mall.api.order.to.LockOrderItemTO;
 import com.chenyi.mall.api.order.to.OrderTO;
+import com.chenyi.mall.api.ware.feign.WareFeignService;
 import com.chenyi.mall.common.constant.ChenYiMallConstant;
 import com.chenyi.mall.common.constant.RabbitConstant;
 import com.chenyi.mall.common.enums.ResultEnum;
 import com.chenyi.mall.common.exception.ChenYiMallException;
 import com.chenyi.mall.common.utils.*;
-import com.chenyi.mall.api.coupon.feign.CouponFeignService;
-import com.chenyi.mall.api.member.feign.MemberFeignService;
-import com.chenyi.mall.api.member.to.MemberInfo;
-import com.chenyi.mall.api.member.to.MemberReceiveAddressTO;
 import com.chenyi.mall.order.dto.OrderDTO;
 import com.chenyi.mall.order.entity.OrderEntity;
 import com.chenyi.mall.order.entity.OrderItemEntity;
@@ -25,7 +26,6 @@ import com.chenyi.mall.order.service.OrderItemService;
 import com.chenyi.mall.order.service.OrderService;
 import com.chenyi.mall.order.vo.OrderBackInfoVO;
 import com.chenyi.mall.order.vo.OrderConfirmVO;
-import com.chenyi.mall.api.ware.feign.WareFeignService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.BeanUtils;
@@ -36,13 +36,11 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -172,9 +170,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, OrderEntity> impl
                 memberAddressFuture).join();
 
         // 保存订单信息
-        int orderId = saveOrderInfo(orderEntity, order);
+        saveOrderInfo(orderEntity, order);
         List<CartItemTO> cartItems = cartItemFuture.join();
-        List<LockOrderItemTO> orderItemList = saveOrderItem(cartItems, orderId, orderEntity.getOrderSn());
+        List<LockOrderItemTO> orderItemList = saveOrderItem(cartItems, orderEntity.getId(), orderEntity.getOrderSn());
 
         // 锁定库存
         CompletableFuture<R> wareFuture = CompletableFuture
@@ -217,11 +215,11 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, OrderEntity> impl
         }
     }
 
-    private List<LockOrderItemTO> saveOrderItem(List<CartItemTO> cartItems, int orderId, String orderSn) {
+    private List<LockOrderItemTO> saveOrderItem(List<CartItemTO> cartItems, Long orderId, String orderSn) {
         // TODO 查询Spu等信息，设置属性等
         List<OrderItemEntity> orderItemList = cartItems.stream().map(cartItem -> {
             OrderItemEntity orderItemEntity = new OrderItemEntity();
-            orderItemEntity.setOrderId((long) orderId);
+            orderItemEntity.setOrderId(orderId);
             orderItemEntity.setSkuId(cartItem.getSkuId());
             orderItemEntity.setSkuQuantity(cartItem.getCount());
             BeanUtils.copyProperties(cartItem, orderItemEntity);
@@ -231,7 +229,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, OrderEntity> impl
         // 拷贝对象进行返回
         return orderItemList.stream().map(orderItemEntity -> {
             LockOrderItemTO orderItem = new LockOrderItemTO();
-            orderItem.setOrderId((long) orderId);
+            orderItem.setOrderId(orderId);
             orderItem.setOrderSn(orderSn);
             orderItem.setSkuName(orderItemEntity.getSkuName());
             orderItem.setSkuQuantity(orderItemEntity.getSkuQuantity());

@@ -37,6 +37,7 @@
         <redisson.version>3.16.8</redisson.version>
         <hutool.version>5.8.0</hutool.version>
         <jwt.version>0.9.1</jwt.version>
+        <druid.version>1.2.11</druid.version>
     </properties>
 
     <dependencyManagement>
@@ -66,6 +67,13 @@
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alicloud-oss</artifactId>
                 <version>${oss.version}</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/com.alibaba/druid-spring-boot-starter -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
             </dependency>
 
             <!-- spring cloud -->

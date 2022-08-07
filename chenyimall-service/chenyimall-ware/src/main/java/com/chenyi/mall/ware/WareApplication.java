@@ -11,12 +11,14 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 
 /**
+ * @className WareApplication
  * @author ChenYi
+ * @date 2021/11/30
  */
 @EnableRabbit
 @EnableTransactionManagement
 @EnableFeignClients("com.chenyi.mall")
-@ComponentScan("com.chenyi.mall")
+@ComponentScan(value = "com.chenyi.mall")
 @SpringBootApplication
 @EnableDiscoveryClient
 public class WareApplication {
