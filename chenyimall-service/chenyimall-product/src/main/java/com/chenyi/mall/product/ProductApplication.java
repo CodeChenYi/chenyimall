@@ -10,7 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 
 /**
- * @author by zixuan
+ * @author by chenyi
  * @className ProductApplication
  * @date 2021/9/25 18:20
  */

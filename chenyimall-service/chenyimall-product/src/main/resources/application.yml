@@ -38,6 +38,17 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
 
 
+seata:
+  config:
+    type: nacos
+    nacos:
+      server-addr: 127.0.0.1:8848
+      group: CHENYI_MALL_SEATA
+      namespace: b96085d9-85d5-4760-8f74-d67b9195ec84
+      username: nacos
+      password: nacos
+  tx-service-group: chenyi_mall_tx_group
+
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
 

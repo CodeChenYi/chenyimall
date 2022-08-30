@@ -3,23 +3,23 @@ package com.chenyi.mall.product.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.chenyi.mall.api.coupon.feign.CouponFeignService;
+import com.chenyi.mall.api.product.to.SpuBoundTO;
 import com.chenyi.mall.common.enums.ResultEnum;
 import com.chenyi.mall.common.exception.ChenYiMallException;
 import com.chenyi.mall.common.utils.PageUtils;
 import com.chenyi.mall.common.utils.Query;
 import com.chenyi.mall.common.utils.R;
-import com.chenyi.mall.api.coupon.feign.CouponFeignService;
 import com.chenyi.mall.product.dto.BoundsDTO;
 import com.chenyi.mall.product.dto.SkuDTO;
 import com.chenyi.mall.product.dto.SpuInfoDTO;
 import com.chenyi.mall.product.entity.SpuInfoEntity;
 import com.chenyi.mall.product.mapper.SpuInfoMapper;
-import com.chenyi.mall.api.product.to.SpuBoundTO;
-import com.chenyi.mall.product.vo.SkuItemVO;
 import com.chenyi.mall.product.service.*;
+import com.chenyi.mall.product.vo.SkuItemVO;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -58,7 +58,7 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoMapper, SpuInfoEntity
         return new PageUtils(page);
     }
 
-    @Transactional
+    @GlobalTransactional(rollbackFor = Exception.class)
     @Override
     public void saveSpuInfoDTO(SpuInfoDTO spuInfoDTO) {
         // 保存Spu信息

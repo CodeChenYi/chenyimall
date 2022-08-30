@@ -1,11 +1,11 @@
 server:
   port: 8001
 
-
 spring:
   profiles:
     active: dev
   datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
     username: root
     password: 111111
     url: jdbc:mysql://192.168.56.10:3306/chenyimall_sms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
@@ -17,11 +17,24 @@ spring:
         namespace: 64a6c427-b3be-4f9f-b7f8-5711d8f0292c
         group: CHENYI_MALL
   application:
-    name: chenyimall-member
+    name: chenyimall-coupon
+  redis:
+    host: 192.168.56.10
+    password: 111111
+
+seata:
+  config:
+    type: nacos
+    nacos:
+      server-addr: 127.0.0.1:8848
+      group: CHENYI_MALL_SEATA
+      namespace: b96085d9-85d5-4760-8f74-d67b9195ec84
+      username: nacos
+      password: nacos
+  tx-service-group: chenyi_mall_tx_group
 
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
-
 swagger:
   enabled: true
   title: 优惠卷服务
