@@ -1,7 +1,7 @@
 FROM openjdk:8-jdk-slim
 LABEL maintainer=chenyi
 
-EXPOSE 8001
+EXPOSE 8010
 
 COPY target/*.jar /app.jar
 

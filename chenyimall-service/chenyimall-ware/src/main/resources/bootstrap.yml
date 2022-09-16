@@ -4,11 +4,11 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: localhost:8848
+        server-addr: 192.168.56.10:8848
         namespace: 64a6c427-b3be-4f9f-b7f8-5711d8f0292c
         group: CHENYI_MALL
       config:
-        server-addr: localhost:8848
+        server-addr: 192.168.56.10:8848
         file-extension: yaml
         namespace: 64a6c427-b3be-4f9f-b7f8-5711d8f0292c
         group: CHENYI_MALL

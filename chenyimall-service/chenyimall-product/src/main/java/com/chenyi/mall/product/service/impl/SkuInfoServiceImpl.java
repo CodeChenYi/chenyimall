@@ -30,6 +30,11 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.stream.Collectors;
 
+/**
+ * @className SkuInfoServiceImpl
+ * @author chenyi
+ * @date 2022/9/5 11:29
+ */
 @Slf4j
 @Service("skuInfoService")
 public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoMapper, SkuInfoEntity> implements SkuInfoService {
@@ -62,7 +67,7 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoMapper, SkuInfoEntity
         return new PageUtils(page);
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void saveSkuInfo(String spuInfoId, String brandId, String catalogId, List<SkuDTO> skus) {
         skus.forEach(sku -> {

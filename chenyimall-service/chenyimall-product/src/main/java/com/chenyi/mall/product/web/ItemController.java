@@ -28,7 +28,7 @@ public class ItemController {
         log.info("=================================================");
         SkuItemVO skuItemVO = skuInfoService.getItem(skuId);
         String s = JSONUtils.toJSONString(skuItemVO);
-        log.info("skuItem:{}", s);
+        log.debug("skuItem:{}", s);
         if (skuItemVO.getSkuInfo() != null) {
             model.addAttribute("item", skuItemVO);
             return "item";

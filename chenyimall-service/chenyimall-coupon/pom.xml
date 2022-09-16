@@ -11,6 +11,7 @@
     <packaging>jar</packaging>
 
     <artifactId>chenyimall-coupon</artifactId>
+    <groupId>com.chenyi.mall.coupon</groupId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
