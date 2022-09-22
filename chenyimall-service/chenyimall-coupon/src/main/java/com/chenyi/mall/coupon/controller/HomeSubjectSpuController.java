@@ -1,16 +1,14 @@
 package com.chenyi.mall.coupon.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
-import org.springframework.web.bind.annotation.*;
-
+import com.chenyi.mall.common.utils.PageUtils;
+import com.chenyi.mall.common.utils.R;
 import com.chenyi.mall.coupon.entity.HomeSubjectSpuEntity;
 import com.chenyi.mall.coupon.service.HomeSubjectSpuService;
-import com.chenyi.mall.common.utils.PageUtils;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import com.chenyi.mall.common.utils.R;
+import java.util.Arrays;
+import java.util.Map;
 
 
 
@@ -31,7 +29,6 @@ public class HomeSubjectSpuController {
      * 列表
      */
     @GetMapping("/list")
-    // @RequiresPermissions("coupon:homesubjectspu:list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = homeSubjectSpuService.queryPage(params);
 
@@ -43,7 +40,6 @@ public class HomeSubjectSpuController {
      * 信息
      */
     @GetMapping("/info/{id}")
-    // @RequiresPermissions("coupon:homesubjectspu:info")
     public R info(@PathVariable("id") Long id){
 		HomeSubjectSpuEntity homeSubjectSpu = homeSubjectSpuService.getById(id);
 
@@ -54,7 +50,6 @@ public class HomeSubjectSpuController {
      * 保存
      */
     @PostMapping("/save")
-    // @RequiresPermissions("coupon:homesubjectspu:save")
     public R save(@RequestBody HomeSubjectSpuEntity homeSubjectSpu){
 		homeSubjectSpuService.save(homeSubjectSpu);
 
@@ -65,7 +60,6 @@ public class HomeSubjectSpuController {
      * 修改
      */
     @PutMapping("/update")
-    // @RequiresPermissions("coupon:homesubjectspu:update")
     public R update(@RequestBody HomeSubjectSpuEntity homeSubjectSpu){
 		homeSubjectSpuService.updateById(homeSubjectSpu);
 
@@ -76,7 +70,6 @@ public class HomeSubjectSpuController {
      * 删除
      */
     @DeleteMapping("/delete")
-    // @RequiresPermissions("coupon:homesubjectspu:delete")
     public R delete(@RequestBody Long[] ids){
 		homeSubjectSpuService.removeByIds(Arrays.asList(ids));
 

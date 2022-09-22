@@ -3,29 +3,31 @@ package com.chenyi.mall.product.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.chenyi.mall.product.service.CategoryBrandRelationService;
-import com.chenyi.mall.product.service.CategoryService;
-import com.chenyi.mall.common.utils.JSONUtils;
+import com.chenyi.mall.common.to.RedisData;
 import com.chenyi.mall.common.utils.PageUtils;
 import com.chenyi.mall.common.utils.Query;
+import com.chenyi.mall.common.utils.RedisUtils;
 import com.chenyi.mall.product.constant.CacheKeyName;
 import com.chenyi.mall.product.entity.CategoryEntity;
 import com.chenyi.mall.product.mapper.CategoryMapper;
+import com.chenyi.mall.product.service.CategoryBrandRelationService;
+import com.chenyi.mall.product.service.CategoryService;
+import com.chenyi.mall.product.vo.CategoryEntityOneVO;
 import com.chenyi.mall.product.vo.CategoryEntityThreeVO;
 import com.chenyi.mall.product.vo.CategoryEntityTwoVO;
 import com.chenyi.mall.product.vo.CategoryEntityVO;
-import com.fasterxml.jackson.core.type.TypeReference;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.BeanUtils;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -34,7 +36,7 @@ import java.util.stream.Collectors;
 public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, CategoryEntity> implements CategoryService {
 
     @Resource
-    private StringRedisTemplate stringRedisTemplate;
+    private RedisUtils<String, Object> redisUtils;
 
     @Resource
     private RedissonClient redissonClient;
@@ -42,11 +44,14 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, CategoryEnt
     @Resource
     private CategoryBrandRelationService categoryBrandRelationService;
 
+    @Resource
+    private ThreadPoolExecutor executor;
+
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         IPage<CategoryEntity> page = this.page(
                 new Query<CategoryEntity>().getPage(params),
-                new QueryWrapper<CategoryEntity>()
+                new QueryWrapper<>()
         );
 
         return new PageUtils(page);
@@ -117,61 +122,88 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, CategoryEnt
         return baseMapper.selectList(new QueryWrapper<CategoryEntity>().eq("parent_cid", ParentId));
     }
 
+    /**
+     * 获取数据，如果没有那么加锁获取
+     *
+     * @return
+     */
     @Override
-    public Map<String, List<CategoryEntityTwoVO>> categoryLevelJson() {
-        String categoryLevelJson = stringRedisTemplate.opsForValue()
-                .get(CacheKeyName.CATEGORY_CACHE + CacheKeyName.DOUBLE_COLON + "categoryLevelJson");
-        if (StringUtils.isEmpty(categoryLevelJson)) {
+    public Map<String, List<CategoryEntityOneVO>> categoryLevelJson() {
+        // 判断key是否过期
+        boolean flag = redisUtils.keyIsExpired(CacheKeyName.CATEGORY_CACHE
+                + CacheKeyName.DOUBLE_COLON
+                + "categoryLevelJson");
+        if (flag) {
+            // 加锁，异步查询数据
             return categoryLevelJsonLock();
         }
-        return JSONUtils.parseObject(categoryLevelJson, new TypeReference<Map<String, List<CategoryEntityTwoVO>>>() {
-        });
+        return (Map<String, List<CategoryEntityOneVO>>) redisUtils.getRedisData(CacheKeyName.CATEGORY_CACHE
+                + CacheKeyName.DOUBLE_COLON
+                + "categoryLevelJson");
     }
 
-    private Map<String, List<CategoryEntityTwoVO>> categoryLevelJsonLock() {
+
+
+    /**
+     * 如果数据已经过期，那么获取锁后，开启一个异步线程去更新数据库，主线程直接返回
+     * 其他线程访问如果获取不到锁，代表缓存已经在修改当中，也直接进行返回
+     * 等待异步线程更新完毕那么就是最新数据
+     * @return
+     */
+    private Map<String, List<CategoryEntityOneVO>> categoryLevelJsonLock() {
         RLock lock = redissonClient.getLock("categoryLevelJson-lock");
-        //  添加锁
-        lock.lock(30, TimeUnit.SECONDS);
-        Map<String, List<CategoryEntityTwoVO>> categoryLevelJsonForDb = null;
         try {
-            log.debug("获取到锁");
-            String categoryLevelJson = stringRedisTemplate
-                    .opsForValue().get(CacheKeyName.CATEGORY_CACHE + CacheKeyName.DOUBLE_COLON + "categoryLevelJson");
-            // 再次确定redis中是否有数据有就直接返回
-            if (!StringUtils.isEmpty(categoryLevelJson)) {
-                log.debug("缓存中已添加直接返回");
-                JSONUtils.parseObject(categoryLevelJson, new TypeReference<Map<String, List<CategoryEntityTwoVO>>>() {
-                });
+            // 尝试获取到锁如果没有获取到锁直接返回
+            boolean flag = lock.tryLock(-1, 30, TimeUnit.SECONDS);
+            if (!flag) {
+                // 没有获取到锁直接返回
+                return (Map<String, List<CategoryEntityOneVO>>) redisUtils.getRedisData(CacheKeyName.CATEGORY_CACHE
+                        + CacheKeyName.DOUBLE_COLON
+                        + "categoryLevelJson");
             }
-            // 查询数据库数据
-            categoryLevelJsonForDb = categoryLevelJsonForDb();
-            stringRedisTemplate.opsForValue()
-                    .set(CacheKeyName.CATEGORY_CACHE + CacheKeyName.DOUBLE_COLON + "categoryLevelJson", JSONUtils.toJSONString(categoryLevelJsonForDb));
+            log.debug("=======categoryLevelJsonLock：获取到锁==============");
+            // 开启异步线程
+            CompletableFuture.runAsync(() -> {
+                log.debug("==================异步查询数据库中==================");
+                // 查询数据库数据，并封装到RedisData中
+                RedisData<Map<String, List<CategoryEntityOneVO>>> mapRedisData
+                        = new RedisData<>(categoryLevelJsonForDb(), LocalDateTime.now().plusDays(7));
+                // 设置到缓存中
+                redisUtils.setString(CacheKeyName.CATEGORY_CACHE + CacheKeyName.DOUBLE_COLON + "categoryLevelJson",
+                                mapRedisData);
+            }, executor);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             lock.unlock();
         }
-        return categoryLevelJsonForDb;
+        // 主线程直接返回
+        return (Map<String, List<CategoryEntityOneVO>>) redisUtils.getRedisData(CacheKeyName.CATEGORY_CACHE
+                + CacheKeyName.DOUBLE_COLON
+                + "categoryLevelJson");
     }
 
-    private Map<String, List<CategoryEntityTwoVO>> categoryLevelJsonForDb() {
+    private Map<String, List<CategoryEntityOneVO>> categoryLevelJsonForDb() {
         log.debug("查询数据库");
-        // 获取一级分类
+        // 获取所有分类，只用一个sql查询，使用streamAPI来进行数据过滤
         List<CategoryEntity> categoryEntityList = baseMapper.selectList(null);
 
         // 筛选一级分类
-        List<CategoryEntity> categoryLevelOne = getParentId(categoryEntityList, "0");
+        String parentId = "0";
+        List<CategoryEntity> categoryLevelOne = getParentId(categoryEntityList, parentId);
 
         // 收集一级分类数据
-        Map<String, List<CategoryEntityTwoVO>> categoryLevelJson = categoryLevelOne.stream().collect(Collectors.toMap(k -> k.getCatId(), v -> {
+        Map<String, List<CategoryEntityOneVO>> categoryLevelJson = categoryLevelOne
+                .stream().collect(Collectors.toMap(k -> k.getCatId(), v -> {
             // 查询所有二级分类
             List<CategoryEntity> categoryEntities = getParentId(categoryEntityList, v.getCatId());
+            List<CategoryEntityOneVO> categoryEntityOneVOList = new ArrayList<>(categoryLevelOne.size());
+            CategoryEntityOneVO categoryEntityOneVO = new CategoryEntityOneVO(v.getName(), v.getCatId(), null);
+            categoryEntityOneVOList.add(categoryEntityOneVO);
             // 收集二级分类
             List<CategoryEntityTwoVO> categoryEntityTwoVOList = null;
             if (categoryEntities != null) {
-                categoryEntityTwoVOList = categoryEntities.stream()
-                        .map(l2 -> {
+                categoryEntityTwoVOList = categoryEntities.stream().map(l2 -> {
                             // 封装二级分类
                             CategoryEntityTwoVO categoryEntityTwoVO = new CategoryEntityTwoVO(l2.getName(), l2.getCatId(), l2.getParentCid(), null);
                             // 查询三级分类
@@ -179,17 +211,18 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, CategoryEnt
                                     getParentId(categoryEntityList, l2.getCatId());
                             if (categoryEntitiesThree != null) {
                                 // 封装三级分类
-                                List<CategoryEntityThreeVO> categoryEntityThreeVOList = categoryEntitiesThree.stream().map(l3 -> new CategoryEntityThreeVO(l3.getName(), l3.getCatId(), l3.getParentCid())).collect(Collectors.toList());
+                                List<CategoryEntityThreeVO> categoryEntityThreeVOList = categoryEntitiesThree
+                                        .stream()
+                                        .map(l3 -> new CategoryEntityThreeVO(l3.getName(), l3.getCatId(), l3.getParentCid()))
+                                        .collect(Collectors.toList());
                                 categoryEntityTwoVO.setCategoryEntityThreeVOList(categoryEntityThreeVOList);
                             }
                             return categoryEntityTwoVO;
-                        })
-                        .collect(Collectors.toList());
+                        }).collect(Collectors.toList());
+                categoryEntityOneVO.setCategoryEntityTwoVO(categoryEntityTwoVOList);
             }
-            return categoryEntityTwoVOList;
+            return categoryEntityOneVOList;
         }));
-
-
         return categoryLevelJson;
     }
 
@@ -197,7 +230,9 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, CategoryEnt
      * 获取父分类
      */
     private List<CategoryEntity> getParentId(List<CategoryEntity> categoryEntityList, String parentId) {
-        return categoryEntityList.stream().filter(item -> item.getParentCid().equals(parentId)).collect(Collectors.toList());
+        return categoryEntityList.stream()
+                .filter(item -> item.getParentCid().equals(parentId))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -218,7 +253,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, CategoryEnt
         return categoryEntityVOList;
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void updateDetail(CategoryEntity category) {
         baseMapper.updateById(category);

@@ -30,7 +30,6 @@ public class MemberController {
      * 列表
      */
     @GetMapping("/list")
-    // @RequiresPermissions("member:member:list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = memberService.queryPage(params);
 
@@ -48,7 +47,6 @@ public class MemberController {
      * 信息
      */
     @GetMapping("/info/{id}")
-    // @RequiresPermissions("member:member:info")
     public R info(@PathVariable("id") Long id){
 		MemberEntity member = memberService.getById(id);
         return R.ok().put("member", member);
@@ -58,7 +56,6 @@ public class MemberController {
      * 保存
      */
     @PostMapping("/save")
-    // @RequiresPermissions("member:member:save")
     public R save(@RequestBody MemberEntity member){
 		memberService.save(member);
 
@@ -69,7 +66,6 @@ public class MemberController {
      * 修改
      */
     @PutMapping("/update")
-    // @RequiresPermissions("member:member:update")
     public R update(@RequestBody MemberEntity member){
 		memberService.updateById(member);
 
@@ -80,7 +76,6 @@ public class MemberController {
      * 删除
      */
     @DeleteMapping("/delete")
-    // @RequiresPermissions("member:member:delete")
     public R delete(@RequestBody Long[] ids){
 		memberService.removeByIds(Arrays.asList(ids));
 

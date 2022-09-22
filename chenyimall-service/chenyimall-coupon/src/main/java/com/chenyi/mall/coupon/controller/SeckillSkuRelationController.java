@@ -1,16 +1,14 @@
 package com.chenyi.mall.coupon.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
-import org.springframework.web.bind.annotation.*;
-
+import com.chenyi.mall.common.utils.PageUtils;
+import com.chenyi.mall.common.utils.R;
 import com.chenyi.mall.coupon.entity.SeckillSkuRelationEntity;
 import com.chenyi.mall.coupon.service.SeckillSkuRelationService;
-import com.chenyi.mall.common.utils.PageUtils;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import com.chenyi.mall.common.utils.R;
+import java.util.Arrays;
+import java.util.Map;
 
 
 
@@ -31,7 +29,6 @@ public class SeckillSkuRelationController {
      * 列表
      */
     @GetMapping("/list")
-    // @RequiresPermissions("coupon:seckillskurelation:list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = seckillSkuRelationService.queryPage(params);
 
@@ -43,7 +40,6 @@ public class SeckillSkuRelationController {
      * 信息
      */
     @GetMapping("/info/{id}")
-    // @RequiresPermissions("coupon:seckillskurelation:info")
     public R info(@PathVariable("id") Long id){
 		SeckillSkuRelationEntity seckillSkuRelation = seckillSkuRelationService.getById(id);
 
@@ -54,7 +50,6 @@ public class SeckillSkuRelationController {
      * 保存
      */
     @PostMapping("/save")
-    // @RequiresPermissions("coupon:seckillskurelation:save")
     public R save(@RequestBody SeckillSkuRelationEntity seckillSkuRelation){
 		seckillSkuRelationService.save(seckillSkuRelation);
 
@@ -65,7 +60,6 @@ public class SeckillSkuRelationController {
      * 修改
      */
     @PutMapping("/update")
-    // @RequiresPermissions("coupon:seckillskurelation:update")
     public R update(@RequestBody SeckillSkuRelationEntity seckillSkuRelation){
 		seckillSkuRelationService.updateById(seckillSkuRelation);
 
@@ -76,7 +70,6 @@ public class SeckillSkuRelationController {
      * 删除
      */
     @DeleteMapping("/delete")
-    // @RequiresPermissions("coupon:seckillskurelation:delete")
     public R delete(@RequestBody Long[] ids){
 		seckillSkuRelationService.removeByIds(Arrays.asList(ids));
 

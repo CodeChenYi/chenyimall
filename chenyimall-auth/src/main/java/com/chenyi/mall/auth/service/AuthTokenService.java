@@ -1,6 +1,6 @@
 package com.chenyi.mall.auth.service;
 
-import com.chenyi.mall.api.member.to.MemberInfo;
+import com.chenyi.mall.auth.vo.MemberVO;
 
 /**
  * @author chenyi
@@ -17,9 +17,9 @@ public interface AuthTokenService {
     String infoByUserName(String userName, String password);
 
     /**
-     * 验证token，登录信息
+     * 获取用户信息
      * @param token
      * @return
      */
-    MemberInfo verifyToken(String token);
+    MemberVO getMemberInfo(String token);
 }

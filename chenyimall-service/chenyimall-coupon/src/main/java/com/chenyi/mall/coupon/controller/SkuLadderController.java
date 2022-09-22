@@ -1,16 +1,14 @@
 package com.chenyi.mall.coupon.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
-import org.springframework.web.bind.annotation.*;
-
+import com.chenyi.mall.common.utils.PageUtils;
+import com.chenyi.mall.common.utils.R;
 import com.chenyi.mall.coupon.entity.SkuLadderEntity;
 import com.chenyi.mall.coupon.service.SkuLadderService;
-import com.chenyi.mall.common.utils.PageUtils;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import com.chenyi.mall.common.utils.R;
+import java.util.Arrays;
+import java.util.Map;
 
 
 
@@ -31,7 +29,6 @@ public class SkuLadderController {
      * 列表
      */
     @GetMapping("/list")
-    // @RequiresPermissions("coupon:skuladder:list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = skuLadderService.queryPage(params);
 
@@ -43,7 +40,6 @@ public class SkuLadderController {
      * 信息
      */
     @GetMapping("/info/{id}")
-    // @RequiresPermissions("coupon:skuladder:info")
     public R info(@PathVariable("id") Long id){
 		SkuLadderEntity skuLadder = skuLadderService.getById(id);
 
@@ -54,7 +50,6 @@ public class SkuLadderController {
      * 保存
      */
     @PostMapping("/save")
-    // @RequiresPermissions("coupon:skuladder:save")
     public R save(@RequestBody SkuLadderEntity skuLadder){
 		skuLadderService.save(skuLadder);
 
@@ -65,7 +60,6 @@ public class SkuLadderController {
      * 修改
      */
     @PutMapping("/update")
-    // @RequiresPermissions("coupon:skuladder:update")
     public R update(@RequestBody SkuLadderEntity skuLadder){
 		skuLadderService.updateById(skuLadder);
 
@@ -76,7 +70,6 @@ public class SkuLadderController {
      * 删除
      */
     @DeleteMapping("/delete")
-    // @RequiresPermissions("coupon:skuladder:delete")
     public R delete(@RequestBody Long[] ids){
 		skuLadderService.removeByIds(Arrays.asList(ids));
 

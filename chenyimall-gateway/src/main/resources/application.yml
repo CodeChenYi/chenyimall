@@ -22,6 +22,12 @@ spring:
         locator:
           enabled: true
       routes:
+        - id: chenyimall-auth
+          uri: lb://chenyimall-auth
+          predicates:
+            - Path=/api/auth/**
+          filters:
+            - RewritePath=/api/auth/(?<segment>.*), /$\{segment}
         # 优惠卷模块
         - id: chenyimall-coupon
           uri: lb://chenyimall-coupon
@@ -81,7 +87,7 @@ spring:
           uri: lb://chenyimall-search
           predicates:
             - Host=search.cym.com
-        # 认证服务
+        # 认证服务路由
         - id: chenyimall-auth-router
           uri: lb://chenyimall-auth
           predicates:

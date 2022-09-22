@@ -6,7 +6,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * @author by chenyi
- * @className mallGateWayApplication
+ * @className GateWayApplication
  * @date 2021/12/6 21:52
  */
 

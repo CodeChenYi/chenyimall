@@ -3,7 +3,7 @@ package com.chenyi.mall.product.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.chenyi.mall.common.utils.PageUtils;
 import com.chenyi.mall.product.entity.CategoryEntity;
-import com.chenyi.mall.product.vo.CategoryEntityTwoVO;
+import com.chenyi.mall.product.vo.CategoryEntityOneVO;
 import com.chenyi.mall.product.vo.CategoryEntityVO;
 
 import java.util.List;
@@ -41,9 +41,10 @@ public interface CategoryService extends IService<CategoryEntity> {
 
     /**
      * 查询首页分页数据
+     *
      * @return
      */
-    Map<String, List<CategoryEntityTwoVO>> categoryLevelJson();
+    Map<String, List<CategoryEntityOneVO>> categoryLevelJson();
 
     /**
      * 按照名称查询tree

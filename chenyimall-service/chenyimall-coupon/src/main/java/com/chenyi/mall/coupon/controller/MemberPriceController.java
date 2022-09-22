@@ -1,16 +1,14 @@
 package com.chenyi.mall.coupon.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
-import org.springframework.web.bind.annotation.*;
-
+import com.chenyi.mall.common.utils.PageUtils;
+import com.chenyi.mall.common.utils.R;
 import com.chenyi.mall.coupon.entity.MemberPriceEntity;
 import com.chenyi.mall.coupon.service.MemberPriceService;
-import com.chenyi.mall.common.utils.PageUtils;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import com.chenyi.mall.common.utils.R;
+import java.util.Arrays;
+import java.util.Map;
 
 
 
@@ -31,7 +29,6 @@ public class MemberPriceController {
      * 列表
      */
     @GetMapping("/list")
-    // @RequiresPermissions("coupon:memberprice:list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = memberPriceService.queryPage(params);
 
@@ -43,7 +40,6 @@ public class MemberPriceController {
      * 信息
      */
     @GetMapping("/info/{id}")
-    // @RequiresPermissions("coupon:memberprice:info")
     public R info(@PathVariable("id") Long id){
 		MemberPriceEntity memberPrice = memberPriceService.getById(id);
 
@@ -54,7 +50,6 @@ public class MemberPriceController {
      * 保存
      */
     @PostMapping("/save")
-    // @RequiresPermissions("coupon:memberprice:save")
     public R save(@RequestBody MemberPriceEntity memberPrice){
 		memberPriceService.save(memberPrice);
 
@@ -65,7 +60,6 @@ public class MemberPriceController {
      * 修改
      */
     @PutMapping("/update")
-    // @RequiresPermissions("coupon:memberprice:update")
     public R update(@RequestBody MemberPriceEntity memberPrice){
 		memberPriceService.updateById(memberPrice);
 
@@ -76,7 +70,6 @@ public class MemberPriceController {
      * 删除
      */
     @DeleteMapping("/delete")
-    // @RequiresPermissions("coupon:memberprice:delete")
     public R delete(@RequestBody Long[] ids){
 		memberPriceService.removeByIds(Arrays.asList(ids));
 

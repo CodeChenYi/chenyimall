@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                .and()
                .authorizeRequests()
                // 允许匿名访问接口
-               .antMatchers("/token", "/", "/login", "/register", "/verifyToken").permitAll()
+               .antMatchers("/token", "/", "/login", "/register", "/getMemberInfo").permitAll()
                .anyRequest().authenticated();
        http.addFilterBefore(jwtAuthTokenFilter, UsernamePasswordAuthenticationFilter.class);
     }

@@ -1,19 +1,20 @@
 package com.chenyi.mall.auth.service.impl;
 
+import com.chenyi.mall.api.member.to.Member;
 import com.chenyi.mall.auth.entity.LoginUser;
 import com.chenyi.mall.auth.service.AuthTokenService;
+import com.chenyi.mall.auth.vo.MemberVO;
 import com.chenyi.mall.common.constant.ChenYiMallConstant;
 import com.chenyi.mall.common.enums.ResultEnum;
 import com.chenyi.mall.common.exception.ChenYiMallException;
 import com.chenyi.mall.common.utils.JWTUtils;
-import com.chenyi.mall.api.member.to.MemberInfo;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -48,7 +49,10 @@ public class AuthTokenServiceImpl implements AuthTokenService {
         }
         LoginUser loginUser = (LoginUser) authenticate.getPrincipal();
         Long id = loginUser.getMemberInfo().getMember().getId();
-        LoginUser user = (LoginUser) redisTemplate.opsForValue().get(ChenYiMallConstant.LOGIN_USER + id);
+        LoginUser user = (LoginUser) redisTemplate
+                .opsForValue()
+                .get(ChenYiMallConstant.LOGIN_USER + id);
+        // token自动续期
         if (user != null) {
             redisTemplate.delete(ChenYiMallConstant.LOGIN_USER + id);
         }
@@ -63,7 +67,7 @@ public class AuthTokenServiceImpl implements AuthTokenService {
         // 设置cookie
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         Cookie cookie = new Cookie("chenyi_mall", jwt);
-        cookie.setDomain("cym.com");
+        cookie.setDomain("chenyimall.com");
         cookie.setPath("/");
         cookie.setMaxAge((int) (ChenYiMallConstant.SEVEN_DAY_MILLIS_VALUE / 1000L));
         requestAttributes.getResponse().addCookie(cookie);
@@ -71,21 +75,16 @@ public class AuthTokenServiceImpl implements AuthTokenService {
     }
 
     @Override
-    public MemberInfo verifyToken(String token) {
-        if (!StringUtils.isEmpty(token)) {
-            try {
-                String userId = (String) JWTUtils.getPayload(token);
-                log.debug(userId);
-                LoginUser loginUser = (LoginUser) redisTemplate.opsForValue()
-                        .get(ChenYiMallConstant.LOGIN_USER + userId);
-                log.debug("loginUser {}", loginUser);
-                if (loginUser != null) {
-                    return loginUser.getMemberInfo();
-                }
-            } catch (Exception e) {
-                log.error("jwt验证错误：{}", e.getMessage());
-                e.getStackTrace();
-            }
+    public MemberVO getMemberInfo(String token) {
+        String id = (String) JWTUtils.getPayload(token);
+        LoginUser loginUser = (LoginUser) redisTemplate
+                .opsForValue()
+                .get(ChenYiMallConstant.LOGIN_USER + id);
+        Member member = loginUser.getMemberInfo().getMember();
+        if (member != null) {
+            MemberVO memberVO = new MemberVO();
+            BeanUtils.copyProperties(member, memberVO);
+            return memberVO;
         }
         return null;
     }

@@ -1,16 +1,14 @@
 package com.chenyi.mall.member.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
+import com.chenyi.mall.common.utils.PageUtils;
+import com.chenyi.mall.common.utils.R;
 import com.chenyi.mall.member.entity.MemberCollectSubjectEntity;
 import com.chenyi.mall.member.service.MemberCollectSubjectService;
 import org.springframework.web.bind.annotation.*;
 
-import com.chenyi.mall.common.utils.PageUtils;
-import com.chenyi.mall.common.utils.R;
-
 import javax.annotation.Resource;
+import java.util.Arrays;
+import java.util.Map;
 
 
 /**
@@ -30,7 +28,6 @@ public class MemberCollectSubjectController {
      * 列表
      */
     @GetMapping("/list")
-    // @RequiresPermissions("member:membercollectsubject:list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = memberCollectSubjectService.queryPage(params);
 
@@ -42,7 +39,6 @@ public class MemberCollectSubjectController {
      * 信息
      */
     @GetMapping("/info/{id}")
-    // @RequiresPermissions("member:membercollectsubject:info")
     public R info(@PathVariable("id") Long id){
 		MemberCollectSubjectEntity memberCollectSubject = memberCollectSubjectService.getById(id);
 
@@ -53,7 +49,6 @@ public class MemberCollectSubjectController {
      * 保存
      */
     @PostMapping("/save")
-    // @RequiresPermissions("member:membercollectsubject:save")
     public R save(@RequestBody MemberCollectSubjectEntity memberCollectSubject){
 		memberCollectSubjectService.save(memberCollectSubject);
 
@@ -64,7 +59,6 @@ public class MemberCollectSubjectController {
      * 修改
      */
     @PutMapping("/update")
-    // @RequiresPermissions("member:membercollectsubject:update")
     public R update(@RequestBody MemberCollectSubjectEntity memberCollectSubject){
 		memberCollectSubjectService.updateById(memberCollectSubject);
 
@@ -75,7 +69,6 @@ public class MemberCollectSubjectController {
      * 删除
      */
     @DeleteMapping("/delete")
-    // @RequiresPermissions("member:membercollectsubject:delete")
     public R delete(@RequestBody Long[] ids){
 		memberCollectSubjectService.removeByIds(Arrays.asList(ids));
 

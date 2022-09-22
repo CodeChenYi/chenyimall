@@ -20,7 +20,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import javax.annotation.Resource;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -49,7 +48,6 @@ public class JWTAuthTokenFilter extends OncePerRequestFilter {
             try {
                 String jwtToken = (String) JWTUtils.getPayload(token);
                 log.debug("userId: {}", jwtToken);
-                Object o = redisTemplate.opsForValue().get(ChenYiMallConstant.LOGIN_USER + jwtToken);
                 LoginUser loginUser = (LoginUser) redisTemplate.opsForValue()
                         .get(ChenYiMallConstant.LOGIN_USER + jwtToken);
                 log.debug("loginUser == null {}", loginUser == null);

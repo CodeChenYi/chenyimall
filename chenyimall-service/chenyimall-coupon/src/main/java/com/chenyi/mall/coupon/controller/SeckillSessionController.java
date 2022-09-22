@@ -4,12 +4,10 @@ import com.chenyi.mall.common.utils.PageUtils;
 import com.chenyi.mall.common.utils.R;
 import com.chenyi.mall.coupon.entity.SeckillSessionEntity;
 import com.chenyi.mall.coupon.service.SeckillSessionService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 
@@ -30,7 +28,6 @@ public class SeckillSessionController {
      * 列表
      */
     @GetMapping("/list")
-    // @RequiresPermissions("coupon:seckillsession:list")
     public R list(@RequestParam Map<String, Object> params) {
         PageUtils page = seckillSessionService.queryPage(params);
 
@@ -42,7 +39,6 @@ public class SeckillSessionController {
      * 信息
      */
     @GetMapping("/info/{id}")
-    // @RequiresPermissions("coupon:seckillsession:info")
     public R info(@PathVariable("id") Long id) {
         SeckillSessionEntity seckillSession = seckillSessionService.getById(id);
 
@@ -53,7 +49,6 @@ public class SeckillSessionController {
      * 保存
      */
     @PostMapping("/save")
-    // @RequiresPermissions("coupon:seckillsession:save")
     public R save(@RequestBody SeckillSessionEntity seckillSession) {
         seckillSessionService.save(seckillSession);
         return R.ok();
@@ -63,7 +58,6 @@ public class SeckillSessionController {
      * 修改
      */
     @PutMapping("/update")
-    // @RequiresPermissions("coupon:seckillsession:update")
     public R update(@RequestBody SeckillSessionEntity seckillSession) {
         seckillSessionService.updateById(seckillSession);
 
@@ -74,7 +68,6 @@ public class SeckillSessionController {
      * 删除
      */
     @DeleteMapping("/delete")
-    // @RequiresPermissions("coupon:seckillsession:delete")
     public R delete(@RequestBody Long[] ids) {
         seckillSessionService.removeByIds(Arrays.asList(ids));
 

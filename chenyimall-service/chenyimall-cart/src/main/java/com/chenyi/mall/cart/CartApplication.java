@@ -22,7 +22,7 @@ import org.springframework.context.annotation.FilterType;
         RabbitAutoConfiguration.class, DruidDataSourceAutoConfigure.class})
 @ComponentScan(value = "com.chenyi.mall",
         excludeFilters = {@ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE,
-        classes = RabbitConfig.class)})
+                classes = RabbitConfig.class)})
 public class CartApplication {
     public static void main(String[] args) {
         SpringApplication.run(CartApplication.class, args);

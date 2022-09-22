@@ -59,6 +59,12 @@ public class GlobalChenYiMallException {
                 ResultEnum.SYSTEM_ALREADY_EXIST_RECORD.getMsg());
     }
 
+    @ExceptionHandler(value = NullPointerException.class)
+    public R NullPointerException(Exception e) {
+        log.error("空指针异常！！！{}", e.getMessage());
+        return R.error(ResultEnum.INTERNAL_SERVER_ERROR.getCode(), ResultEnum.INTERNAL_SERVER_ERROR.getMsg());
+    }
+
     // TODO 权限异常处理
     public R noPermission(Exception e) {
         log.error("没有权限，请联系管理员授权！{}", e.getMessage());
