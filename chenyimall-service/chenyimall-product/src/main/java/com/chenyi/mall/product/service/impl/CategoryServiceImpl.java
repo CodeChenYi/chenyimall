@@ -3,6 +3,7 @@ package com.chenyi.mall.product.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.chenyi.mall.common.constant.ChenYiMallConstant;
 import com.chenyi.mall.common.to.RedisData;
 import com.chenyi.mall.common.utils.PageUtils;
 import com.chenyi.mall.common.utils.Query;
@@ -131,15 +132,14 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, CategoryEnt
     public Map<String, List<CategoryEntityOneVO>> categoryLevelJson() {
         // 判断key是否过期
         boolean flag = redisUtils.keyIsExpired(CacheKeyName.CATEGORY_CACHE
-                + CacheKeyName.DOUBLE_COLON
                 + "categoryLevelJson");
         if (flag) {
             // 加锁，异步查询数据
             return categoryLevelJsonLock();
         }
-        return (Map<String, List<CategoryEntityOneVO>>) redisUtils.getRedisData(CacheKeyName.CATEGORY_CACHE
-                + CacheKeyName.DOUBLE_COLON
-                + "categoryLevelJson");
+        return (Map<String, List<CategoryEntityOneVO>>) redisUtils.getRedisData(
+                CacheKeyName.CATEGORY_CACHE
+                + CacheKeyName.CATEGORY_LEVEL_JSON_KEY);
     }
 
 
@@ -151,40 +151,46 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, CategoryEnt
      * @return
      */
     private Map<String, List<CategoryEntityOneVO>> categoryLevelJsonLock() {
-        RLock lock = redissonClient.getLock("categoryLevelJson-lock");
+        RLock lock = redissonClient.getLock(CacheKeyName.CATEGORY_CACHE
+                + CacheKeyName.CATEGORY_LEVEL_JSON_LOCK_KEY);
         try {
             // 尝试获取到锁如果没有获取到锁直接返回
-            boolean flag = lock.tryLock(-1, 30, TimeUnit.SECONDS);
+            boolean flag = lock.tryLock(ChenYiMallConstant.NO_EXPIRATION_TIME_VALUE,
+                    ChenYiMallConstant.THIRTY_SECONDS_VALUE,
+                    TimeUnit.SECONDS);
             if (!flag) {
                 // 没有获取到锁直接返回
-                return (Map<String, List<CategoryEntityOneVO>>) redisUtils.getRedisData(CacheKeyName.CATEGORY_CACHE
-                        + CacheKeyName.DOUBLE_COLON
-                        + "categoryLevelJson");
+                log.debug("=================未获取到锁直接返回旧数据==============");
+                return (Map<String, List<CategoryEntityOneVO>>) redisUtils.getRedisData(
+                        CacheKeyName.CATEGORY_CACHE
+                        + CacheKeyName.CATEGORY_LEVEL_JSON_KEY);
             }
-            log.debug("=======categoryLevelJsonLock：获取到锁==============");
+            log.debug("=========categoryLevelJsonLock：获取到锁==============");
             // 开启异步线程
             CompletableFuture.runAsync(() -> {
                 log.debug("==================异步查询数据库中==================");
                 // 查询数据库数据，并封装到RedisData中
                 RedisData<Map<String, List<CategoryEntityOneVO>>> mapRedisData
-                        = new RedisData<>(categoryLevelJsonForDb(), LocalDateTime.now().plusDays(7));
+                        = new RedisData<>(categoryLevelJsonForDb(),
+                        LocalDateTime.now().plusDays(ChenYiMallConstant.SEVEN_DAYS_VALUE));
                 // 设置到缓存中
-                redisUtils.setString(CacheKeyName.CATEGORY_CACHE + CacheKeyName.DOUBLE_COLON + "categoryLevelJson",
+                redisUtils.setString(
+                        CacheKeyName.CATEGORY_CACHE +
+                                CacheKeyName.CATEGORY_LEVEL_JSON_KEY,
                                 mapRedisData);
+                // 让异步线程去解锁
+                lock.unlock();
             }, executor);
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            lock.unlock();
         }
         // 主线程直接返回
         return (Map<String, List<CategoryEntityOneVO>>) redisUtils.getRedisData(CacheKeyName.CATEGORY_CACHE
-                + CacheKeyName.DOUBLE_COLON
-                + "categoryLevelJson");
+                + CacheKeyName.CATEGORY_LEVEL_JSON_KEY);
     }
 
     private Map<String, List<CategoryEntityOneVO>> categoryLevelJsonForDb() {
-        log.debug("查询数据库");
+        log.debug("=================查询数据库==================");
         // 获取所有分类，只用一个sql查询，使用streamAPI来进行数据过滤
         List<CategoryEntity> categoryEntityList = baseMapper.selectList(null);
 
@@ -197,6 +203,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, CategoryEnt
                 .stream().collect(Collectors.toMap(k -> k.getCatId(), v -> {
             // 查询所有二级分类
             List<CategoryEntity> categoryEntities = getParentId(categoryEntityList, v.getCatId());
+            // 生成一级分类
             List<CategoryEntityOneVO> categoryEntityOneVOList = new ArrayList<>(categoryLevelOne.size());
             CategoryEntityOneVO categoryEntityOneVO = new CategoryEntityOneVO(v.getName(), v.getCatId(), null);
             categoryEntityOneVOList.add(categoryEntityOneVO);

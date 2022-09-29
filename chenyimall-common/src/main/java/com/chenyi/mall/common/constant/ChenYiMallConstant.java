@@ -58,6 +58,21 @@ public interface ChenYiMallConstant {
     Long THIRTY_MINUTE_MILLIS_VALUE = 1000L * 60 * 30;
 
     /**
+     * 七天
+     */
+    Integer SEVEN_DAYS_VALUE = 7;
+
+    /**
+     * 三十秒
+     */
+    Integer THIRTY_SECONDS_VALUE = 30;
+
+    /**
+     * 不设置过期时间
+     */
+    Integer NO_EXPIRATION_TIME_VALUE = -1;
+
+    /**
      * 支付宝支付
      */
     Integer ALIPAY = 1;
