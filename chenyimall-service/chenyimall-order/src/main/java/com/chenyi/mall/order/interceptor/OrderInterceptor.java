@@ -1,12 +1,11 @@
 package com.chenyi.mall.order.interceptor;
 
 import com.chenyi.mall.api.auth.feign.AuthFeignService;
+import com.chenyi.mall.api.member.to.MemberInfo;
 import com.chenyi.mall.common.enums.ResultEnum;
 import com.chenyi.mall.common.utils.R;
 import com.chenyi.mall.common.utils.ServletUtils;
-import com.chenyi.mall.api.member.to.MemberInfo;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.util.AntPathMatcher;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -14,9 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.TreeMap;
 
 /**
+ * 用于拦截请求，在请求前做一些前置造作
  * @author chenyi
  * @className CartInterceptor
  * @date 2022/6/29 21:30

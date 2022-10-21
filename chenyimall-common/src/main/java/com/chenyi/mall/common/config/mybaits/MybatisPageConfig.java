@@ -10,6 +10,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+/**
+ * mybatis分配策略
+ * @className MybatisPageConfig
+ * @author chenyi
+ * @date 2022/9/30 18:11
+ */
 @Configuration
 @ConditionalOnBean({SqlSessionFactory.class, SqlSessionFactoryBean.class, DataSourceAutoConfiguration.class})
 @EnableTransactionManagement

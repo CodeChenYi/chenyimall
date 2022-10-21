@@ -9,6 +9,8 @@ import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSeriali
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
+ *
+ * 使用json序列化redis
  * @author chenyi
  * @className RedisConfig
  * @date 2022/5/17 1:27
@@ -26,6 +28,7 @@ public class RedisConfig {
         StringRedisSerializer stringSerializer = new StringRedisSerializer();
         GenericJackson2JsonRedisSerializer jsonRedisSerializer
                 = new GenericJackson2JsonRedisSerializer();
+        // 将key的序列化器设置为String
         redisTemplate.setKeySerializer(stringSerializer);
         redisTemplate.setValueSerializer(jsonRedisSerializer);
         redisTemplate.setHashKeySerializer(stringSerializer);

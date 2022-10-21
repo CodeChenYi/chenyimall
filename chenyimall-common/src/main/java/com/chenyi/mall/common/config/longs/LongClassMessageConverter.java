@@ -9,7 +9,10 @@ import org.springframework.context.annotation.Configuration;
 import javax.annotation.Resource;
 import java.math.BigInteger;
 
-/** 重新注册ObjectMapper将Long类型转换为String
+/**
+ * 重新注册ObjectMapper将Long类型转换为String
+ * 主要是因为如果返回给前端的整数大于16位那么就会丢失精度
+ * 所以需要转为String类型
  * @className LongClassMessageConverter
  * @author chenyi
  * @date 2022/5/15 22:29

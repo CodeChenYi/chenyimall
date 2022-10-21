@@ -1,8 +1,11 @@
 server:
-  port: 8200
+  port: 8900
 
 spring:
+  profiles:
+    active: dev
   datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
     username: root
     password: 111111
     url: jdbc:mysql://192.168.56.10:3306/chenyimall_oms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
@@ -14,11 +17,11 @@ spring:
         namespace: 64a6c427-b3be-4f9f-b7f8-5711d8f0292c
         group: CHENYI_MALL
   application:
-    name: chenyimall-order
+    name: chenyimall-seckill
   redis:
     host: 192.168.56.10
-    port: 6379
     password: 111111
+    port: 6379
   rabbitmq:
     host: 192.168.56.10
     port: 5672
@@ -32,23 +35,3 @@ spring:
     publisher-confirm-type: correlated
     template:
       mandatory: true
-  jackson:
-    date-format: yyyy-MM-dd HH:mm:ss
-
-
-chenyimall:
-  thread:
-    enable-thread: true
-    core: 20
-    max-pool-size: 200
-    time: 10
-    queue-size: 100
-    unit: seconds
-
-swagger:
-  enabled: true
-  title: 订单服务
-  base-package: com.chenyi.mall.order.controller
-  description: 订单服务接口文档
-  version: 1.0
-  ip-address: ${spring.cloud.client.ipAddress}:${server.port}

@@ -4,7 +4,10 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+import java.util.concurrent.*;
+
 /**
+ * 自定义线程池配置类
  * @author chenyi
  * @className ThreadConfig
  * @date 2022/5/14 21:44
@@ -37,13 +40,25 @@ public class ThreadConfig {
     /**
      * 队列大小
      */
-    private int queueSize = 10000;
+    private int queueSize = 100;
 
-//    private TimeUnit unit = TimeUnit.SECONDS;
+    /**
+     * 超时时间
+     */
+    private TimeUnit unit = TimeUnit.SECONDS;
+
+//    /**
+//     * 阻塞队列
+//     */
+//    private Class<? extends BlockingQueue> queue = ArrayBlockingQueue.class;
 //
-//    private BlockingQueue<Runnable> queue = new LinkedBlockingQueue<>(100000);
+//    /**
+//     * 线程工厂
+//     */
+//    private Class<? extends ThreadFactory> factory = Executors.defaultThreadFactory().getClass();
 //
-//    private ThreadFactory factory = Executors.defaultThreadFactory();
-//
-//    private RejectedExecutionHandler handler = new ThreadPoolExecutor.AbortPolicy();
+//    /**
+//     * 拒绝策略
+//     */
+//    private Class<? extends RejectedExecutionHandler> handler = ThreadPoolExecutor.DiscardPolicy.class;
 }

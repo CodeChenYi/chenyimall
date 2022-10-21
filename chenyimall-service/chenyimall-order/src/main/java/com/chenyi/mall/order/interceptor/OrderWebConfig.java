@@ -7,6 +7,8 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
+ * 放行swagger静态页面
+ *
  * @author chenyi
  * @className mallWebConfig
  * @date 2022/6/29 22:10

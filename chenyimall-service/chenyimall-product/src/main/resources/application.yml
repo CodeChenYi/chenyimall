@@ -71,4 +71,5 @@ chenyimall:
     core: 20
     max-pool-size: 200
     time: 10
-    queue-size: 10000
+    queue-size: 100
+    unit: seconds

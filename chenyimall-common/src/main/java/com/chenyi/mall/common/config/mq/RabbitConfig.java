@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 
 /**
+ * 设置rabbit MQ的解析格式为json
  * @author chenyi
  * @className RabbitConfig
  * @date 2022/6/30 22:18

@@ -1,17 +1,15 @@
 package com.chenyi.mall.order.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import com.chenyi.mall.order.entity.PaymentInfoEntity;
-import com.chenyi.mall.order.service.PaymentInfoService;
 import com.chenyi.mall.common.utils.PageUtils;
 import com.chenyi.mall.common.utils.R;
+import com.chenyi.mall.order.dto.OrderDTO;
+import com.chenyi.mall.order.entity.PaymentInfoEntity;
+import com.chenyi.mall.order.service.PaymentInfoService;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
+import java.util.Map;
 
 
 /**
@@ -22,10 +20,21 @@ import javax.annotation.Resource;
  * @date 2021-10-04 23:07:20
  */
 @RestController
-@RequestMapping("order/paymentinfo")
+@RequestMapping("order/payment")
 public class PaymentInfoController {
     @Resource
     private PaymentInfoService paymentInfoService;
+
+    /**
+     * 支付宝支付
+     * @param orderDTO
+     * @return
+     */
+    @PostMapping("/aliPay")
+    public R AliPay(OrderDTO orderDTO) {
+        paymentInfoService.aliPay(orderDTO);
+        return R.ok();
+    }
 
     /**
      * 列表

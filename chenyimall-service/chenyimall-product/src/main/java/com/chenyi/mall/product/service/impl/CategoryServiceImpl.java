@@ -174,7 +174,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, CategoryEnt
                         = new RedisData<>(categoryLevelJsonForDb(),
                         LocalDateTime.now().plusDays(ChenYiMallConstant.SEVEN_DAYS_VALUE));
                 // 设置到缓存中
-                redisUtils.setString(
+                redisUtils.setValue(
                         CacheKeyName.CATEGORY_CACHE +
                                 CacheKeyName.CATEGORY_LEVEL_JSON_KEY,
                                 mapRedisData);

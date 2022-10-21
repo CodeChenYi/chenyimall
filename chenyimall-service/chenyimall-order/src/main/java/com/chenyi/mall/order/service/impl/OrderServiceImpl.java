@@ -179,7 +179,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, OrderEntity> impl
                 .supplyAsync(() -> wareFeignService.lockOrderWare(orderItemList), executor);
 
         try {
-            R r = wareFuture.get(5, TimeUnit.MINUTES);
+            R r = wareFuture.get(5, TimeUnit.SECONDS);
             if (!ResultEnum.SUCCESS.getCode().equals(r.getCode())) {
                 throw new ChenYiMallException(ResultEnum.ORDER_CREATED_FAIL.getCode(),
                         ResultEnum.LOCK_STOCK_FAIL.getMsg());
@@ -195,6 +195,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, OrderEntity> impl
 
         rabbitTemplate.convertAndSend(RabbitConstant.ORDER_EVENT_EXCHANGE,
                 RabbitConstant.ORDER_CREATE_ORDER_KEY, orderEntity);
+
+        stringRedisTemplate.delete(ChenYiMallConstant.CART_USER + memberId);
         stringRedisTemplate.delete(ChenYiMallConstant.READY_SUBMIT_ORDER + requestId);
         return orderBackInfoVO;
     }

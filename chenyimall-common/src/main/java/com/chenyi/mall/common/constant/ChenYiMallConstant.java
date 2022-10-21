@@ -25,12 +25,12 @@ public interface ChenYiMallConstant {
     /**
      * 登录key loginUser
      */
-    String LOGIN_USER = "loginUser::";
+    String LOGIN_USER = "loginUser:";
 
     /**
      * 购物车key
      */
-    String CART_USER = "cartUser::";
+    String CART_USER = "cartUser:";
 
     /**
      * request id字符串
@@ -40,7 +40,7 @@ public interface ChenYiMallConstant {
     /**
      * 准备提交订单
      */
-    String READY_SUBMIT_ORDER = "ReadySubmitOrder::";
+    String READY_SUBMIT_ORDER = "ReadySubmitOrder:";
 
     /**
      * 7天毫秒值

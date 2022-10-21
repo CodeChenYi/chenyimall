@@ -54,17 +54,12 @@ public class RedisUtils<K, V> {
     }
 
     /**
-     * 返回Map<String, List<T>>类型数据
+     * 通过key获取value
      * @param key 获取的key
      * @return
      */
     public V getValue(K key) {
-        V redisData = redisTemplate
-                .opsForValue().get(key);
-        if (redisData != null) {
-            return redisData;
-        }
-        return null;
+        return redisTemplate.opsForValue().get(key);
     }
 
     public Object getRedisData(K key) {
@@ -75,18 +70,27 @@ public class RedisUtils<K, V> {
         return null;
     }
 
-    public boolean setString(K key, V value) {
+    public boolean setValue(K key, V value) {
         redisTemplate.opsForValue().set(key, value);
         return true;
     }
 
+    public boolean setHash(K key, Object hashKey, V value) {
+        redisTemplate.opsForHash().put(key, hashKey, value);
+        return true;
+    }
+
+    public V getHash(K key, Object hashKey) {
+        return (V) redisTemplate.opsForHash().get(key, hashKey);
+    }
+
     /**
-     * 使用stringRedisTemplate.opsForValue().set(key, value);
+     * 使用StringTemplate set数据
      * @param key
      * @param value
      * @return
      */
-    public boolean setStringByStrTemp(String key, String value) {
+    public boolean setByStrTemp(String key, String value) {
         stringRedisTemplate.opsForValue().set(key, value);
         return true;
     }

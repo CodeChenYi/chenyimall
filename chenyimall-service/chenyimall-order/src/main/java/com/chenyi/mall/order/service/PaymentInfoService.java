@@ -2,6 +2,7 @@ package com.chenyi.mall.order.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.chenyi.mall.common.utils.PageUtils;
+import com.chenyi.mall.order.dto.OrderDTO;
 import com.chenyi.mall.order.entity.PaymentInfoEntity;
 
 import java.util.Map;
@@ -16,5 +17,11 @@ import java.util.Map;
 public interface PaymentInfoService extends IService<PaymentInfoEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    /**
+     * 支付宝支付
+     */
+    void aliPay(OrderDTO orderDTO);
+
 }
 

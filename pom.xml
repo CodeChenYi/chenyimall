@@ -2,12 +2,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.12.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
+<!--    <parent>-->
+<!--        <groupId>org.springframework.boot</groupId>-->
+<!--        <artifactId>spring-boot-starter-parent</artifactId>-->
+<!--        <version>2.3.12.RELEASE</version>-->
+<!--        <relativePath/> &lt;!&ndash; lookup parent from repository &ndash;&gt;-->
+<!--    </parent>-->
 
     <groupId>com.chenyi.mall</groupId>
     <artifactId>chenyimall</artifactId>
@@ -38,6 +38,7 @@
         <hutool.version>5.8.0</hutool.version>
         <jwt.version>0.9.1</jwt.version>
         <druid.version>1.2.11</druid.version>
+        <spring.boot.version>2.3.12.RELEASE</spring.boot.version>
     </properties>
 
     <dependencyManagement>
@@ -47,6 +48,14 @@
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
                 <version>${spring.cloud.alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -150,7 +159,6 @@
                 <artifactId>validation-api</artifactId>
                 <version>2.0.1.Final</version>
             </dependency>
-
 
 <!--            <dependency>-->
 <!--                <groupId>org.hibernate.validator</groupId>-->

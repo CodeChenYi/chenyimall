@@ -2,13 +2,14 @@ package com.chenyi.mall.common.config.thread;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
 import javax.annotation.Resource;
+import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.Executors;
-import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 /**
+ * 自定义线程池
  * @author chenyi
  * @className ThreadPool
  * @date 2022/5/14 21:39
@@ -27,8 +28,8 @@ public class ThreadPool {
                     threadConfig.getCore(),
                     threadConfig.getMaxPoolSize(),
                     threadConfig.getTime(),
-                    TimeUnit.SECONDS,
-                    new LinkedBlockingQueue<>(threadConfig.getQueueSize()),
+                    threadConfig.getUnit(),
+                    new ArrayBlockingQueue<>(threadConfig.getQueueSize()),
                     Executors.defaultThreadFactory(),
                     new ThreadPoolExecutor.DiscardPolicy());
         }

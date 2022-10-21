@@ -10,8 +10,6 @@ import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.Map;
 
-
-
 /**
  * 秒杀活动
  *
